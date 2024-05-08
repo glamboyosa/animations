@@ -285,7 +285,7 @@ const One = () => {
             bounce: 0.3,
           }}
           onClick={() => setOpen(true)}
-          className="p-1.5 relative rounded-xl bg-black"
+          className="p-1.5 relative dark:border-white/75  dark:border dark:border-solid rounded-xl bg-black"
         >
           <span className="flex gap-1 p-2 items-center justify-center text-sm">
             <motion.span className="hover:text-white text-stone-400">
