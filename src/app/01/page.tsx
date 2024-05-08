@@ -319,7 +319,7 @@ const One = () => {
                 duration: 0.75,
                 bounce: 0.5,
               }}
-              className="w-96 z-20 absolute top-[34%] right-1/3 rounded-md p-3 bg-black"
+              className="w-96 z-20 absolute top-[34%] right-[9%] md:right-1/3 rounded-md p-3 bg-black"
             >
               <div className="flex items-center mb-3">
                 {TABS.map((tab) => (
