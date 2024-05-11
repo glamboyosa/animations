@@ -40,7 +40,7 @@ const ContextualToolbar = () => {
               <input
                 type="text"
                 placeholder="https://myapp.com/webhooks"
-                className="flex h-9 rounded-md w-full border border-input bg-white dark:bg-black px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-orange-500 dark:focus-visible:ring-green-400 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex h-9 rounded-md w-full border border-input bg-white  px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-orange-500 disabled:cursor-not-allowed disabled:opacity-50"
               />
             </div>
             <div className="space-y-2 my-3">
@@ -57,14 +57,14 @@ const ContextualToolbar = () => {
                       value="default"
                       id="r1"
                     >
-                      <RadioGroup.Indicator className="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-[8px] after:h-[8px] after:rounded-[50%] after:bg-orange-500 dark:after:bg-green-400" />
+                      <RadioGroup.Indicator className="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-[8px] after:h-[8px] after:rounded-[50%] after:bg-orange-500 " />
                     </RadioGroup.Item>
                     <label
-                      className=" text-[14px] text-black/60 dark:text-white leading-none pl-[10px]"
+                      className=" text-[14px] text-black/60  leading-none pl-[10px]"
                       htmlFor="r1"
                     >
                       All Team Projects in{" "}
-                      <span className="p-1 rounded-md bg-stone-100 text-orange-500 dark:text-green-400">
+                      <span className="p-1 rounded-md bg-stone-100 text-orange-500 ">
                         acme
                       </span>
                     </label>
@@ -75,10 +75,10 @@ const ContextualToolbar = () => {
                       value="comfortable"
                       id="r2"
                     >
-                      <RadioGroup.Indicator className="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-[8px] after:h-[8px] after:rounded-[50%] after:bg-orange-500 dark:after:bg-green-400" />
+                      <RadioGroup.Indicator className="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-[8px] after:h-[8px] after:rounded-[50%] after:bg-orange-500 " />
                     </RadioGroup.Item>
                     <label
-                      className="text-[14px] text-black/60 dark:text-white leading-none pl-[10px]"
+                      className="text-[14px] text-black/60  leading-none pl-[10px]"
                       htmlFor="r2"
                     >
                       Tagged Projects
@@ -97,7 +97,7 @@ const ContextualToolbar = () => {
                       defaultChecked
                       id="c1"
                     >
-                      <Checkbox.Indicator className="text-orange-500 dark:text-green-400">
+                      <Checkbox.Indicator className="text-orange-500 ">
                         <svg
                           width="15"
                           height="15"
@@ -115,7 +115,7 @@ const ContextualToolbar = () => {
                       </Checkbox.Indicator>
                     </Checkbox.Root>
                     <label
-                      className="pl-[10px] text-[14px] text-black/60 dark:text-white leading-none"
+                      className="pl-[10px] text-[14px] text-black/60  leading-none"
                       htmlFor="c1"
                     >
                       Deployment Created
@@ -127,7 +127,7 @@ const ContextualToolbar = () => {
                       defaultChecked
                       id="c1"
                     >
-                      <Checkbox.Indicator className="text-orange-500 dark:text-green-400">
+                      <Checkbox.Indicator className="text-orange-500 ">
                         <svg
                           width="15"
                           height="15"
@@ -145,7 +145,7 @@ const ContextualToolbar = () => {
                       </Checkbox.Indicator>
                     </Checkbox.Root>
                     <label
-                      className="pl-[10px] text-[14px] text-black/60 dark:text-white leading-none"
+                      className="pl-[10px] text-[14px] text-black/60  leading-none"
                       htmlFor="c1"
                     >
                       Deployment Error
@@ -157,7 +157,7 @@ const ContextualToolbar = () => {
                       defaultChecked
                       id="c1"
                     >
-                      <Checkbox.Indicator className="text-orange-500 dark:text-green-400">
+                      <Checkbox.Indicator className="text-orange-500 ">
                         <svg
                           width="15"
                           height="15"
@@ -175,7 +175,7 @@ const ContextualToolbar = () => {
                       </Checkbox.Indicator>
                     </Checkbox.Root>
                     <label
-                      className="pl-[10px] text-[14px] text-black/60 dark:text-white leading-none"
+                      className="pl-[10px] text-[14px] text-black/60  leading-none"
                       htmlFor="c1"
                     >
                       Deployment Cancelled
@@ -189,7 +189,7 @@ const ContextualToolbar = () => {
                       defaultChecked
                       id="c1"
                     >
-                      <Checkbox.Indicator className="text-orange-500 dark:text-green-400">
+                      <Checkbox.Indicator className="text-orange-500 ">
                         <svg
                           width="15"
                           height="15"
@@ -207,7 +207,7 @@ const ContextualToolbar = () => {
                       </Checkbox.Indicator>
                     </Checkbox.Root>
                     <label
-                      className="pl-[10px] text-[14px] text-black/60 dark:text-white leading-none"
+                      className="pl-[10px] text-[14px] text-black/60 leading-none"
                       htmlFor="c1"
                     >
                       Project Created
@@ -219,7 +219,7 @@ const ContextualToolbar = () => {
                       defaultChecked
                       id="c1"
                     >
-                      <Checkbox.Indicator className="text-orange-500 dark:text-green-400">
+                      <Checkbox.Indicator className="text-orange-500 ">
                         <svg
                           width="15"
                           height="15"
@@ -237,7 +237,7 @@ const ContextualToolbar = () => {
                       </Checkbox.Indicator>
                     </Checkbox.Root>
                     <label
-                      className="pl-[10px] text-[14px] text-black/60 dark:text-white leading-none"
+                      className="pl-[10px] text-[14px] text-black/60 leading-none"
                       htmlFor="c1"
                     >
                       Project Deleted
@@ -258,7 +258,7 @@ const ContextualToolbar = () => {
           >
             <h2 className="text-[15px] ml-1 mt-1.5 mb-2.5">
               Connect Repositories to{" "}
-              <span className="p-1 rounded-md bg-stone-100 text-orange-500 dark:text-green-400">
+              <span className="p-1 rounded-md bg-stone-100 text-orange-500 ">
                 acme
               </span>
             </h2>
@@ -269,7 +269,7 @@ const ContextualToolbar = () => {
                     className=" flex h-[20px] w-[20px] border border-black/10 appearance-none items-center justify-center rounded-[4px] bg-white outline-none"
                     id="c1"
                   >
-                    <Checkbox.Indicator className="text-orange-500 dark:text-green-400">
+                    <Checkbox.Indicator className="text-orange-500 ">
                       <svg
                         width="15"
                         height="15"
@@ -287,7 +287,7 @@ const ContextualToolbar = () => {
                     </Checkbox.Indicator>
                   </Checkbox.Root>
                   <label
-                    className="pl-[10px] text-[14px] text-black/60 dark:text-white leading-none"
+                    className="pl-[10px] text-[14px] text-black/60  leading-none"
                     htmlFor="c1"
                   >
                     acme-homepage
@@ -298,7 +298,7 @@ const ContextualToolbar = () => {
                     className=" flex h-[20px] w-[20px] border border-black/10 appearance-none items-center justify-center rounded-[4px] bg-white outline-none"
                     id="c1"
                   >
-                    <Checkbox.Indicator className="text-orange-500 dark:text-green-400">
+                    <Checkbox.Indicator className="text-orange-500 ">
                       <svg
                         width="15"
                         height="15"
@@ -316,7 +316,7 @@ const ContextualToolbar = () => {
                     </Checkbox.Indicator>
                   </Checkbox.Root>
                   <label
-                    className="pl-[10px] text-[14px]  text-black/60 dark:text-white leading-none"
+                    className="pl-[10px] text-[14px]  text-black/60  leading-none"
                     htmlFor="c1"
                   >
                     prisma-test
@@ -327,7 +327,7 @@ const ContextualToolbar = () => {
                     className=" flex h-[20px] w-[20px] border border-black/10 appearance-none items-center justify-center rounded-[4px] bg-white outline-none"
                     id="c1"
                   >
-                    <Checkbox.Indicator className="text-orange-500 dark:text-green-400">
+                    <Checkbox.Indicator className="text-orange-500 ">
                       <svg
                         width="15"
                         height="15"
@@ -345,7 +345,7 @@ const ContextualToolbar = () => {
                     </Checkbox.Indicator>
                   </Checkbox.Root>
                   <label
-                    className="pl-[10px] text-[14px] text-black/60 dark:text-white leading-none"
+                    className="pl-[10px] text-[14px] text-black/60  leading-none"
                     htmlFor="c1"
                   >
                     legacy-old-homepage
@@ -369,7 +369,7 @@ const ContextualToolbar = () => {
             <p className="mb-2 text-sm text-pretty">
               Your secret API Key will be shared with all users belonging to
               your
-              <span className="p-1 rounded-md bg-stone-100 text-orange-500 dark:text-green-400">
+              <span className="p-1 rounded-md bg-stone-100 text-orange-500 ">
                 acme
               </span>
               organization
@@ -378,7 +378,7 @@ const ContextualToolbar = () => {
               <input
                 type="text"
                 placeholder="https://myapp.com/webhooks"
-                className="flex h-9 rounded-md w-full border border-input bg-white dark:bg-black px-2 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-orange-500 dark:focus-visible:ring-green-400 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex h-9 rounded-md w-full border border-input bg-white  px-2 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-orange-500  disabled:cursor-not-allowed disabled:opacity-50"
               />
             </form>
           </motion.div>
@@ -397,7 +397,7 @@ const ContextualToolbar = () => {
                 checked={checked}
                 onClick={(e) => e.stopPropagation()}
                 onCheckedChange={(checked) => setChecked(checked)}
-                className="w-[35px] h-[18px] ml-auto bg-gray-100 rounded-full relative dark:data-[state=checked]:bg-green-300 data-[state=checked]:bg-orange-400 outline-none cursor-pointer"
+                className="w-[35px] h-[18px] ml-auto bg-gray-100 rounded-full relative  data-[state=checked]:bg-orange-400 outline-none cursor-pointer"
                 id="airplane-mode"
               >
                 <Switch.Thumb className="block w-[14px] h-[14px] bg-white rounded-full transition-transform duration-100 translate-x-0.5 will-change-transform data-[state=checked]:translate-x-[19px]" />
@@ -423,7 +423,7 @@ const ContextualToolbar = () => {
                 >
                   <input
                     type="text"
-                    className="flex h-9 rounded-md w-full border border-input bg-white dark:bg-black px-2 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-orange-500 dark:focus-visible:ring-green-400 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex h-9 rounded-md w-full border border-input bg-white  px-2 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-orange-500 disabled:cursor-not-allowed disabled:opacity-50"
                     placeholder="/amazinglink"
                   />
                   <div className="absolute inset-y-0 right-0 flex items-center">
@@ -462,7 +462,7 @@ const ContextualToolbar = () => {
       >
         <Toaster />
         <div>
-          <div className="flex w-full p-1.5 bg-white flex-col items-center border border-black/30 rounded-xl">
+          <div className="flex w-full p-1.5 bg-white  flex-col items-center border border-black/30 rounded-xl">
             {shownTab === "Create Webhook" ? (
               <h1 className="text-[15px] ml-2 mt-1 mb-2 place-self-start">
                 Create Webhook
@@ -479,12 +479,13 @@ const ContextualToolbar = () => {
                     height: 0,
                     opacity: 0,
                   }}
+                  onClick={(e) => e.stopPropagation()}
                   transition={{
                     duration: 0.1,
                     type: "spring",
                     bounce: 0,
                   }}
-                  className="flex border border-black/10 flex-col p-3 w-[450px] rounded-lg bg-stone-50"
+                  className="flex border border-black/10 flex-col p-3 w-[450px] rounded-lg bg-stone-50 "
                 >
                   <AnimatePresence mode="popLayout">{content}</AnimatePresence>
                   <div className="ml-auto text-sm flex gap-1">
@@ -499,7 +500,7 @@ const ContextualToolbar = () => {
                         toast.message("Settings Saved", {});
                         setShownTab(null);
                       }}
-                      className="bg-orange-500 text-white dark:bg-green-200 dark:text-black dark:disabled:bg-green-300 disabled:bg-orange-300 px-2.5 text-sm py-1 rounded-md"
+                      className="bg-orange-500 text-white    disabled:bg-orange-300 px-2.5 text-sm py-1 rounded-md"
                     >
                       {shownTab === "Create API Key"
                         ? "Create Secret Key"
@@ -520,9 +521,9 @@ const ContextualToolbar = () => {
                 {TABS.map((tab) => (
                   <motion.li
                     className={clsx(
-                      "relative space-x-4 snap-center text-nowrap whitespace-nowrap cursor-pointer text-stone-600 dark:text-white/80 px-[6.9px] py-1.5 text-sm outline-none transition-colors list-none",
-                      activeTab === tab ? "text-black dark:text-white" : null,
-                      shownTab === tab ? "text-black dark:text-white" : null
+                      "relative space-x-4 snap-center text-nowrap whitespace-nowrap cursor-pointer text-stone-600  px-[6.9px] py-1.5 text-sm outline-none transition-colors list-none",
+                      activeTab === tab ? "text-black " : null,
+                      shownTab === tab ? "text-black " : null
                     )}
                     tabIndex={0}
                     key={tab}
