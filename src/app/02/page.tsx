@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { clsx } from "clsx";
 import useMeasure from "react-use-measure";
 import * as Slider from "@radix-ui/react-slider";
@@ -23,18 +23,16 @@ const ContextualToolbar = () => {
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
   const [activeTab, setActiveTab] = useState<ActiveTabType | null>(null);
-  const [shownTab, setShownTab] = useState<ActiveTabType | null>(
-    "Create Webhook"
-  );
-  const [ref, bounds] = useMeasure();
-  console.log(bounds);
+  const [shownTab, setShownTab] = useState<ActiveTabType | null>(null);
+  const scrollC = useRef<HTMLDivElement | null>(null!);
   const content = useMemo(() => {
     switch (shownTab) {
       case "Create Webhook":
         return (
           <motion.div
+            className="h-[320px]"
             initial={{ opacity: 0, filter: "blur(5px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)", height: "320px" }}
             exit={{ opacity: 0, filter: "blur(5px)" }}
           >
             <div className="space-y-2 my-3">
@@ -253,8 +251,9 @@ const ContextualToolbar = () => {
       case "Connect Repositories":
         return (
           <motion.div
+            className="h-[125px]"
             initial={{ opacity: 0, filter: "blur(5px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)", height: "125px" }}
             exit={{ opacity: 0, filter: "blur(5px)" }}
           >
             <h2 className="text-[15px] ml-1 mt-1.5 mb-2.5">
@@ -359,8 +358,9 @@ const ContextualToolbar = () => {
       case "Create API Key":
         return (
           <motion.div
+            className="h-[133px]"
             initial={{ opacity: 0, filter: "blur(5px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)", height: "133px" }}
             exit={{ opacity: 0, filter: "blur(5px)" }}
           >
             <h2 className="text-[15px] ml-1 mt-1.5 mb-2.5">
@@ -386,14 +386,16 @@ const ContextualToolbar = () => {
       default:
         return (
           <motion.div
+            className="h-[90px]"
             initial={{ opacity: 0, filter: "blur(5px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)", height: "90px" }}
             exit={{ opacity: 0, filter: "blur(5px)" }}
           >
             <div className="flex items-center">
               <h2 className="text-[15px] ml-1 mt-1.5 mb-2.5">Sharing is off</h2>
               <Switch.Root
                 checked={checked}
+                onClick={(e) => e.stopPropagation()}
                 onCheckedChange={(checked) => setChecked(checked)}
                 className="w-[35px] h-[18px] ml-auto bg-gray-100 rounded-full relative dark:data-[state=checked]:bg-green-300 data-[state=checked]:bg-orange-400 outline-none cursor-pointer"
                 id="airplane-mode"
@@ -436,17 +438,26 @@ const ContextualToolbar = () => {
         );
     }
   }, [shownTab, checked]);
-
+  useEffect(() => {
+    if (shownTab !== null && shownTab !== "Create Webhook" && scrollC.current) {
+      scrollC.current.scrollLeft = 1000;
+    } else if (
+      (shownTab === null || shownTab === "Create Webhook") &&
+      scrollC.current
+    ) {
+      scrollC.current.scrollLeft = 0;
+    }
+  }, [shownTab]);
   return (
     <MotionConfig
       transition={{
-        duration: 1.5,
+        duration: 0.25,
         bounce: 0,
         type: "spring",
       }}
     >
-      <motion.div
-        animate={{ height: bounds.height }}
+      <div
+        onClick={() => setShownTab(null)}
         className="flex justify-center items-center h-screen"
       >
         <Toaster />
@@ -458,25 +469,50 @@ const ContextualToolbar = () => {
               </h1>
             ) : null}
 
-            <div
-              ref={ref}
-              className="flex border border-black/10 flex-col p-3 w-[500px] rounded-lg bg-stone-50"
-            >
-              <AnimatePresence mode="popLayout">{content}</AnimatePresence>
-              <div className="ml-auto text-sm flex gap-1">
-                <button className="bg-transparent text-sm px-1.5 py-0.5 rounded-md hover:bg-stone-200">
-                  Cancel
-                </button>
-                <button className="bg-orange-500 text-white dark:bg-green-200 dark:text-black dark:disabled:bg-green-300 disabled:bg-orange-300 px-2.5 text-sm py-1 rounded-md">
-                  {shownTab === "Create API Key"
-                    ? "Create Secret Key"
-                    : shownTab}
-                </button>
-              </div>
-            </div>
+            <AnimatePresence initial={false}>
+              {shownTab !== null ? (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{
+                    overflowY: "hidden",
+                    height: 0,
+                    opacity: 0,
+                  }}
+                  transition={{
+                    duration: 0.1,
+                    type: "spring",
+                    bounce: 0,
+                  }}
+                  className="flex border border-black/10 flex-col p-3 w-[450px] rounded-lg bg-stone-50"
+                >
+                  <AnimatePresence mode="popLayout">{content}</AnimatePresence>
+                  <div className="ml-auto text-sm flex gap-1">
+                    <button
+                      onClick={() => setShownTab(null)}
+                      className="bg-transparent text-sm px-1.5 py-0.5 rounded-md hover:bg-stone-200"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={() => {
+                        toast.message("Settings Saved", {});
+                        setShownTab(null);
+                      }}
+                      className="bg-orange-500 text-white dark:bg-green-200 dark:text-black dark:disabled:bg-green-300 disabled:bg-orange-300 px-2.5 text-sm py-1 rounded-md"
+                    >
+                      {shownTab === "Create API Key"
+                        ? "Create Secret Key"
+                        : shownTab}
+                    </button>
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
 
             <div className="flex p-2.5  items-center">
-              <div
+              <motion.div
+                ref={scrollC}
                 className={clsx(
                   "flex items-center scrollContainer w-[408px] overflow-scroll snap-x"
                 )}
@@ -493,7 +529,10 @@ const ContextualToolbar = () => {
                     onFocus={() => setActiveTab(tab)}
                     onMouseOver={() => setActiveTab(tab)}
                     onMouseLeave={() => setActiveTab(tab)}
-                    onClick={() => setShownTab(tab)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShownTab(tab);
+                    }}
                   >
                     {activeTab === tab ? (
                       <motion.div
@@ -510,7 +549,7 @@ const ContextualToolbar = () => {
                     <span className="relative text-inherit">{tab}</span>
                   </motion.li>
                 ))}
-              </div>
+              </motion.div>
               <div className="flex ml-auto items-center gap-3.5">
                 <Separator.Root
                   className="bg-stone-200 data-[orientation=vertical]:h-5 data-[orientation=vertical]:w-[1.5px]"
@@ -518,6 +557,7 @@ const ContextualToolbar = () => {
                   orientation="vertical"
                 />
                 <svg
+                  onClick={() => setShownTab(null)}
                   width="15"
                   height="15"
                   viewBox="0 0 15 15"
@@ -535,7 +575,7 @@ const ContextualToolbar = () => {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </MotionConfig>
   );
 };
