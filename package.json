@@ -20,7 +20,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-use-measure": "^2.1.1",
-    "sonner": "^1.4.41"
+    "sonner": "^1.4.41",
+    "vaul": "^0.9.1"
   },
   "devDependencies": {
     "@types/node": "^20",
