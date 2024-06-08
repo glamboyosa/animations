@@ -1,6 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect, LegacyRef } from "react";
 import { Drawer } from "vaul";
 
 import Image from "next/image";
@@ -32,11 +32,16 @@ const variants = {
   }),
 };
 const Airbnbsharebookmarks = () => {
-  const [play, setPlaying] = useState<"not-playing" | "playing">("playing");
-
+  const [loaded, setLoaded] = useState<"not-loaded" | "loaded">("not-loaded");
+  const [container, setContainer] = useState(null);
+  useEffect(() => {
+    setLoaded("loaded");
+  }, []);
+  if (loaded !== "loaded") return null;
   return (
-    <div className="p-20 translate-x-56 h-screen overflow-hidden">
+    <div className="p-20 translate-x-56 h-screen">
       <div
+        ref={setContainer as unknown as LegacyRef<HTMLDivElement>}
         style={{
           height: `calc(100vh - 80px)`,
         }}
@@ -47,8 +52,8 @@ const Airbnbsharebookmarks = () => {
             <span className="text-xs tracking-tighter">Dates .</span>
             <span className="text-xs tracking-tighter">4 guests</span>
           </button>
-          <Drawer.Root>
-            <Drawer.Trigger asChild>
+          <Drawer.Root direction="left">
+            <Drawer.Trigger>
               {" "}
               <button className="rounded-2xl px-3.5 py-2.5 border-black/5 border flex items-center gap-1.5 hover:bg-stone-100">
                 <span className="text-xs tracking-tighter">Share</span>
@@ -70,10 +75,10 @@ const Airbnbsharebookmarks = () => {
                 </span>
               </button>
             </Drawer.Trigger>
-            <Drawer.Portal>
+            <Drawer.Portal container={container}>
               <Drawer.Content>
                 <Drawer.Handle />
-                <p>Content</p>
+                <p>Heyyyy</p>
               </Drawer.Content>
               <Drawer.Overlay />
             </Drawer.Portal>
