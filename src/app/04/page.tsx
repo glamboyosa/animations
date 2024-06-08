@@ -77,13 +77,13 @@ const Airbnbsharebookmarks = () => {
           ></Image>
           <div className="absolute inset-0">
             <div className="flex  items-center justify-start p-2">
-              <div className="rounded-2xl text-white bg-gray-500 px-3.5 py-2.5 flex items-center justify-center">
+              <div className="rounded-2xl text-white bg-gray-500 px-3 py-2 text-xs flex items-center justify-center">
                 Superhost
               </div>
               <svg
-                className="border-2 border-white ml-auto mr-1"
-                width="15"
-                height="15"
+                className=" ml-auto mr-1"
+                width="25"
+                height="25"
                 viewBox="0 0 15 15"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
