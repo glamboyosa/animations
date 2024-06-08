@@ -65,7 +65,7 @@ const Airbnbsharebookmarks = () => {
             </span>
           </button>
         </div>
-        <div className="w-5/6 h-96 ml-4 mb-4 relative">
+        <div className="w-5/6 h-96 ml-4  relative">
           <Image
             width={1920} // Original image width
             height={1080} // Original image height
@@ -131,7 +131,7 @@ const Airbnbsharebookmarks = () => {
             </div>
           </div>
         </div>
-        <div className="w-5/6 h-96 ml-4 mt-4 relative">
+        <div className="w-5/6 h-96 ml-4 mt-24 relative">
           <Image
             width={1920} // Original image width
             height={1080} // Original image height
