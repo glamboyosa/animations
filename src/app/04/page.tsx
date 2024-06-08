@@ -76,11 +76,11 @@ const Airbnbsharebookmarks = () => {
               </button>
             </Drawer.Trigger>
             <Drawer.Portal container={container}>
-              <Drawer.Content className="bg-gray-100 p-3 absolute w-[90%] h-[150px] rounded-t-[10px] focus:outline-none">
+              <Drawer.Content className="bg-gray-100 p-3  sticky w-[95%] h-[150px] rounded-t-[10px] focus:outline-none">
                 <Drawer.Handle className="bg-gray-300 mb-8" />
                 <p>Heyyyy</p>
               </Drawer.Content>
-              <Drawer.Overlay className="bg-black" />
+              <Drawer.Overlay className="bg-black/50 absolute inset-x-0 bottom-0 z-20" />
             </Drawer.Portal>
           </Drawer.Root>
         </div>
