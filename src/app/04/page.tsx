@@ -8,10 +8,13 @@ const images = [
   "andrea-davis-IWfe63thJxk-unsplash.jpg",
   "karsten-winegeart-sStahKEhT9w-unsplash.jpg",
   "meritt-thomas-_YxDGcDm4Hs-unsplash.jpg",
-  "roberto-nickson-6FZf3yzuodE-unsplash.jpg",
-  "stephen-wheeler-hBh9JbyeCtg-unsplash.jpg",
 ];
-const rotationDegrees = [10, -20, -5, 5, 2];
+const translates = [
+  { x: 0, y: 0 },
+  { x: -5, y: 3 },
+  { x: 5, y: 4 },
+];
+const rotationDegrees = [10, 0, 20];
 const variants = {
   initial: () => ({
     opacity: 0,
@@ -23,12 +26,12 @@ const variants = {
     rotate: rotationDegrees[index],
   }),
   transition: (index: number) => ({
-    delay: index * 0.15,
+    delay: index * 0.1,
     type: "spring",
     bounce: 0.6,
     bounceDamping: 10,
     bounceStiffness: 40,
-    duration: 0.5,
+    duration: 0.3,
   }),
 };
 const Airbnbsharebookmarks = () => {
@@ -78,7 +81,31 @@ const Airbnbsharebookmarks = () => {
             <Drawer.Portal container={container}>
               <Drawer.Content className="bg-gray-100 p-3  sticky w-[95%] h-[150px] rounded-t-[10px] focus:outline-none">
                 <Drawer.Handle className="bg-gray-300 mb-8" />
-                <p>Heyyyy</p>
+                <div className="relative">
+                  <AnimatePresence>
+                    {images.map((img, idx) => (
+                      <motion.img
+                        className="w-12 h-12 border-2 overflow-hidden border-white rounded-md"
+                        key={img}
+                        style={{
+                          zIndex: idx * 10,
+                          translateX: translates[idx].x,
+                          translateY: translates[idx].y,
+                        }}
+                        width={32}
+                        height={32}
+                        initial="initial"
+                        animate="animate"
+                        variants={variants}
+                        custom={idx}
+                        transition={variants.transition(idx)}
+                        loading="eager"
+                        alt=""
+                        src={`/${img}`}
+                      />
+                    ))}
+                  </AnimatePresence>
+                </div>
               </Drawer.Content>
               <Drawer.Overlay className="bg-black/50 absolute inset-x-0 bottom-0 z-20" />
             </Drawer.Portal>
