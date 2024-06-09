@@ -11,10 +11,10 @@ const images = [
 ];
 const translates = [
   { x: 0, y: 0 },
-  { x: -5, y: 3 },
-  { x: 5, y: 4 },
+  { x: -20, y: 20 },
+  { x: 15, y: 15 },
 ];
-const rotationDegrees = [10, 0, 20];
+const rotationDegrees = [0, -5, 5];
 const variants = {
   initial: () => ({
     opacity: 0,
@@ -26,12 +26,12 @@ const variants = {
     rotate: rotationDegrees[index],
   }),
   transition: (index: number) => ({
-    delay: index * 0.1,
+    delay: index * 0.15,
     type: "spring",
     bounce: 0.6,
     bounceDamping: 10,
     bounceStiffness: 40,
-    duration: 0.3,
+    duration: 0.6,
   }),
 };
 const Airbnbsharebookmarks = () => {
@@ -48,13 +48,14 @@ const Airbnbsharebookmarks = () => {
         style={{
           height: `calc(100vh - 80px)`,
         }}
-        className="max-w-xl p-8  overflow-hidden relative shadow-black/30 shadow-lg rounded-md bg-white"
+        className="max-w-xl p-10  overflow-hidden relative shadow-black/30 shadow-lg rounded-md bg-white"
       >
-        <div className="flex m-4 items-center gap-2">
+        <div className="flex mx-4 items-center gap-2">
           <button className="rounded-2xl px-3.5 py-2.5 border-black border-2  flex items-center gap-0.5">
             <span className="text-xs tracking-tighter">Dates .</span>
             <span className="text-xs tracking-tighter">4 guests</span>
           </button>
+
           <Drawer.Root>
             <Drawer.Trigger>
               {" "}
@@ -79,13 +80,35 @@ const Airbnbsharebookmarks = () => {
               </button>
             </Drawer.Trigger>
             <Drawer.Portal container={container}>
-              <Drawer.Content className="bg-gray-100 p-3  sticky w-[95%] h-[150px] rounded-t-[10px] focus:outline-none">
-                <Drawer.Handle className="bg-gray-300 mb-8" />
-                <div className="relative">
+              <Drawer.Content className="bg-gray-100 z-50 cursor-pointer sticky top-0 w-[95%] h-[140px] rounded-t-[10px] focus:outline-none after:h-0">
+                {/* <Drawer.Handle className="bg-gray-300" /> */}
+                <Drawer.Close
+                  asChild
+                  className="fixed cursor-pointer inset-x-3 top-2.5"
+                >
+                  <button>
+                    <svg
+                      className=" text-gray-500"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 15 15"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z"
+                        fill="currentColor"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </button>
+                </Drawer.Close>
+                <div className="relative flex  items-center justify-center w-full h-24 z-50">
                   <AnimatePresence>
                     {images.map((img, idx) => (
                       <motion.img
-                        className="w-12 h-12 border-2 overflow-hidden border-white rounded-md"
+                        className="w-16 h-16 absolute border-[3px] overflow-hidden border-white rounded-md"
                         key={img}
                         style={{
                           zIndex: idx * 10,
@@ -106,12 +129,26 @@ const Airbnbsharebookmarks = () => {
                     ))}
                   </AnimatePresence>
                 </div>
+                <div className="w-full mt-2.5 flex flex-col gap-2.5 items-center justify-start">
+                  <h3 className="text-2xl tracking-tighter w-60 z-50 font-semibold  ml-4">
+                    Share this wishlist with your group
+                  </h3>
+                  <p className="text-sm z-50 ml-4 tracking-tight w-[300px]">
+                    Everyone can add homes, write notes and vote for their
+                    favourites. <span className="underline">Learn more</span>
+                  </p>
+                  <Drawer.Close asChild>
+                    <button className="bg-black rounded-lg px-4 py-2 w-11/12 text-white text-sm z-50 hover:bg-black/70">
+                      Got it
+                    </button>
+                  </Drawer.Close>
+                </div>
               </Drawer.Content>
-              <Drawer.Overlay className="bg-black/50 absolute inset-x-0 bottom-0 z-20" />
+              {/* <Drawer.Overlay className="bg-black/50" /> */}
             </Drawer.Portal>
           </Drawer.Root>
         </div>
-        <div className="w-5/6 h-96 ml-4 relative">
+        <div className="w-5/6 h-96 ml-4 mt-2.5 relative">
           <Image
             width={1920} // Original image width
             height={1080} // Original image height
@@ -171,7 +208,7 @@ const Airbnbsharebookmarks = () => {
               <p className="text-lg font-light">5.0</p>
             </div>
           </div>
-          <div className="my-4 bg-stone-100 shadow-xl shadow-black/5 rounded-lg p-4 w-full">
+          <div className="my-2 bg-stone-100 shadow-xl shadow-black/5 rounded-lg p-4 w-full">
             <div className="text-black/40 cursor-pointer underline">
               Add Note
             </div>
@@ -189,10 +226,27 @@ const Airbnbsharebookmarks = () => {
               src="/mike-von-GrfbQPPYguU-unsplash.jpg"
             ></Image>
             <div className="absolute inset-0">
-              <div className="flex  items-center justify-start p-2">
+              <div className="flex  items-center gap-24 p-2">
                 <div className="rounded-2xl text-white bg-gray-500 px-3 py-2 text-xs flex items-center justify-center">
                   Superhost
                 </div>
+                <button className="flex text-xs px-4 text-white py-3 gap-1 bg-black rounded-full">
+                  <span>Map</span>
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 15 15"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9 2H6V13H9V2ZM10 2V13H12.5C12.7761 13 13 12.7761 13 12.5V2.5C13 2.22386 12.7761 2 12.5 2H10ZM2.5 2H5V13H2.5C2.22386 13 2 12.7761 2 12.5V2.5C2 2.22386 2.22386 2 2.5 2ZM2.5 1C1.67157 1 1 1.67157 1 2.5V12.5C1 13.3284 1.67157 14 2.5 14H12.5C13.3284 14 14 13.3284 14 12.5V2.5C14 1.67157 13.3284 1 12.5 1H2.5Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
                 <svg
                   className=" ml-auto mr-1"
                   width="25"
