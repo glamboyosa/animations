@@ -96,7 +96,7 @@ export default function Home() {
             </span>
           </h2>
           <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Airbnb &ldquo;share with wishlist&rdquo; microinteraction
+            Airbnb &ldquo;share wishlist&rdquo; microinteraction
           </p>
         </Link>
       </div>
