@@ -3,7 +3,7 @@ import { cn } from "@/_lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
 
-const AirBnbHomesAnimation = () => {
+const TwoStepPopover = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [direction, setDirection] = useState(0);
   const [open, setOpen] = useState(false);
@@ -245,4 +245,4 @@ const variants = {
     return { x: `${-110 * direction}%`, opacity: 0, delay: 0 };
   },
 };
-export default AirBnbHomesAnimation;
+export default TwoStepPopover;
