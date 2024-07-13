@@ -1,6 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, LegacyRef } from "react";
+import { useState, useEffect, type LegacyRef } from "react";
 import { Drawer } from "vaul";
 
 import Image from "next/image";
@@ -42,16 +42,16 @@ const Airbnbsharebookmarks = () => {
   }, []);
   if (loaded !== "loaded") return null;
   return (
-    <div className="p-20 overflow-scroll translate-x-56 h-screen">
+    <div className="h-screen translate-x-56 overflow-scroll p-20">
       <div
         ref={setContainer as unknown as LegacyRef<HTMLDivElement>}
         style={{
-          height: `calc(100vh - 80px)`,
+          height: "calc(100vh - 80px)",
         }}
-        className="max-w-xl p-10  overflow-hidden relative shadow-black/30 shadow-lg rounded-md bg-white"
+        className="relative max-w-xl overflow-hidden rounded-md bg-white p-10 shadow-black/30 shadow-lg"
       >
-        <div className="flex mx-4 items-center gap-2">
-          <button className="rounded-2xl px-3.5 py-2.5 border-black border-2  flex items-center gap-0.5">
+        <div className="mx-4 flex items-center gap-2">
+          <button className="flex items-center gap-0.5 rounded-2xl border-2 border-black px-3.5 py-2.5">
             <span className="text-xs tracking-tighter">Dates .</span>
             <span className="text-xs tracking-tighter">4 guests</span>
           </button>
@@ -59,7 +59,7 @@ const Airbnbsharebookmarks = () => {
           <Drawer.Root>
             <Drawer.Trigger>
               {" "}
-              <button className="rounded-2xl px-3.5 py-2.5 border-black/5 border flex items-center gap-1.5 hover:bg-stone-100">
+              <button className="flex items-center gap-1.5 rounded-2xl border border-black/5 px-3.5 py-2.5 hover:bg-stone-100">
                 <span className="text-xs tracking-tighter">Share</span>
                 <span className="text-xs tracking-tighter">
                   <svg
@@ -74,17 +74,17 @@ const Airbnbsharebookmarks = () => {
                       fill="currentColor"
                       fill-rule="evenodd"
                       clip-rule="evenodd"
-                    ></path>
+                    />
                   </svg>
                 </span>
               </button>
             </Drawer.Trigger>
             <Drawer.Portal container={container}>
-              <Drawer.Content className="bg-gray-100 z-50 cursor-pointer sticky top-0 w-[95%] h-[140px] rounded-t-[10px] focus:outline-none after:h-0">
+              <Drawer.Content className="sticky top-0 z-50 h-[140px] w-[95%] cursor-pointer rounded-t-[10px] bg-gray-100 after:h-0 focus:outline-none">
                 {/* <Drawer.Handle className="bg-gray-300" /> */}
                 <Drawer.Close
                   asChild
-                  className="fixed cursor-pointer inset-x-3 top-2.5"
+                  className="fixed inset-x-3 top-2.5 cursor-pointer"
                 >
                   <button>
                     <svg
@@ -100,15 +100,15 @@ const Airbnbsharebookmarks = () => {
                         fill="currentColor"
                         fill-rule="evenodd"
                         clip-rule="evenodd"
-                      ></path>
+                      />
                     </svg>
                   </button>
                 </Drawer.Close>
-                <div className="relative flex  items-center justify-center w-full h-24 z-50">
+                <div className="relative z-50 flex h-24 w-full items-center justify-center">
                   <AnimatePresence>
                     {images.map((img, idx) => (
                       <motion.img
-                        className="w-16 h-16 absolute border-[3px] overflow-hidden border-white rounded-md"
+                        className="absolute h-16 w-16 overflow-hidden rounded-md border-[3px] border-white"
                         key={img}
                         style={{
                           zIndex: idx * 10,
@@ -129,16 +129,16 @@ const Airbnbsharebookmarks = () => {
                     ))}
                   </AnimatePresence>
                 </div>
-                <div className="w-full mt-2.5 flex flex-col gap-2.5 items-center justify-start">
-                  <h3 className="text-2xl tracking-tighter w-60 z-50 font-semibold  ml-4">
+                <div className="mt-2.5 flex w-full flex-col items-center justify-start gap-2.5">
+                  <h3 className="z-50 ml-4 w-60 font-semibold text-2xl tracking-tighter">
                     Share this wishlist with your group
                   </h3>
-                  <p className="text-sm z-50 ml-4 tracking-tight w-[300px]">
+                  <p className="z-50 ml-4 w-[300px] text-sm tracking-tight">
                     Everyone can add homes, write notes and vote for their
                     favourites. <span className="underline">Learn more</span>
                   </p>
                   <Drawer.Close asChild>
-                    <button className="bg-black rounded-lg px-4 py-2 w-11/12 text-white text-sm z-50 hover:bg-black/70">
+                    <button className="z-50 w-11/12 rounded-lg bg-black px-4 py-2 text-sm text-white hover:bg-black/70">
                       Got it
                     </button>
                   </Drawer.Close>
@@ -148,7 +148,7 @@ const Airbnbsharebookmarks = () => {
             </Drawer.Portal>
           </Drawer.Root>
         </div>
-        <div className="w-5/6 h-96 ml-4 mt-2.5 relative">
+        <div className="relative mt-2.5 ml-4 h-96 w-5/6">
           <Image
             width={1920} // Original image width
             height={1080} // Original image height
@@ -157,14 +157,14 @@ const Airbnbsharebookmarks = () => {
             quality={100}
             className="rounded-xl object-cover"
             src="/digital-marketing-agency-ntwrk-g39p1kDjvSY-unsplash.jpg"
-          ></Image>
+          />
           <div className="absolute inset-0">
-            <div className="flex  items-center justify-start p-2">
-              <div className="rounded-2xl text-white bg-gray-500 px-3 py-2 text-xs flex items-center justify-center">
+            <div className="flex items-center justify-start p-2">
+              <div className="flex items-center justify-center rounded-2xl bg-gray-500 px-3 py-2 text-white text-xs">
                 Superhost
               </div>
               <svg
-                className=" ml-auto mr-1"
+                className=" mr-1 ml-auto"
                 width="25"
                 height="25"
                 viewBox="0 0 15 15"
@@ -176,23 +176,23 @@ const Airbnbsharebookmarks = () => {
                   fill="red"
                   fill-rule="evenodd"
                   clip-rule="evenodd"
-                ></path>
+                />
               </svg>
             </div>
           </div>
-          <div className="flex items-start justify-center mt-4">
+          <div className="mt-4 flex items-start justify-center">
             <div className="flex flex-col gap-0.5">
-              <h3 className="text-lg font-semiBold tracking-tight">
+              <h3 className="font-semiBold text-lg tracking-tight">
                 Home in Bo Phut, Thailand
               </h3>
-              <p className="text-sm text-black/40 tracking-tighter">
+              <p className="text-black/40 text-sm tracking-tighter">
                 Manee10Villa 3 bedrooms
               </p>
-              <p className="text-sm text-black/40 tracking-tighter">
+              <p className="text-black/40 text-sm tracking-tighter">
                 3 beds. 3 bedrooms
               </p>
             </div>
-            <div className="flex ml-auto mr-1 items-center gap-1">
+            <div className="mr-1 ml-auto flex items-center gap-1">
               <svg
                 width="15"
                 height="15"
@@ -203,19 +203,19 @@ const Airbnbsharebookmarks = () => {
                 <path
                   d="M7.22303 0.665992C7.32551 0.419604 7.67454 0.419604 7.77702 0.665992L9.41343 4.60039C9.45663 4.70426 9.55432 4.77523 9.66645 4.78422L13.914 5.12475C14.18 5.14607 14.2878 5.47802 14.0852 5.65162L10.849 8.42374C10.7636 8.49692 10.7263 8.61176 10.7524 8.72118L11.7411 12.866C11.803 13.1256 11.5206 13.3308 11.2929 13.1917L7.6564 10.9705C7.5604 10.9119 7.43965 10.9119 7.34365 10.9705L3.70718 13.1917C3.47945 13.3308 3.19708 13.1256 3.25899 12.866L4.24769 8.72118C4.2738 8.61176 4.23648 8.49692 4.15105 8.42374L0.914889 5.65162C0.712228 5.47802 0.820086 5.14607 1.08608 5.12475L5.3336 4.78422C5.44573 4.77523 5.54342 4.70426 5.58662 4.60039L7.22303 0.665992Z"
                   fill="currentColor"
-                ></path>
+                />
               </svg>
-              <p className="text-lg font-light">5.0</p>
+              <p className="font-light text-lg">5.0</p>
             </div>
           </div>
-          <div className="my-2 bg-stone-100 shadow-xl shadow-black/5 rounded-lg p-4 w-full">
-            <div className="text-black/40 cursor-pointer underline">
+          <div className="my-2 w-full rounded-lg bg-stone-100 p-4 shadow-black/5 shadow-xl">
+            <div className="cursor-pointer text-black/40 underline">
               Add Note
             </div>
           </div>
         </div>
         <div className="absolute">
-          <div className="w-5/6 h-96 ml-4 mt-24 relative">
+          <div className="relative mt-24 ml-4 h-96 w-5/6">
             <Image
               width={1920} // Original image width
               height={1080} // Original image height
@@ -224,13 +224,13 @@ const Airbnbsharebookmarks = () => {
               quality={100}
               className="rounded-xl object-cover"
               src="/mike-von-GrfbQPPYguU-unsplash.jpg"
-            ></Image>
+            />
             <div className="absolute inset-0">
-              <div className="flex  items-center gap-24 p-2">
-                <div className="rounded-2xl text-white bg-gray-500 px-3 py-2 text-xs flex items-center justify-center">
+              <div className="flex items-center gap-24 p-2">
+                <div className="flex items-center justify-center rounded-2xl bg-gray-500 px-3 py-2 text-white text-xs">
                   Superhost
                 </div>
-                <button className="flex text-xs px-4 text-white py-3 gap-1 bg-black rounded-full">
+                <button className="flex gap-1 rounded-full bg-black px-4 py-3 text-white text-xs">
                   <span>Map</span>
                   <svg
                     width="15"
@@ -244,11 +244,11 @@ const Airbnbsharebookmarks = () => {
                       fill="currentColor"
                       fill-rule="evenodd"
                       clip-rule="evenodd"
-                    ></path>
+                    />
                   </svg>
                 </button>
                 <svg
-                  className=" ml-auto mr-1"
+                  className=" mr-1 ml-auto"
                   width="25"
                   height="25"
                   viewBox="0 0 15 15"
@@ -260,7 +260,7 @@ const Airbnbsharebookmarks = () => {
                     fill="red"
                     fill-rule="evenodd"
                     clip-rule="evenodd"
-                  ></path>
+                  />
                 </svg>
               </div>
             </div>

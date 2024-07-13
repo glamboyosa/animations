@@ -36,13 +36,13 @@ const AirBnbHomesAnimation = () => {
     return () => clearTimeout(timer);
   }, []);
   return (
-    <div className="flex gap-4  flex-col justify-center items-center h-screen">
-      <div className="bg-stone-200 grid place-content-center grid-flow-col auto-cols-max rounded-lg p-3 size-80  shadow-md shadow-zinc-300">
+    <div className="flex h-screen flex-col items-center justify-center gap-4">
+      <div className="grid size-80 auto-cols-max grid-flow-col place-content-center rounded-lg bg-stone-200 p-3 shadow-md shadow-zinc-300">
         <AnimatePresence>
           {play === "playing"
             ? images.map((img, idx) => (
                 <motion.img
-                  className="w-12 h-12 border-2 overflow-hidden border-white rounded-md"
+                  className="h-12 w-12 overflow-hidden rounded-md border-2 border-white"
                   key={img}
                   style={{
                     zIndex: idx * 10,
@@ -62,7 +62,7 @@ const AirBnbHomesAnimation = () => {
               ))
             : images.map((img, idx) => (
                 <Image
-                  className="w-12 h-12 border-2 overflow-hidden border-white rounded-md"
+                  className="h-12 w-12 overflow-hidden rounded-md border-2 border-white"
                   key={img}
                   style={{
                     zIndex: idx * 10,
@@ -86,7 +86,7 @@ const AirBnbHomesAnimation = () => {
             clearTimeout(timeout);
           }, 2000);
         }}
-        className="w-72 p-3 bg-stone-200 text-black/70 rounded-md text-sm hover:bg-stone-300"
+        className="w-72 rounded-md bg-stone-200 p-3 text-black/70 text-sm hover:bg-stone-300"
       >
         {play === "playing" ? "playing" : "play"}
       </button>

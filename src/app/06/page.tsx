@@ -19,14 +19,14 @@ const Six = () => {
     }, 3000);
   };
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="bg-stone-100 border border-stone-300 rounded-md w-1/3 h-1/2 flex justify-center items-center flex-col gap-24">
+    <div className="flex h-screen items-center justify-center">
+      <div className="flex h-1/2 w-1/3 flex-col items-center justify-center gap-24 rounded-md border border-stone-300 bg-stone-100">
         <MotionConfig transition={{ type: "spring", duration: 0.3, bounce: 0 }}>
-          <div className="relative text-sm w-full flex flex-col items-center justify-center">
+          <div className="relative flex w-full flex-col items-center justify-center text-sm">
             <span>checkout the GitHub repo</span>
-            <motion.div className="bg-white absolute top-0 flex z-20 flex-col items-center justify-center border border-black/10 rounded-md shadow-sm gap-2 p-3.5 w-3/4 h-40">
+            <motion.div className="absolute top-0 z-20 flex h-40 w-3/4 flex-col items-center justify-center gap-2 rounded-md border border-black/10 bg-white p-3.5 shadow-sm">
               <h2 className="font-bold text-lg">Transfered</h2>
-              <span className="flex  items-center gap-1 bg-green-200 rounded-lg w-fit px-2 py-0.5 text-green-600">
+              <span className="flex w-fit items-center gap-1 rounded-lg bg-green-200 px-2 py-0.5 text-green-600">
                 <svg
                   width="15"
                   height="15"
@@ -39,7 +39,7 @@ const Six = () => {
                     fill="currentColor"
                     fill-rule="evenodd"
                     clip-rule="evenodd"
-                  ></path>
+                  />
                 </svg>
                 <p>You are $6000M richer</p>
               </span>
@@ -49,10 +49,10 @@ const Six = () => {
                 <motion.div
                   variants={variants}
                   exit="exit"
-                  className="bg-white absolute top-1 z-30 flex flex-col items-center justify-center border border-black/10 rounded-md shadow-sm gap-2 p-3.5 w-3/4 h-40"
+                  className="absolute top-1 z-30 flex h-40 w-3/4 flex-col items-center justify-center gap-2 rounded-md border border-black/10 bg-white p-3.5 shadow-sm"
                 >
                   <h2 className="font-bold text-lg">Check your bank</h2>
-                  <span className="flex  items-center gap-1 bg-blue-50 rounded-lg w-fit px-2 py-0.5 text-blue-500">
+                  <span className="flex w-fit items-center gap-1 rounded-lg bg-blue-50 px-2 py-0.5 text-blue-500">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="15"
@@ -77,7 +77,7 @@ const Six = () => {
                 <motion.div
                   variants={variants}
                   exit="exit"
-                  className="bg-white absolute flex flex-col gap-8 top-2.5 z-50 border border-black/10 rounded-md shadow-sm  p-3.5 w-3/4 h-40"
+                  className="absolute top-2.5 z-50 flex h-40 w-3/4 flex-col gap-8 rounded-md border border-black/10 bg-white p-3.5 shadow-sm"
                 >
                   <div className="flex items-center">
                     <span className="text-gray-700">ASK</span>
@@ -85,7 +85,7 @@ const Six = () => {
                       We don&apos;t ask anything
                     </span>
                   </div>
-                  <p className="text-2xl text-center font-extrabold">$6000M</p>
+                  <p className="text-center font-extrabold text-2xl">$6000M</p>
                 </motion.div>
               ) : null}
             </AnimatePresence>
@@ -95,7 +95,7 @@ const Six = () => {
           onClick={calculateHandler}
           disabled={status !== "default"}
           className={cn(
-            "p-3 mt-20 w-1/3 text-white bg-black hover:text-white/70 rounded-md text-sm hover:bg-black/80 disabled:bg-black/80 disabled:text-white/80"
+            "mt-20 w-1/3 rounded-md bg-black p-3 text-sm text-white hover:bg-black/80 hover:text-white/70 disabled:bg-black/80 disabled:text-white/80"
           )}
         >
           Calculate
