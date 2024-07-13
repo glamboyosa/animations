@@ -1,52 +1,30 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
   "formatter": {
-    "attributePosition": "multiline",
     "enabled": true,
-    "formatWithErrors": false,
-    "indentStyle": "space",
+    "formatWithErrors": true,
+    "ignore": [],
+    "attributePosition": "auto",
+    "indentStyle": "tab",
     "indentWidth": 2,
-    "lineEnding": "lf",
-    "lineWidth": 80
-  },
-  "css": {
-    "formatter": {
-      "enabled": true,
-      "quoteStyle": "double"
-    },
-    "linter": {
-      "enabled": true
-    },
-    "parser": {
-      "cssModules": true
-    }
+    "lineWidth": 80,
+    "lineEnding": "lf"
   },
   "javascript": {
     "formatter": {
       "arrowParentheses": "always",
-      "attributePosition": "multiline",
-      "bracketSameLine": true,
+      "bracketSameLine": false,
       "bracketSpacing": true,
-      "enabled": true,
       "jsxQuoteStyle": "double",
-      "lineEnding": "lf",
       "quoteProperties": "asNeeded",
-      "quoteStyle": "single",
       "semicolons": "always",
-      "trailingCommas": "es5"
+      "trailingCommas": "all",
+      "quoteStyle": "double"
     }
   },
   "json": {
     "formatter": {
-      "enabled": true,
       "trailingCommas": "none"
-    },
-    "linter": {
-      "enabled": true
-    },
-    "parser": {
-      "allowComments": false,
-      "allowTrailingCommas": false
     }
   },
   "vcs": {
@@ -57,12 +35,15 @@
     "useIgnoreFile": true
   },
   "organizeImports": {
-    "enabled": true
+    "enabled": false
   },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
+      "correctness": {
+        "noUnusedImports": "error"
+      },
       "nursery": {
         "useSortedClasses": "error"
       }
