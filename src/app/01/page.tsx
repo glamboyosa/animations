@@ -24,7 +24,7 @@ const RATIOS = [
           fill="currentColor"
           fill-rule="evenodd"
           clip-rule="evenodd"
-        ></path>
+        />
       </svg>
     ),
   },
@@ -43,7 +43,7 @@ const RATIOS = [
           fill="currentColor"
           fill-rule="evenodd"
           clip-rule="evenodd"
-        ></path>
+        />
       </svg>
     ),
   },
@@ -62,7 +62,7 @@ const RATIOS = [
           fill="currentColor"
           fill-rule="evenodd"
           clip-rule="evenodd"
-        ></path>
+        />
       </svg>
     ),
   },
@@ -81,7 +81,7 @@ const RATIOS = [
           fill="currentColor"
           fill-rule="evenodd"
           clip-rule="evenodd"
-        ></path>
+        />
       </svg>
     ),
   },
@@ -100,7 +100,7 @@ const RATIOS = [
           fill="currentColor"
           fill-rule="evenodd"
           clip-rule="evenodd"
-        ></path>
+        />
       </svg>
     ),
   },
@@ -119,7 +119,7 @@ const RATIOS = [
           fill="currentColor"
           fill-rule="evenodd"
           clip-rule="evenodd"
-        ></path>
+        />
       </svg>
     ),
   },
@@ -145,77 +145,77 @@ const One = () => {
             exit={{ opacity: 0, filter: "blur(5px)" }}
             className="space-y-0.5"
           >
-            <div className="flex justify-between p-1 items-center">
-              <p className="text-sm hover:text-white text-stone-400">
+            <div className="flex items-center justify-between p-1">
+              <p className="text-sm text-stone-400 hover:text-white">
                 Vertical
               </p>
               <div className="flex gap-2">
-                <div className="bg-stone-800  rounded-sm">
-                  <p className="text-xs text-white p-1.5">{vertical[0]}</p>
+                <div className="rounded-sm bg-stone-800">
+                  <p className="p-1.5 text-white text-xs">{vertical[0]}</p>
                 </div>
                 <Slider.Root
                   value={vertical}
                   onValueChange={(value) => setVertical(value)}
-                  className="relative flex items-center select-none touch-none w-[100px] h-5"
+                  className="relative flex h-5 w-[100px] touch-none select-none items-center"
                   defaultValue={[50]}
                   max={100}
                   step={1}
                 >
-                  <Slider.Track className="bg-black/5 relative grow rounded-full h-[3px]">
-                    <Slider.Range className="absolute bg-stone-600 rounded-full h-full" />
+                  <Slider.Track className="relative h-[3px] grow rounded-full bg-black/5">
+                    <Slider.Range className="absolute h-full rounded-full bg-stone-600" />
                   </Slider.Track>
                   <Slider.Thumb
-                    className="block w-3 h-3 bg-white/75 shadow-[0_2px_10px]  rounded-full hover:bg-white focus:outline-none focus:shadow-[0_0_0_5px]"
+                    className="block h-3 w-3 rounded-full bg-white/75 shadow-[0_2px_10px] hover:bg-white focus:shadow-[0_0_0_5px] focus:outline-none"
                     aria-label="Volume"
                   />
                 </Slider.Root>
               </div>
             </div>
-            <div className="flex p-1 justify-between items-center">
-              <p className="text-sm hover:text-white text-stone-400">
+            <div className="flex items-center justify-between p-1">
+              <p className="text-sm text-stone-400 hover:text-white">
                 Horizontal
               </p>
               <div className="flex gap-2">
                 <div className="bg-stone-800">
-                  <p className="text-xs text-white p-1.5">{horizontal[0]}</p>
+                  <p className="p-1.5 text-white text-xs">{horizontal[0]}</p>
                 </div>
                 <Slider.Root
                   value={horizontal}
                   onValueChange={(value) => setHorizontal(value)}
-                  className="relative flex items-center select-none touch-none w-[100px] h-5"
+                  className="relative flex h-5 w-[100px] touch-none select-none items-center"
                   defaultValue={[50]}
                   max={100}
                   step={1}
                 >
-                  <Slider.Track className="bg-black/5 relative grow rounded-full h-[3px]">
-                    <Slider.Range className="absolute bg-stone-600 rounded-full h-full" />
+                  <Slider.Track className="relative h-[3px] grow rounded-full bg-black/5">
+                    <Slider.Range className="absolute h-full rounded-full bg-stone-600" />
                   </Slider.Track>
                   <Slider.Thumb
-                    className="block w-3 h-3 bg-white/75 shadow-[0_2px_10px]  rounded-full hover:bg-white focus:outline-none focus:shadow-[0_0_0_5px]"
+                    className="block h-3 w-3 rounded-full bg-white/75 shadow-[0_2px_10px] hover:bg-white focus:shadow-[0_0_0_5px] focus:outline-none"
                     aria-label="Volume"
                   />
                 </Slider.Root>
               </div>
             </div>
-            <div className="flex p-1 justify-between items-center">
-              <p className="text-sm hover:text-white text-stone-400">Upscale</p>
+            <div className="flex items-center justify-between p-1">
+              <p className="text-sm text-stone-400 hover:text-white">Upscale</p>
               <div className="flex gap-2">
                 <div className="bg-stone-800">
-                  <p className="text-xs text-white p-1.5">{upscale[0]}</p>
+                  <p className="p-1.5 text-white text-xs">{upscale[0]}</p>
                 </div>
                 <Slider.Root
                   value={upscale}
                   onValueChange={(value) => setUpscale(value)}
-                  className="relative flex items-center select-none touch-none w-[100px] h-5"
+                  className="relative flex h-5 w-[100px] touch-none select-none items-center"
                   defaultValue={[50]}
                   max={100}
                   step={1}
                 >
-                  <Slider.Track className="bg-black/5 relative grow rounded-full h-[3px]">
-                    <Slider.Range className="absolute bg-stone-600 rounded-full h-full" />
+                  <Slider.Track className="relative h-[3px] grow rounded-full bg-black/5">
+                    <Slider.Range className="absolute h-full rounded-full bg-stone-600" />
                   </Slider.Track>
                   <Slider.Thumb
-                    className="block w-3 h-3 bg-white/75 shadow-[0_2px_10px]  rounded-full hover:bg-white focus:outline-none focus:shadow-[0_0_0_5px]"
+                    className="block h-3 w-3 rounded-full bg-white/75 shadow-[0_2px_10px] hover:bg-white focus:shadow-[0_0_0_5px] focus:outline-none"
                     aria-label="Volume"
                   />
                 </Slider.Root>
@@ -236,7 +236,7 @@ const One = () => {
                 key={ratio.name}
                 onClick={() => setARActiveTab(ratio.name)}
                 className={clsx(
-                  " p-0.5 cursor-pointer flex items-center rounded-md gap-1.5 hover:text-yellow-200",
+                  " flex cursor-pointer items-center gap-1.5 rounded-md p-0.5 hover:text-yellow-200",
                   ARActiveTab === ratio.name
                     ? "bg-stone-800 text-yellow-200"
                     : "text-stone-400",
@@ -244,7 +244,7 @@ const One = () => {
                 )}
               >
                 {ratio.svg}
-                <p className="text-sm p-1">{ratio.name}</p>
+                <p className="p-1 text-sm">{ratio.name}</p>
               </div>
             ))}
           </motion.div>
@@ -255,22 +255,21 @@ const One = () => {
             initial={{ opacity: 0, filter: "blur(5px)" }}
             animate={{ opacity: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0, filter: "blur(5px)" }}
-            className="w-[99%] h-[120px] flex"
+            className="flex h-[120px] w-[99%]"
           >
             <textarea
-              autoFocus
               placeholder="Add a new prompt"
-              className="w-full text-white h-full resize-none px-2 py-[6px] bg-transparent placeholder:text-white/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FDFF79]"
+              className="h-full w-full resize-none bg-transparent px-2 py-[6px] text-white placeholder:text-white/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#FDFF79] focus-visible:outline-offset-2"
               name="prompt"
               id="prompt"
-            ></textarea>
+            />
           </motion.form>
         );
     }
   }, [activeTab, ARActiveTab, upscale, vertical, horizontal]);
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex h-screen items-center justify-center">
       <Toaster />
       <div>
         <motion.button
@@ -285,10 +284,10 @@ const One = () => {
             bounce: 0.3,
           }}
           onClick={() => setOpen(true)}
-          className="p-1.5 relative dark:border-white/75  dark:border dark:border-solid rounded-xl bg-black"
+          className="relative rounded-xl bg-black p-1.5 dark:border dark:border-white/75 dark:border-solid"
         >
-          <span className="flex gap-1 p-2 items-center justify-center text-sm">
-            <motion.span className="hover:text-white text-stone-400">
+          <span className="flex items-center justify-center gap-1 p-2 text-sm">
+            <motion.span className="text-stone-400 hover:text-white">
               Add Style
             </motion.span>
             <svg
@@ -303,7 +302,7 @@ const One = () => {
                 fill="#fff"
                 fill-rule="evenodd"
                 clip-rule="evenodd"
-              ></path>
+              />
             </svg>
           </span>
         </motion.button>
@@ -319,13 +318,13 @@ const One = () => {
                 duration: 0.75,
                 bounce: 0.5,
               }}
-              className="w-80 z-20 absolute top-[34%] right-[9%] md:w-96 md:right-1/3 rounded-md p-3 bg-black"
+              className="absolute top-[34%] right-[9%] z-20 w-80 rounded-md bg-black p-3 md:right-1/3 md:w-96"
             >
-              <div className="flex items-center mb-3">
+              <div className="mb-3 flex items-center">
                 {TABS.map((tab) => (
                   <motion.li
                     className={clsx(
-                      "relative space-x-2 cursor-pointer px-2 py-1 text-sm outline-none transition-colors list-none hover:text-white",
+                      "relative cursor-pointer list-none space-x-2 px-2 py-1 text-sm outline-none transition-colors hover:text-white",
                       activeTab === tab ? "text-white" : "text-stone-400"
                     )}
                     tabIndex={0}
@@ -357,7 +356,7 @@ const One = () => {
                     fill="#fff"
                     fill-rule="evenodd"
                     clip-rule="evenodd"
-                  ></path>
+                  />
                 </motion.svg>
               </div>
               <div>
@@ -367,9 +366,9 @@ const One = () => {
                   {content}
                 </MotionConfig>
                 <motion.div className="mt-4 flex items-center justify-between">
-                  <div className="flex gap-1 items-center">
-                    <span className="size-1.5 rounded-full bg-yellow-200"></span>
-                    <p className="text-xs text-stone-400">Changes</p>
+                  <div className="flex items-center gap-1">
+                    <span className="size-1.5 rounded-full bg-yellow-200" />
+                    <p className="text-stone-400 text-xs">Changes</p>
                   </div>
                   <button
                     onClick={() => {
@@ -378,7 +377,7 @@ const One = () => {
                         description: "New template created in drafts 🤠",
                       });
                     }}
-                    className="text-black bg-yellow-200 p-1.5 text-xs rounded-md"
+                    className="rounded-md bg-yellow-200 p-1.5 text-black text-xs"
                   >
                     Apply Changes
                   </button>

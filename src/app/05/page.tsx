@@ -18,9 +18,9 @@ const TwoStepPopover = () => {
                 setDirection(1);
                 e.stopPropagation();
               }}
-              className="flex p-1 rounded-sm text-xs mb-2 items-center gap-2 hover:bg-stone-100"
+              className="mb-2 flex items-center gap-2 rounded-sm p-1 text-xs hover:bg-stone-100"
             >
-              <div className="flex items-center  gap-1.5">
+              <div className="flex items-center gap-1.5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="15"
@@ -31,14 +31,14 @@ const TwoStepPopover = () => {
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  className="lucide lucide-circle-check stroke-gray-400 fill-gray-400"
+                  className="lucide lucide-circle-check fill-gray-400 stroke-gray-400"
                 >
                   <circle cx="12" cy="12" r="10" />
                   <path className="!stroke-white" d="m9 12 2 2 4-4" />
                 </svg>
                 <p className="text-gray-800">Approve Changes</p>
               </div>
-              <p className="text-gray-400 ml-auto">Send Review</p>
+              <p className="ml-auto text-gray-400">Send Review</p>
             </div>
             <div
               onClick={(e) => {
@@ -46,9 +46,9 @@ const TwoStepPopover = () => {
                 setDirection(1);
                 e.stopPropagation();
               }}
-              className="flex p-1 rounded-sm text-xs items-center gap-2 hover:bg-stone-100"
+              className="flex items-center gap-2 rounded-sm p-1 text-xs hover:bg-stone-100"
             >
-              <div className="flex items-center  gap-1.5">
+              <div className="flex items-center gap-1.5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="15"
@@ -59,7 +59,7 @@ const TwoStepPopover = () => {
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  className="lucide lucide-message-square-text stroke-gray-400 fill-gray-400"
+                  className="lucide lucide-message-square-text fill-gray-400 stroke-gray-400"
                 >
                   <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   <path className="!stroke-white" d="M13 8H7" />
@@ -67,20 +67,20 @@ const TwoStepPopover = () => {
                 </svg>
                 <p className="text-gray-800">Add Comment</p>
               </div>
-              <p className="text-gray-400 ml-auto">Reply Thread</p>
+              <p className="ml-auto text-gray-400">Reply Thread</p>
             </div>
           </>
         );
       case 1:
         return (
           <div>
-            <div className="flex -mt-2 items-center">
-              <h2 className="text-sm  tracking-tight">Approve Changes</h2>
-              <span className="p-1 ml-auto rounded-lg text-xs text-teal-600 bg-teal-50">
+            <div className="-mt-2 flex items-center">
+              <h2 className="text-sm tracking-tight">Approve Changes</h2>
+              <span className="ml-auto rounded-lg bg-teal-50 p-1 text-teal-600 text-xs">
                 by @osa
               </span>
             </div>
-            <div className="mt-3 p-2 flex flex-col gap-2  justify-center items-start bg-gray-100 rounded-md">
+            <div className="mt-3 flex flex-col items-start justify-center gap-2 rounded-md bg-gray-100 p-2">
               <div className="flex items-center gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -105,14 +105,14 @@ const TwoStepPopover = () => {
                 &ldquo;Osa is a product engineer.&rdquo;
               </p>
             </div>
-            <div className="mt-3 w-full flex gap-1">
+            <div className="mt-3 flex w-full gap-1">
               <button
                 onClick={(e) => {
                   setCurrentStep(0);
                   setDirection(-1);
                   e.stopPropagation();
                 }}
-                className="px-1.5 py-1 text-black font-normal rounded-md bg-white text-xs border border-black/20 w-1/2"
+                className="w-1/2 rounded-md border border-black/20 bg-white px-1.5 py-1 font-normal text-black text-xs"
               >
                 Back
               </button>
@@ -121,7 +121,7 @@ const TwoStepPopover = () => {
                   setOpen(false);
                   e.stopPropagation();
                 }}
-                className="px-1.5 py-1 rounded-md bg-black text-white text-xs w-1/2"
+                className="w-1/2 rounded-md bg-black px-1.5 py-1 text-white text-xs"
               >
                 Approve
               </button>
@@ -131,21 +131,21 @@ const TwoStepPopover = () => {
       case 2:
         return (
           <div>
-            <div className="flex -mt-2 items-center">
-              <h2 className="text-sm  tracking-tight">Add Comment</h2>
-              <span className="p-1 ml-auto rounded-lg text-xs text-teal-600 bg-teal-50">
+            <div className="-mt-2 flex items-center">
+              <h2 className="text-sm tracking-tight">Add Comment</h2>
+              <span className="ml-auto rounded-lg bg-teal-50 p-1 text-teal-600 text-xs">
                 Create Thread
               </span>
             </div>
-            <div className="mt-3 p-2 flex flex-col gap-2 h-14  justify-center items-start bg-gray-100 rounded-md"></div>
-            <div className="mt-3 w-full flex gap-1">
+            <div className="mt-3 flex h-14 flex-col items-start justify-center gap-2 rounded-md bg-gray-100 p-2" />
+            <div className="mt-3 flex w-full gap-1">
               <button
                 onClick={(e) => {
                   setCurrentStep(0);
                   setDirection(-1);
                   e.stopPropagation();
                 }}
-                className="px-1.5 py-1 text-black font-normal rounded-md bg-white text-xs border border-black/20 w-1/2"
+                className="w-1/2 rounded-md border border-black/20 bg-white px-1.5 py-1 font-normal text-black text-xs"
               >
                 Back
               </button>
@@ -154,7 +154,7 @@ const TwoStepPopover = () => {
                   setOpen(false);
                   e.stopPropagation();
                 }}
-                className="px-1.5 py-1 rounded-md bg-black text-white text-xs w-1/2"
+                className="w-1/2 rounded-md bg-black px-1.5 py-1 text-white text-xs"
               >
                 Submit
               </button>
@@ -171,7 +171,7 @@ const TwoStepPopover = () => {
         setOpen(false);
         setCurrentStep(0);
       }}
-      className="flex gap-4  flex-col justify-center items-center h-screen"
+      className="flex h-screen flex-col items-center justify-center gap-4"
     >
       <button
         onClick={(e) => {
@@ -179,7 +179,7 @@ const TwoStepPopover = () => {
           setCurrentStep(0);
           e.stopPropagation();
         }}
-        className="bg-white relative p-1.5 rounded-md border border-black/20"
+        className="relative rounded-md border border-black/20 bg-white p-1.5"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -192,8 +192,8 @@ const TwoStepPopover = () => {
           stroke-linecap="round"
           stroke-linejoin="round"
           className={cn(
-            "lucide text-gray-500 scale-[0.8] lucide-inbox hover:text-black hover:scale-90 transition-all delay-[0.4]",
-            open && "text-black scale-90"
+            "lucide lucide-inbox scale-[0.8] text-gray-500 transition-all delay-[0.4] hover:scale-90 hover:text-black",
+            open && "scale-90 text-black"
           )}
         >
           <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
@@ -211,7 +211,7 @@ const TwoStepPopover = () => {
                 bounce: 0.1,
               }}
               className={cn(
-                "bg-white fixed overflow-hidden  shadow-lg shadow-black/30  top-[36.5vh] left-[39%] p-4 rounded-md h-20 w-72",
+                "fixed top-[36.5vh] left-[39%] h-20 w-72 overflow-hidden rounded-md bg-white p-4 shadow-black/30 shadow-lg",
                 currentStep !== 0 && "top-[28.5vh]"
               )}
             >
