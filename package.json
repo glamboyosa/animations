@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "pnpm biome lint --write --unsafe ./src",
-    "fmt": "pnpm biome "
+    "lint": "pnpm biome lint --write --unsafe ./src"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.0.4",
