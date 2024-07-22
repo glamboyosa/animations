@@ -153,6 +153,7 @@ const Airbnbsharebookmarks = () => {
 													idx,
 												)}
 												loading="eager"
+												fetchPriority="high"
 												alt=""
 												src={`/${img}`}
 											/>
@@ -193,6 +194,7 @@ const Airbnbsharebookmarks = () => {
 						alt=""
 						loading="eager"
 						quality={100}
+						fetchPriority="high"
 						className="rounded-xl object-cover"
 						src="/digital-marketing-agency-ntwrk-g39p1kDjvSY-unsplash.jpg"
 					/>
@@ -264,6 +266,7 @@ const Airbnbsharebookmarks = () => {
 							alt=""
 							loading="eager"
 							quality={100}
+							fetchPriority="high"
 							className="rounded-xl object-cover"
 							src="/mike-von-GrfbQPPYguU-unsplash.jpg"
 						/>
