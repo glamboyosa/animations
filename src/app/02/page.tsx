@@ -1,7 +1,16 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
 import { clsx } from "clsx";
-import { motion, AnimatePresence, MotionConfig } from "framer-motion";
+import {
+	motion,
+	AnimatePresence,
+	MotionConfig,
+} from "framer-motion";
 import { Toaster, toast } from "sonner";
 import * as Separator from "@radix-ui/react-separator";
 import * as RadioGroup from "@radix-ui/react-radio-group";
@@ -19,21 +28,37 @@ type ActiveTabType = (typeof TABS)[number];
 const ContextualToolbar = () => {
 	const [open, setOpen] = useState(false);
 	const [checked, setChecked] = useState(false);
-	const [activeTab, setActiveTab] = useState<ActiveTabType | null>(null);
-	const [shownTab, setShownTab] = useState<ActiveTabType | null>(null);
-	const scrollC = useRef<HTMLDivElement | null>(null);
+	const [activeTab, setActiveTab] =
+		useState<ActiveTabType | null>(null);
+	const [shownTab, setShownTab] =
+		useState<ActiveTabType | null>(null);
+	const scrollC = useRef<HTMLDivElement | null>(
+		null,
+	);
 	const content = useMemo(() => {
 		switch (shownTab) {
 			case "Create Webhook":
 				return (
 					<motion.div
 						className="h-[320px]"
-						initial={{ opacity: 0, filter: "blur(5px)" }}
-						animate={{ opacity: 1, filter: "blur(0px)", height: "320px" }}
-						exit={{ opacity: 0, filter: "blur(5px)" }}
+						initial={{
+							opacity: 0,
+							filter: "blur(5px)",
+						}}
+						animate={{
+							opacity: 1,
+							filter: "blur(0px)",
+							height: "320px",
+						}}
+						exit={{
+							opacity: 0,
+							filter: "blur(5px)",
+						}}
 					>
 						<div className="my-3 space-y-2">
-							<h2 className="mb-1 text-[15px]">Endpoint</h2>
+							<h2 className="mb-1 text-[15px]">
+								Endpoint
+							</h2>
 							<input
 								type="text"
 								placeholder="https://myapp.com/webhooks"
@@ -41,7 +66,9 @@ const ContextualToolbar = () => {
 							/>
 						</div>
 						<div className="my-3 space-y-2">
-							<h2 className="mb-1 text-[15px]">Projects</h2>
+							<h2 className="mb-1 text-[15px]">
+								Projects
+							</h2>
 							<form>
 								<RadioGroup.Root
 									className="flex gap-2.5"
@@ -85,7 +112,9 @@ const ContextualToolbar = () => {
 							</form>
 						</div>
 						<div className="my-3 space-y-2">
-							<h2 className="mb-1 font-lg">Events</h2>
+							<h2 className="mb-1 font-lg">
+								Events
+							</h2>
 							<form className=" flex justify-start gap-2 rounded-md bg-zinc-100 p-4">
 								<div className="flex flex-col gap-1.5">
 									<div className="flex items-center">
@@ -254,9 +283,19 @@ const ContextualToolbar = () => {
 				return (
 					<motion.div
 						className="h-[125px]"
-						initial={{ opacity: 0, filter: "blur(5px)" }}
-						animate={{ opacity: 1, filter: "blur(0px)", height: "125px" }}
-						exit={{ opacity: 0, filter: "blur(5px)" }}
+						initial={{
+							opacity: 0,
+							filter: "blur(5px)",
+						}}
+						animate={{
+							opacity: 1,
+							filter: "blur(0px)",
+							height: "125px",
+						}}
+						exit={{
+							opacity: 0,
+							filter: "blur(5px)",
+						}}
 					>
 						<h2 className="mt-1.5 mb-2.5 ml-1 text-[15px]">
 							Connect Repositories to{" "}
@@ -364,16 +403,26 @@ const ContextualToolbar = () => {
 				return (
 					<motion.div
 						className="h-[133px]"
-						initial={{ opacity: 0, filter: "blur(5px)" }}
-						animate={{ opacity: 1, filter: "blur(0px)", height: "133px" }}
-						exit={{ opacity: 0, filter: "blur(5px)" }}
+						initial={{
+							opacity: 0,
+							filter: "blur(5px)",
+						}}
+						animate={{
+							opacity: 1,
+							filter: "blur(0px)",
+							height: "133px",
+						}}
+						exit={{
+							opacity: 0,
+							filter: "blur(5px)",
+						}}
 					>
 						<h2 className="mt-1.5 mb-2.5 ml-1 text-[15px]">
 							Create new API key
 						</h2>
 						<p className="mb-2 text-pretty text-sm">
-							Your secret API Key will be shared with all users belonging to
-							your
+							Your secret API Key will be shared
+							with all users belonging to your
 							<span className="rounded-md bg-stone-100 p-1 text-orange-500 ">
 								acme
 							</span>
@@ -392,38 +441,76 @@ const ContextualToolbar = () => {
 				return (
 					<motion.div
 						className="h-[90px]"
-						initial={{ opacity: 0, filter: "blur(5px)" }}
-						animate={{ opacity: 1, filter: "blur(0px)", height: "90px" }}
-						exit={{ opacity: 0, filter: "blur(5px)" }}
+						initial={{
+							opacity: 0,
+							filter: "blur(5px)",
+						}}
+						animate={{
+							opacity: 1,
+							filter: "blur(0px)",
+							height: "90px",
+						}}
+						exit={{
+							opacity: 0,
+							filter: "blur(5px)",
+						}}
 					>
 						<div className="flex items-center">
-							<h2 className="mt-1.5 mb-2.5 ml-1 text-[15px]">Sharing is off</h2>
+							<h2 className="mt-1.5 mb-2.5 ml-1 text-[15px]">
+								Sharing is off
+							</h2>
 							<Switch.Root
 								checked={checked}
-								onClick={(e) => e.stopPropagation()}
-								onCheckedChange={(checked) => setChecked(checked)}
+								onClick={(e) =>
+									e.stopPropagation()
+								}
+								onCheckedChange={(checked) =>
+									setChecked(checked)
+								}
 								className="relative ml-auto h-[18px] w-[35px] cursor-pointer rounded-full bg-gray-100 outline-none data-[state=checked]:bg-orange-400"
 								id="airplane-mode"
 							>
 								<Switch.Thumb className="block h-[14px] w-[14px] translate-x-0.5 rounded-full bg-white transition-transform duration-100 will-change-transform data-[state=checked]:translate-x-[19px]" />
 							</Switch.Root>
 						</div>
-						<AnimatePresence mode="popLayout" initial={false}>
+						<AnimatePresence
+							mode="popLayout"
+							initial={false}
+						>
 							{!checked ? (
 								<motion.p
-									initial={{ opacity: 0, filter: "blur(5px)" }}
-									animate={{ opacity: 1, filter: "blur(0px)" }}
-									exit={{ opacity: 0, filter: "blur(5px)" }}
+									initial={{
+										opacity: 0,
+										filter: "blur(5px)",
+									}}
+									animate={{
+										opacity: 1,
+										filter: "blur(0px)",
+									}}
+									exit={{
+										opacity: 0,
+										filter: "blur(5px)",
+									}}
 									className="mb-2 text-pretty text-sm"
 								>
-									To share your workspace with other people you need to publish
+									To share your workspace with
+									other people you need to publish
 									it first.
 								</motion.p>
 							) : (
 								<motion.div
-									initial={{ opacity: 0, filter: "blur(5px)" }}
-									animate={{ opacity: 1, filter: "blur(0px)" }}
-									exit={{ opacity: 0, filter: "blur(5px)" }}
+									initial={{
+										opacity: 0,
+										filter: "blur(5px)",
+									}}
+									animate={{
+										opacity: 1,
+										filter: "blur(0px)",
+									}}
+									exit={{
+										opacity: 0,
+										filter: "blur(5px)",
+									}}
 									className="relative mb-2 rounded-md shadow-sm"
 								>
 									<input
@@ -447,10 +534,15 @@ const ContextualToolbar = () => {
 		}
 	}, [shownTab, checked]);
 	useEffect(() => {
-		if (shownTab !== null && shownTab !== "Create Webhook" && scrollC.current) {
+		if (
+			shownTab !== null &&
+			shownTab !== "Create Webhook" &&
+			scrollC.current
+		) {
 			scrollC.current.scrollLeft = 1000;
 		} else if (
-			(shownTab === null || shownTab === "Create Webhook") &&
+			(shownTab === null ||
+				shownTab === "Create Webhook") &&
 			scrollC.current
 		) {
 			scrollC.current.scrollLeft = 0;
@@ -488,7 +580,9 @@ const ContextualToolbar = () => {
 										height: 0,
 										opacity: 0,
 									}}
-									onClick={(e) => e.stopPropagation()}
+									onClick={(e) =>
+										e.stopPropagation()
+									}
 									transition={{
 										duration: 0.1,
 										type: "spring",
@@ -496,11 +590,15 @@ const ContextualToolbar = () => {
 									}}
 									className="flex w-[450px] flex-col rounded-lg border border-black/10 bg-stone-50 p-3 "
 								>
-									<AnimatePresence mode="popLayout">{content}</AnimatePresence>
+									<AnimatePresence mode="popLayout">
+										{content}
+									</AnimatePresence>
 									<div className="ml-auto flex gap-1 text-sm">
 										<button
 											type="button"
-											onClick={() => setShownTab(null)}
+											onClick={() =>
+												setShownTab(null)
+											}
 											className="rounded-md bg-transparent px-1.5 py-0.5 text-sm hover:bg-stone-200"
 										>
 											Cancel
@@ -508,12 +606,16 @@ const ContextualToolbar = () => {
 										<button
 											type="button"
 											onClick={() => {
-												toast.message("Settings Saved", {});
+												toast.message(
+													"Settings Saved",
+													{},
+												);
 												setShownTab(null);
 											}}
 											className="rounded-md bg-orange-500 px-2.5 py-1 text-sm text-white disabled:bg-orange-300"
 										>
-											{shownTab === "Create API Key"
+											{shownTab ===
+											"Create API Key"
 												? "Create Secret Key"
 												: shownTab}
 										</button>
@@ -533,14 +635,24 @@ const ContextualToolbar = () => {
 									<motion.li
 										className={clsx(
 											"relative cursor-pointer snap-center list-none space-x-4 whitespace-nowrap text-nowrap px-[6.9px] py-1.5 text-sm text-stone-600 outline-none transition-colors",
-											activeTab === tab ? "text-black " : null,
-											shownTab === tab ? "text-black " : null,
+											activeTab === tab
+												? "text-black "
+												: null,
+											shownTab === tab
+												? "text-black "
+												: null,
 										)}
 										tabIndex={0}
 										key={tab}
-										onFocus={() => setActiveTab(tab)}
-										onMouseOver={() => setActiveTab(tab)}
-										onMouseLeave={() => setActiveTab(tab)}
+										onFocus={() =>
+											setActiveTab(tab)
+										}
+										onMouseOver={() =>
+											setActiveTab(tab)
+										}
+										onMouseLeave={() =>
+											setActiveTab(tab)
+										}
 										onClick={(e) => {
 											e.stopPropagation();
 											setShownTab(tab);
@@ -558,7 +670,9 @@ const ContextualToolbar = () => {
 												className="absolute inset-0 rounded-lg bg-stone-100"
 											/>
 										) : null}
-										<span className="relative text-inherit">{tab}</span>
+										<span className="relative text-inherit">
+											{tab}
+										</span>
 									</motion.li>
 								))}
 							</motion.div>
@@ -570,7 +684,9 @@ const ContextualToolbar = () => {
 								/>
 								{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 								<svg
-									onClick={() => setShownTab(null)}
+									onClick={() =>
+										setShownTab(null)
+									}
 									width="15"
 									height="15"
 									viewBox="0 0 15 15"

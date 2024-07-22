@@ -1,5 +1,8 @@
 "use client";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+	motion,
+	AnimatePresence,
+} from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 const images = [
@@ -30,9 +33,14 @@ const variants = {
 	}),
 };
 const AirBnbHomesAnimation = () => {
-	const [play, setPlaying] = useState<"not-playing" | "playing">("playing");
+	const [play, setPlaying] = useState<
+		"not-playing" | "playing"
+	>("playing");
 	useEffect(() => {
-		const timer = setTimeout(() => setPlaying("not-playing"), 2000);
+		const timer = setTimeout(
+			() => setPlaying("not-playing"),
+			2000,
+		);
 		return () => clearTimeout(timer);
 	}, []);
 	return (
@@ -54,7 +62,9 @@ const AirBnbHomesAnimation = () => {
 									animate="animate"
 									variants={variants}
 									custom={idx}
-									transition={variants.transition(idx)}
+									transition={variants.transition(
+										idx,
+									)}
 									loading="eager"
 									fetchPriority="auto"
 									alt=""

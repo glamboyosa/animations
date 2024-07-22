@@ -1,10 +1,14 @@
 "use client";
 import { cn } from "@/_lib/utils";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+	motion,
+	AnimatePresence,
+} from "framer-motion";
 import { useMemo, useState } from "react";
 
 const TwoStepPopover = () => {
-	const [currentStep, setCurrentStep] = useState(0);
+	const [currentStep, setCurrentStep] =
+		useState(0);
 	const [direction, setDirection] = useState(0);
 	const [open, setOpen] = useState(false);
 	const content = useMemo(() => {
@@ -35,12 +39,23 @@ const TwoStepPopover = () => {
 									className="lucide lucide-circle-check fill-gray-400 stroke-gray-400"
 								>
 									<title>svg</title>
-									<circle cx="12" cy="12" r="10" />
-									<path className="!stroke-white" d="m9 12 2 2 4-4" />
+									<circle
+										cx="12"
+										cy="12"
+										r="10"
+									/>
+									<path
+										className="!stroke-white"
+										d="m9 12 2 2 4-4"
+									/>
 								</svg>
-								<p className="text-gray-800">Approve Changes</p>
+								<p className="text-gray-800">
+									Approve Changes
+								</p>
 							</div>
-							<p className="ml-auto text-gray-400">Send Review</p>
+							<p className="ml-auto text-gray-400">
+								Send Review
+							</p>
 						</div>
 						{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 						<div
@@ -66,12 +81,22 @@ const TwoStepPopover = () => {
 								>
 									<title>svg</title>
 									<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-									<path className="!stroke-white" d="M13 8H7" />
-									<path className="stroke-white" d="M17 12H7" />
+									<path
+										className="!stroke-white"
+										d="M13 8H7"
+									/>
+									<path
+										className="stroke-white"
+										d="M17 12H7"
+									/>
 								</svg>
-								<p className="text-gray-800">Add Comment</p>
+								<p className="text-gray-800">
+									Add Comment
+								</p>
 							</div>
-							<p className="ml-auto text-gray-400">Reply Thread</p>
+							<p className="ml-auto text-gray-400">
+								Reply Thread
+							</p>
 						</div>
 					</>
 				);
@@ -79,7 +104,9 @@ const TwoStepPopover = () => {
 				return (
 					<div>
 						<div className="-mt-2 flex items-center">
-							<h2 className="text-sm tracking-tight">Approve Changes</h2>
+							<h2 className="text-sm tracking-tight">
+								Approve Changes
+							</h2>
 							<span className="ml-auto rounded-lg bg-teal-50 p-1 text-teal-600 text-xs">
 								by @osa
 							</span>
@@ -104,10 +131,13 @@ const TwoStepPopover = () => {
 									<path d="M12 18V6" />
 									<path d="m17 12 3-2v8" />
 								</svg>
-								<span className="text-xs">New Title Added</span>
+								<span className="text-xs">
+									New Title Added
+								</span>
 							</div>
 							<p className="text-xs">
-								&ldquo;Osa is a product engineer.&rdquo;
+								&ldquo;Osa is a product
+								engineer.&rdquo;
 							</p>
 						</div>
 						<div className="mt-3 flex w-full gap-1">
@@ -139,7 +169,9 @@ const TwoStepPopover = () => {
 				return (
 					<div>
 						<div className="-mt-2 flex items-center">
-							<h2 className="text-sm tracking-tight">Add Comment</h2>
+							<h2 className="text-sm tracking-tight">
+								Add Comment
+							</h2>
 							<span className="ml-auto rounded-lg bg-teal-50 p-1 text-teal-600 text-xs">
 								Create Thread
 							</span>
@@ -215,7 +247,11 @@ const TwoStepPopover = () => {
 					{open ? (
 						<motion.div
 							initial={{ opacity: 0 }}
-							animate={{ opacity: 1, height: currentStep !== 0 ? 144 : 80 }}
+							animate={{
+								opacity: 1,
+								height:
+									currentStep !== 0 ? 144 : 80,
+							}}
 							exit={{ opacity: 0 }}
 							transition={{
 								type: "spring",
@@ -224,10 +260,14 @@ const TwoStepPopover = () => {
 							}}
 							className={cn(
 								"fixed top-[36.5vh] left-[39%] h-20 w-72 overflow-hidden rounded-md bg-white p-4 shadow-black/30 shadow-lg",
-								currentStep !== 0 && "top-[28.5vh]",
+								currentStep !== 0 &&
+									"top-[28.5vh]",
 							)}
 						>
-							<AnimatePresence mode="popLayout" initial={false}>
+							<AnimatePresence
+								mode="popLayout"
+								initial={false}
+							>
 								<motion.div
 									key={currentStep}
 									variants={variants}
@@ -236,7 +276,11 @@ const TwoStepPopover = () => {
 									exit="exit"
 									custom={direction}
 									layout
-									transition={{ duration: 0.2, type: "spring", bounce: 0 }}
+									transition={{
+										duration: 0.2,
+										type: "spring",
+										bounce: 0,
+									}}
 								>
 									{content}
 								</motion.div>
@@ -250,11 +294,18 @@ const TwoStepPopover = () => {
 };
 const variants = {
 	initial: (direction: number) => {
-		return { x: `${110 * direction}%`, opacity: 0 };
+		return {
+			x: `${110 * direction}%`,
+			opacity: 0,
+		};
 	},
 	active: { x: "0%", opacity: 1 },
 	exit: (direction: number) => {
-		return { x: `${-110 * direction}%`, opacity: 0, delay: 0 };
+		return {
+			x: `${-110 * direction}%`,
+			opacity: 0,
+			delay: 0,
+		};
 	},
 };
 export default TwoStepPopover;

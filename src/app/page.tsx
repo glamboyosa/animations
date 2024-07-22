@@ -1,8 +1,17 @@
 import clsx from "clsx";
-import { Jersey_10_Charted, Jacquard_24 } from "next/font/google";
+import {
+	Jersey_10_Charted,
+	Jacquard_24,
+} from "next/font/google";
 import Link from "next/link";
-const jersey = Jersey_10_Charted({ subsets: ["latin"], weight: "400" });
-const jac = Jacquard_24({ subsets: ["latin"], weight: "400" });
+const jersey = Jersey_10_Charted({
+	subsets: ["latin"],
+	weight: "400",
+});
+const jac = Jacquard_24({
+	subsets: ["latin"],
+	weight: "400",
+});
 export default function Home() {
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -40,7 +49,8 @@ export default function Home() {
 					jersey.className,
 				)}
 			>
-				UI components animations and recreations 🪄
+				UI components animations and recreations
+				🪄
 			</div>
 
 			<div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
@@ -55,7 +65,8 @@ export default function Home() {
 						</span>
 					</h2>
 					<p className="m-0 max-w-[30ch] text-sm opacity-50">
-						Dynamic Settings from UI Labs by mrnest
+						Dynamic Settings from UI Labs by
+						mrnest
 					</p>
 				</Link>
 				<Link
@@ -69,7 +80,8 @@ export default function Home() {
 						</span>
 					</h2>
 					<p className="m-0 max-w-[30ch] text-sm opacity-50">
-						Contextual Toolbar from UI Labs by mrnest
+						Contextual Toolbar from UI Labs by
+						mrnest
 					</p>
 				</Link>
 				<Link
@@ -83,7 +95,8 @@ export default function Home() {
 						</span>
 					</h2>
 					<p className="m-0 max-w-[30ch] text-sm opacity-50">
-						Airbnb &ldquo;available homes&rdquo; preview microinteraction
+						Airbnb &ldquo;available homes&rdquo;
+						preview microinteraction
 					</p>
 				</Link>
 				<Link
@@ -97,7 +110,8 @@ export default function Home() {
 						</span>
 					</h2>
 					<p className="m-0 max-w-[30ch] text-sm opacity-50">
-						Airbnb &ldquo;share wishlist&rdquo; microinteraction
+						Airbnb &ldquo;share wishlist&rdquo;
+						microinteraction
 					</p>
 				</Link>
 				<Link

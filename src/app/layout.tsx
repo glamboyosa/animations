@@ -41,22 +41,9 @@ export default function RootLayout({
 				href="/stephen-wheeler-hBh9JbyeCtg-unsplash.jpg"
 				as="image"
 			/>
-			<link
-				rel="preload"
-				href="/andrea-davis-IWfe63thJxk-unsplash.jpg"
-				as="image"
-			/>
-			<link
-				rel="preload"
-				href="/karsten-winegeart-sStahKEhT9w-unsplash.jpg"
-				as="image"
-			/>
-			<link
-				rel="preload"
-				href="/meritt-thomas-_YxDGcDm4Hs-unsplash.jpg"
-				as="image"
-			/>
-			<body className={inter.className}>{children}</body>
+			<body className={inter.className}>
+				{children}
+			</body>
 		</html>
 	);
 }

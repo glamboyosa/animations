@@ -2,10 +2,18 @@
 import { useMemo, useState } from "react";
 import { clsx } from "clsx";
 import * as Slider from "@radix-ui/react-slider";
-import { motion, AnimatePresence, MotionConfig } from "framer-motion";
+import {
+	motion,
+	AnimatePresence,
+	MotionConfig,
+} from "framer-motion";
 import { Toaster, toast } from "sonner";
 
-const TABS = ["Dimensions", "Aspect Ratio", "Prompt"] as const;
+const TABS = [
+	"Dimensions",
+	"Aspect Ratio",
+	"Prompt",
+] as const;
 const RATIOS = [
 	{
 		name: "1:1",
@@ -128,25 +136,39 @@ const RATIOS = [
 		),
 	},
 ] as const;
-type ARActiveTabType = (typeof RATIOS)[number]["name"];
+type ARActiveTabType =
+	(typeof RATIOS)[number]["name"];
 type ActiveTabType = (typeof TABS)[number];
 
 const One = () => {
 	const [open, setOpen] = useState(false);
-	const [activeTab, setActiveTab] = useState<ActiveTabType>("Dimensions");
-	const [ARActiveTab, setARActiveTab] = useState<ARActiveTabType>("1:1");
+	const [activeTab, setActiveTab] =
+		useState<ActiveTabType>("Dimensions");
+	const [ARActiveTab, setARActiveTab] =
+		useState<ARActiveTabType>("1:1");
 
 	const [vertical, setVertical] = useState([50]);
-	const [horizontal, setHorizontal] = useState([50]);
+	const [horizontal, setHorizontal] = useState([
+		50,
+	]);
 	const [upscale, setUpscale] = useState([50]);
 	const content = useMemo(() => {
 		switch (activeTab) {
 			case "Dimensions":
 				return (
 					<motion.div
-						initial={{ opacity: 0, filter: "blur(5px)" }}
-						animate={{ opacity: 1, filter: "blur(0px)" }}
-						exit={{ opacity: 0, filter: "blur(5px)" }}
+						initial={{
+							opacity: 0,
+							filter: "blur(5px)",
+						}}
+						animate={{
+							opacity: 1,
+							filter: "blur(0px)",
+						}}
+						exit={{
+							opacity: 0,
+							filter: "blur(5px)",
+						}}
 						className="space-y-0.5"
 					>
 						<div className="flex items-center justify-between p-1">
@@ -155,11 +177,15 @@ const One = () => {
 							</p>
 							<div className="flex gap-2">
 								<div className="rounded-sm bg-stone-800">
-									<p className="p-1.5 text-white text-xs">{vertical[0]}</p>
+									<p className="p-1.5 text-white text-xs">
+										{vertical[0]}
+									</p>
 								</div>
 								<Slider.Root
 									value={vertical}
-									onValueChange={(value) => setVertical(value)}
+									onValueChange={(value) =>
+										setVertical(value)
+									}
 									className="relative flex h-5 w-[100px] touch-none select-none items-center"
 									defaultValue={[50]}
 									max={100}
@@ -181,11 +207,15 @@ const One = () => {
 							</p>
 							<div className="flex gap-2">
 								<div className="bg-stone-800">
-									<p className="p-1.5 text-white text-xs">{horizontal[0]}</p>
+									<p className="p-1.5 text-white text-xs">
+										{horizontal[0]}
+									</p>
 								</div>
 								<Slider.Root
 									value={horizontal}
-									onValueChange={(value) => setHorizontal(value)}
+									onValueChange={(value) =>
+										setHorizontal(value)
+									}
 									className="relative flex h-5 w-[100px] touch-none select-none items-center"
 									defaultValue={[50]}
 									max={100}
@@ -202,14 +232,20 @@ const One = () => {
 							</div>
 						</div>
 						<div className="flex items-center justify-between p-1">
-							<p className="text-sm text-stone-400 hover:text-white">Upscale</p>
+							<p className="text-sm text-stone-400 hover:text-white">
+								Upscale
+							</p>
 							<div className="flex gap-2">
 								<div className="bg-stone-800">
-									<p className="p-1.5 text-white text-xs">{upscale[0]}</p>
+									<p className="p-1.5 text-white text-xs">
+										{upscale[0]}
+									</p>
 								</div>
 								<Slider.Root
 									value={upscale}
-									onValueChange={(value) => setUpscale(value)}
+									onValueChange={(value) =>
+										setUpscale(value)
+									}
 									className="relative flex h-5 w-[100px] touch-none select-none items-center"
 									defaultValue={[50]}
 									max={100}
@@ -230,26 +266,41 @@ const One = () => {
 			case "Aspect Ratio":
 				return (
 					<motion.div
-						initial={{ opacity: 0, filter: "blur(5px)" }}
-						animate={{ opacity: 1, filter: "blur(0px)" }}
-						exit={{ opacity: 0, filter: "blur(5px)" }}
+						initial={{
+							opacity: 0,
+							filter: "blur(5px)",
+						}}
+						animate={{
+							opacity: 1,
+							filter: "blur(0px)",
+						}}
+						exit={{
+							opacity: 0,
+							filter: "blur(5px)",
+						}}
 						className="grid grid-cols-4 items-center"
 					>
 						{RATIOS.map((ratio) => (
 							// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 							<div
 								key={ratio.name}
-								onClick={() => setARActiveTab(ratio.name)}
+								onClick={() =>
+									setARActiveTab(ratio.name)
+								}
 								className={clsx(
 									" flex cursor-pointer items-center gap-1.5 rounded-md p-0.5 hover:text-yellow-200",
 									ARActiveTab === ratio.name
 										? "bg-stone-800 text-yellow-200"
 										: "text-stone-400",
-									ratio.name === "Custom" ? "w-full" : "w-3/4",
+									ratio.name === "Custom"
+										? "w-full"
+										: "w-3/4",
 								)}
 							>
 								{ratio.svg}
-								<p className="p-1 text-sm">{ratio.name}</p>
+								<p className="p-1 text-sm">
+									{ratio.name}
+								</p>
 							</div>
 						))}
 					</motion.div>
@@ -257,9 +308,18 @@ const One = () => {
 			default:
 				return (
 					<motion.form
-						initial={{ opacity: 0, filter: "blur(5px)" }}
-						animate={{ opacity: 1, filter: "blur(0px)" }}
-						exit={{ opacity: 0, filter: "blur(5px)" }}
+						initial={{
+							opacity: 0,
+							filter: "blur(5px)",
+						}}
+						animate={{
+							opacity: 1,
+							filter: "blur(0px)",
+						}}
+						exit={{
+							opacity: 0,
+							filter: "blur(5px)",
+						}}
 						className="flex h-[120px] w-[99%]"
 					>
 						<textarea
@@ -271,7 +331,13 @@ const One = () => {
 					</motion.form>
 				);
 		}
-	}, [activeTab, ARActiveTab, upscale, vertical, horizontal]);
+	}, [
+		activeTab,
+		ARActiveTab,
+		upscale,
+		vertical,
+		horizontal,
+	]);
 
 	return (
 		<div className="flex h-screen items-center justify-center">
@@ -313,7 +379,10 @@ const One = () => {
 						</svg>
 					</span>
 				</motion.button>
-				<AnimatePresence mode="popLayout" initial={false}>
+				<AnimatePresence
+					mode="popLayout"
+					initial={false}
+				>
 					{open ? (
 						<motion.div
 							layoutId="wrapper"
@@ -332,11 +401,15 @@ const One = () => {
 									<motion.li
 										className={clsx(
 											"relative cursor-pointer list-none space-x-2 px-2 py-1 text-sm outline-none transition-colors hover:text-white",
-											activeTab === tab ? "text-white" : "text-stone-400",
+											activeTab === tab
+												? "text-white"
+												: "text-stone-400",
 										)}
 										tabIndex={0}
 										key={tab}
-										onClick={() => setActiveTab(tab)}
+										onClick={() =>
+											setActiveTab(tab)
+										}
 									>
 										{activeTab === tab ? (
 											<motion.div
@@ -346,7 +419,9 @@ const One = () => {
 												className="absolute inset-0 rounded-lg bg-stone-800"
 											/>
 										) : null}
-										<span className="relative text-inherit">{tab}</span>
+										<span className="relative text-inherit">
+											{tab}
+										</span>
 									</motion.li>
 								))}
 								<motion.svg
@@ -369,22 +444,32 @@ const One = () => {
 							</div>
 							<div>
 								<MotionConfig
-									transition={{ type: "tween", duration: 0.3, bounce: 0.2 }}
+									transition={{
+										type: "tween",
+										duration: 0.3,
+										bounce: 0.2,
+									}}
 								>
 									{content}
 								</MotionConfig>
 								<motion.div className="mt-4 flex items-center justify-between">
 									<div className="flex items-center gap-1">
 										<span className="size-1.5 rounded-full bg-yellow-200" />
-										<p className="text-stone-400 text-xs">Changes</p>
+										<p className="text-stone-400 text-xs">
+											Changes
+										</p>
 									</div>
 									<button
 										type="button"
 										onClick={() => {
 											setOpen(false);
-											toast.message("Parameters Saved", {
-												description: "New template created in drafts 🤠",
-											});
+											toast.message(
+												"Parameters Saved",
+												{
+													description:
+														"New template created in drafts 🤠",
+												},
+											);
 										}}
 										className="rounded-md bg-yellow-200 p-1.5 text-black text-xs"
 									>

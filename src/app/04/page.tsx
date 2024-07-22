@@ -1,6 +1,13 @@
 "use client";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, type LegacyRef } from "react";
+import {
+	motion,
+	AnimatePresence,
+} from "framer-motion";
+import {
+	useState,
+	useEffect,
+	type LegacyRef,
+} from "react";
 import { Drawer } from "vaul";
 
 import Image from "next/image";
@@ -35,8 +42,11 @@ const variants = {
 	}),
 };
 const Airbnbsharebookmarks = () => {
-	const [loaded, setLoaded] = useState<"not-loaded" | "loaded">("not-loaded");
-	const [container, setContainer] = useState(null);
+	const [loaded, setLoaded] = useState<
+		"not-loaded" | "loaded"
+	>("not-loaded");
+	const [container, setContainer] =
+		useState(null);
 	useEffect(() => {
 		setLoaded("loaded");
 	}, []);
@@ -44,7 +54,9 @@ const Airbnbsharebookmarks = () => {
 	return (
 		<div className="h-screen translate-x-56 overflow-scroll p-20">
 			<div
-				ref={setContainer as unknown as LegacyRef<HTMLDivElement>}
+				ref={
+					setContainer as unknown as LegacyRef<HTMLDivElement>
+				}
 				style={{
 					height: "calc(100vh - 80px)",
 				}}
@@ -55,8 +67,12 @@ const Airbnbsharebookmarks = () => {
 						type="button"
 						className="flex items-center gap-0.5 rounded-2xl border-2 border-black px-3.5 py-2.5"
 					>
-						<span className="text-xs tracking-tighter">Dates .</span>
-						<span className="text-xs tracking-tighter">4 guests</span>
+						<span className="text-xs tracking-tighter">
+							Dates .
+						</span>
+						<span className="text-xs tracking-tighter">
+							4 guests
+						</span>
 					</button>
 
 					<Drawer.Root>
@@ -66,7 +82,9 @@ const Airbnbsharebookmarks = () => {
 								type="button"
 								className="flex items-center gap-1.5 rounded-2xl border border-black/5 px-3.5 py-2.5 hover:bg-stone-100"
 							>
-								<span className="text-xs tracking-tighter">Share</span>
+								<span className="text-xs tracking-tighter">
+									Share
+								</span>
 								<span className="text-xs tracking-tighter">
 									<svg
 										width="15"
@@ -120,8 +138,10 @@ const Airbnbsharebookmarks = () => {
 												key={img}
 												style={{
 													zIndex: idx * 10,
-													translateX: translates[idx].x,
-													translateY: translates[idx].y,
+													translateX:
+														translates[idx].x,
+													translateY:
+														translates[idx].y,
 												}}
 												width={32}
 												height={32}
@@ -129,7 +149,9 @@ const Airbnbsharebookmarks = () => {
 												animate="animate"
 												variants={variants}
 												custom={idx}
-												transition={variants.transition(idx)}
+												transition={variants.transition(
+													idx,
+												)}
 												loading="eager"
 												alt=""
 												src={`/${img}`}
@@ -139,11 +161,16 @@ const Airbnbsharebookmarks = () => {
 								</div>
 								<div className="mt-2.5 flex w-full flex-col items-center justify-start gap-2.5">
 									<h3 className="z-50 ml-4 w-60 font-semibold text-2xl tracking-tighter">
-										Share this wishlist with your group
+										Share this wishlist with your
+										group
 									</h3>
 									<p className="z-50 ml-4 w-[300px] text-sm tracking-tight">
-										Everyone can add homes, write notes and vote for their
-										favourites. <span className="underline">Learn more</span>
+										Everyone can add homes, write
+										notes and vote for their
+										favourites.{" "}
+										<span className="underline">
+											Learn more
+										</span>
 									</p>
 									<Drawer.Close asChild>
 										<button
@@ -218,7 +245,9 @@ const Airbnbsharebookmarks = () => {
 									fill="currentColor"
 								/>
 							</svg>
-							<p className="font-light text-lg">5.0</p>
+							<p className="font-light text-lg">
+								5.0
+							</p>
 						</div>
 					</div>
 					<div className="my-2 w-full rounded-lg bg-stone-100 p-4 shadow-black/5 shadow-xl">

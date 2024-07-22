@@ -1,14 +1,23 @@
 "use client";
 import { cn } from "@/_lib/utils";
-import { AnimatePresence, MotionConfig, motion } from "framer-motion";
+import {
+	AnimatePresence,
+	MotionConfig,
+	motion,
+} from "framer-motion";
 import { useState } from "react";
 const variants = {
-	exit: { y: 40, filter: "blur(2px)", scale: 0.9, opacity: 0 },
+	exit: {
+		y: 40,
+		filter: "blur(2px)",
+		scale: 0.9,
+		opacity: 0,
+	},
 };
 const Six = () => {
-	const [status, setStatus] = useState<"default" | "sending" | "transfered">(
-		"default",
-	);
+	const [status, setStatus] = useState<
+		"default" | "sending" | "transfered"
+	>("default");
 	const calculateHandler = () => {
 		setStatus("sending");
 		setTimeout(() => {
@@ -21,11 +30,19 @@ const Six = () => {
 	return (
 		<div className="flex h-screen items-center justify-center">
 			<div className="flex h-1/2 w-1/3 flex-col items-center justify-center gap-24 rounded-md border border-stone-300 bg-stone-100">
-				<MotionConfig transition={{ type: "spring", duration: 0.3, bounce: 0 }}>
+				<MotionConfig
+					transition={{
+						type: "spring",
+						duration: 0.3,
+						bounce: 0,
+					}}
+				>
 					<div className="relative flex w-full flex-col items-center justify-center text-sm">
 						<span>checkout the GitHub repo</span>
 						<motion.div className="absolute top-0 z-20 flex h-40 w-3/4 flex-col items-center justify-center gap-2 rounded-md border border-black/10 bg-white p-3.5 shadow-sm">
-							<h2 className="font-bold text-lg">Transfered</h2>
+							<h2 className="font-bold text-lg">
+								Transfered
+							</h2>
 							<span className="flex w-fit items-center gap-1 rounded-lg bg-green-200 px-2 py-0.5 text-green-600">
 								<svg
 									width="15"
@@ -46,13 +63,16 @@ const Six = () => {
 							</span>
 						</motion.div>
 						<AnimatePresence>
-							{status === "sending" || status === "default" ? (
+							{status === "sending" ||
+							status === "default" ? (
 								<motion.div
 									variants={variants}
 									exit="exit"
 									className="absolute top-1 z-30 flex h-40 w-3/4 flex-col items-center justify-center gap-2 rounded-md border border-black/10 bg-white p-3.5 shadow-sm"
 								>
-									<h2 className="font-bold text-lg">Check your bank</h2>
+									<h2 className="font-bold text-lg">
+										Check your bank
+									</h2>
 									<span className="flex w-fit items-center gap-1 rounded-lg bg-blue-50 px-2 py-0.5 text-blue-500">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
@@ -82,12 +102,16 @@ const Six = () => {
 									className="absolute top-2.5 z-50 flex h-40 w-3/4 flex-col gap-8 rounded-md border border-black/10 bg-white p-3.5 shadow-sm"
 								>
 									<div className="flex items-center">
-										<span className="text-gray-700">ASK</span>
+										<span className="text-gray-700">
+											ASK
+										</span>
 										<span className="ml-auto text-gray-300">
 											We don&apos;t ask anything
 										</span>
 									</div>
-									<p className="text-center font-extrabold text-2xl">$6000M</p>
+									<p className="text-center font-extrabold text-2xl">
+										$6000M
+									</p>
 								</motion.div>
 							) : null}
 						</AnimatePresence>
