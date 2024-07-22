@@ -56,6 +56,7 @@ const AirBnbHomesAnimation = () => {
 									custom={idx}
 									transition={variants.transition(idx)}
 									loading="eager"
+									fetchPriority="auto"
 									alt=""
 									src={`/${img}`}
 								/>
@@ -72,6 +73,7 @@ const AirBnbHomesAnimation = () => {
 									width={32}
 									height={32}
 									loading="eager"
+									priority
 									alt=""
 									src={`/${img}`}
 								/>
