@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Timer } from "./timer";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 export default function DynamicIsland() {
 	const [view, setView] = useState<
 		"timer" | "idle"
