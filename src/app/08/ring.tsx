@@ -5,16 +5,21 @@ import {
 	AnimatePresence,
 } from "framer-motion";
 
-export function Ring() {
+export function Ring({
+	view,
+}: {
+	view: "ring" | "idle";
+}) {
 	const [isSilent, setIsSilent] = useState(false);
-
 	useEffect(() => {
-		const id = setTimeout(() => {
-			setIsSilent((s) => !s);
-		}, 2000);
-
-		return () => clearTimeout(id);
-	}, []);
+		let id: NodeJS.Timeout;
+		if (view === "ring") {
+			id = setInterval(() => {
+				setIsSilent((s) => !s);
+			}, 1500);
+		}
+		return () => clearInterval(id);
+	}, [view]);
 
 	return (
 		<motion.div
@@ -25,11 +30,7 @@ export function Ring() {
 			<AnimatePresence>
 				{isSilent ? (
 					<motion.div
-						initial={{
-							width: 0,
-							opacity: 0,
-							filter: "blur(4px)",
-						}}
+						key="red"
 						animate={{
 							width: 40,
 							opacity: 1,
