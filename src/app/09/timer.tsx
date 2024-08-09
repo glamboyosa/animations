@@ -22,11 +22,6 @@ export function Timer() {
 					{isPaused ? (
 						<motion.svg
 							key="play"
-							initial={{
-								opacity: 0,
-								scale: 0.5,
-								filter: "blur(4px)",
-							}}
 							animate={{
 								opacity: 1,
 								scale: 1,
@@ -49,11 +44,6 @@ export function Timer() {
 					) : (
 						<motion.svg
 							key="pause"
-							initial={{
-								opacity: 0,
-								scale: 0.5,
-								filter: "blur(4px)",
-							}}
 							animate={{
 								opacity: 1,
 								scale: 1,
@@ -146,11 +136,6 @@ function Counter({
 						className="inline-block tabular-nums"
 						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 						key={n + i}
-						initial={{
-							y: "12px",
-							filter: "blur(2px)",
-							opacity: 0,
-						}}
 						animate={{
 							y: "0",
 							filter: "blur(0px)",
