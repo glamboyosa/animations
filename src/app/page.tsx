@@ -197,9 +197,8 @@ export default function Home() {
 					</h2>
 					<p className="m-0 max-w-[30ch] text-sm opacity-50">
 						An iOS Dynamic Island-inspired music
-						component with animated audio
-						waveforms and dynamic color palette
-						extraction.
+						component with animated waveforms and
+						color-matched palette.
 					</p>
 				</Link>
 			</div>
