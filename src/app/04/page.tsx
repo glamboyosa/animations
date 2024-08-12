@@ -9,13 +9,14 @@ import {
 	type LegacyRef,
 } from "react";
 import { Drawer } from "vaul";
-
 import Image from "next/image";
-const images = [
-	"andrea-davis-IWfe63thJxk-unsplash.jpg",
-	"karsten-winegeart-sStahKEhT9w-unsplash.jpg",
-	"meritt-thomas-_YxDGcDm4Hs-unsplash.jpg",
-];
+import Andrea from "../../../public/andrea-davis-IWfe63thJxk-unsplash.jpg";
+import Karsten from "../../../public/karsten-winegeart-sStahKEhT9w-unsplash.jpg";
+import Merrit from "../../../public/meritt-thomas-_YxDGcDm4Hs-unsplash.jpg";
+import Mike from "../../../public/mike-von-GrfbQPPYguU-unsplash.jpg";
+import Digital from "../../../public/digital-marketing-agency-ntwrk-g39p1kDjvSY-unsplash.jpg";
+const MotionImage = motion(Image);
+const images = [Andrea, Karsten, Merrit];
 const translates = [
 	{ x: 0, y: 0 },
 	{ x: -20, y: 20 },
@@ -133,9 +134,10 @@ const Airbnbsharebookmarks = () => {
 								<div className="relative z-50 flex h-24 w-full items-center justify-center">
 									<AnimatePresence>
 										{images.map((img, idx) => (
-											<motion.img
+											<MotionImage
 												className="absolute h-16 w-16 overflow-hidden rounded-md border-[3px] border-white"
-												key={img}
+												// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+												key={idx}
 												style={{
 													zIndex: idx * 10,
 													translateX:
@@ -155,7 +157,8 @@ const Airbnbsharebookmarks = () => {
 												loading="eager"
 												fetchPriority="high"
 												alt=""
-												src={`/${img}`}
+												placeholder="blur"
+												src={img}
 											/>
 										))}
 									</AnimatePresence>
@@ -196,7 +199,8 @@ const Airbnbsharebookmarks = () => {
 						quality={100}
 						fetchPriority="high"
 						className="rounded-xl object-cover"
-						src="/digital-marketing-agency-ntwrk-g39p1kDjvSY-unsplash.jpg"
+						placeholder="blur"
+						src={Digital}
 					/>
 					<div className="absolute inset-0">
 						<div className="flex items-center justify-start p-2">
@@ -268,7 +272,8 @@ const Airbnbsharebookmarks = () => {
 							quality={100}
 							fetchPriority="high"
 							className="rounded-xl object-cover"
-							src="/mike-von-GrfbQPPYguU-unsplash.jpg"
+							placeholder="blur"
+							src={Mike}
 						/>
 						<div className="absolute inset-0">
 							<div className="flex items-center gap-24 p-2">

@@ -5,12 +5,19 @@ import {
 } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Andrea from "../../../public/andrea-davis-IWfe63thJxk-unsplash.jpg";
+import Karsten from "../../../public/karsten-winegeart-sStahKEhT9w-unsplash.jpg";
+import Merrit from "../../../public/meritt-thomas-_YxDGcDm4Hs-unsplash.jpg";
+import Roberto from "../../../public/roberto-nickson-6FZf3yzuodE-unsplash.jpg";
+import Stephen from "../../../public/stephen-wheeler-hBh9JbyeCtg-unsplash.jpg";
+const MotionImage = motion(Image);
+
 const images = [
-	"andrea-davis-IWfe63thJxk-unsplash.jpg",
-	"karsten-winegeart-sStahKEhT9w-unsplash.jpg",
-	"meritt-thomas-_YxDGcDm4Hs-unsplash.jpg",
-	"roberto-nickson-6FZf3yzuodE-unsplash.jpg",
-	"stephen-wheeler-hBh9JbyeCtg-unsplash.jpg",
+	Andrea,
+	Karsten,
+	Merrit,
+	Roberto,
+	Stephen,
 ];
 const rotationDegrees = [10, -20, -5, 5, 2];
 const variants = {
@@ -49,9 +56,10 @@ const AirBnbHomesAnimation = () => {
 				<AnimatePresence>
 					{play === "playing"
 						? images.map((img, idx) => (
-								<motion.img
+								<MotionImage
 									className="h-12 w-12 overflow-hidden rounded-md border-2 border-white"
-									key={img}
+									// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+									key={idx}
 									style={{
 										zIndex: idx * 10,
 										translate: idx * -5,
@@ -68,13 +76,15 @@ const AirBnbHomesAnimation = () => {
 									loading="eager"
 									fetchPriority="high"
 									alt=""
-									src={`/${img}`}
+									placeholder="blur"
+									src={img}
 								/>
 							))
 						: images.map((img, idx) => (
 								<Image
 									className="h-12 w-12 overflow-hidden rounded-md border-2 border-white"
-									key={img}
+									// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+									key={idx}
 									style={{
 										zIndex: idx * 10,
 										translate: idx * -5,
@@ -83,9 +93,10 @@ const AirBnbHomesAnimation = () => {
 									width={32}
 									height={32}
 									loading="eager"
+									placeholder="blur"
 									fetchPriority="high"
 									alt=""
-									src={`/${img}`}
+									src={img}
 								/>
 							))}
 				</AnimatePresence>

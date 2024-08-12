@@ -16,31 +16,6 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<link
-				rel="preload"
-				href="/andrea-davis-IWfe63thJxk-unsplash.jpg"
-				as="image"
-			/>
-			<link
-				rel="preload"
-				href="/karsten-winegeart-sStahKEhT9w-unsplash.jpg"
-				as="image"
-			/>
-			<link
-				rel="preload"
-				href="/meritt-thomas-_YxDGcDm4Hs-unsplash.jpg"
-				as="image"
-			/>
-			<link
-				rel="preload"
-				href="/roberto-nickson-6FZf3yzuodE-unsplash.jpg"
-				as="image"
-			/>
-			<link
-				rel="preload"
-				href="/stephen-wheeler-hBh9JbyeCtg-unsplash.jpg"
-				as="image"
-			/>
 			<body className={inter.className}>
 				{children}
 			</body>
