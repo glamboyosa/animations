@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FastAverageColor } from "fast-average-color";
 import Image from "next/image";
+import BBKing from "../../../public/Liveincookcountyjail.jpg";
 const scaledValue = (value: number) =>
 	Math.max((value / 100) * 20, 5);
 
@@ -54,10 +55,11 @@ export function Music({
 			transition={{ type: "spring", bounce: 0.5 }}
 		>
 			<Image
-				src={"/Liveincookcountyjail.jpg"}
+				src={BBKing}
 				alt="BB King"
 				width={19.75}
 				height={19.75}
+				placeholder="blur"
 				priority
 				onLoadingComplete={(img) => getColor(img)}
 				className="rounded-sm"
