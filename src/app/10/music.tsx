@@ -7,7 +7,6 @@ import BBKing from "../../../public/Liveincookcountyjail.jpg";
 const scaledValue = (value: number) =>
 	Math.max((value / 100) * 20, 5);
 
-const fac = new FastAverageColor();
 const generateRandomValues = (
 	numBars: number,
 ) => {
@@ -15,6 +14,7 @@ const generateRandomValues = (
 		scaledValue(Math.random() * 100),
 	);
 };
+const fac = new FastAverageColor();
 export function Music({
 	view,
 }: {
@@ -43,7 +43,7 @@ export function Music({
 	useEffect(() => {
 		const intervalId = setInterval(() => {
 			setFrequencies(generateRandomValues(6));
-		}, 100);
+		}, 300);
 
 		return () => clearInterval(intervalId); // Cleanup interval on component unmount
 	}, []);
