@@ -53,7 +53,13 @@ const Airbnbsharebookmarks = () => {
 	}, []);
 	if (loaded !== "loaded") return null;
 	return (
-		<div className="h-screen translate-x-56 overflow-scroll p-20">
+		<div
+			style={{
+				transform:
+					"translateX(calc(100vw - 50%))",
+			}}
+			className="h-screen overflow-scroll p-20"
+		>
 			<div
 				ref={
 					setContainer as unknown as LegacyRef<HTMLDivElement>
