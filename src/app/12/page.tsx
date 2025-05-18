@@ -65,7 +65,7 @@ export default function Page() {
                                 loading="eager"
                                 fetchPriority="high"
                                 placeholder='blur'
-                                className="object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.15)]"
+                                className="object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.45)]"
                             />
                         </div>
                     </motion.div>
