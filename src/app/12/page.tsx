@@ -24,10 +24,10 @@ export default function Page() {
 
     useEffect(() => {
         if (isFirstMount.current) {
-            // On first mount, wait for initialDelay before starting
+
             const initialTimeout = setTimeout(() => {
                 isFirstMount.current = false;
-                // Start the interval after the initial delay
+
                 const interval = setInterval(() => {
                     setCurrentIndex((prev) => (prev + 1) % products.length);
                 }, 1000);
@@ -36,7 +36,7 @@ export default function Page() {
 
             return () => clearTimeout(initialTimeout);
         } else {
-            // On subsequent mounts, start interval immediately
+
             const interval = setInterval(() => {
                 setCurrentIndex((prev) => (prev + 1) % products.length);
             }, 1000);
@@ -66,6 +66,7 @@ export default function Page() {
                             onError={(e) => console.error(`Error loading: ${products[currentIndex].alt}`, e)}
                             loading="eager"
                             fetchPriority="high"
+                            placeholder='blur'
                             className="object-contain"
                         />
                     </motion.div>
