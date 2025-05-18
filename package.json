@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "pnpm biome format ./src --write && pnpm biome check --unsafe ./src"
@@ -18,9 +18,9 @@
     "fast-average-color": "^9.4.0",
     "framer-motion": "^11.1.9",
     "motion": "^12.12.1",
-    "next": "15.0.0-canary.102",
-    "react": "19.0.0-rc-06d0b89e-20240801",
-    "react-dom": "19.0.0-rc-06d0b89e-20240801",
+    "next": "15.3.2",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "react-use-measure": "^2.1.1",
     "sonner": "^1.4.41",
     "tailwind-merge": "^2.3.0",
@@ -29,8 +29,8 @@
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "postcss": "^8",

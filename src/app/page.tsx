@@ -1,9 +1,12 @@
+'use client';
+
 import clsx from "clsx";
 import {
 	Jersey_10_Charted,
 	Jacquard_24,
 } from "next/font/google";
 import Link from "next/link";
+
 const jersey = Jersey_10_Charted({
 	subsets: ["latin"],
 	weight: "400",
@@ -12,6 +15,17 @@ const jac = Jacquard_24({
 	subsets: ["latin"],
 	weight: "400",
 });
+
+// Client component for the attribution link
+const AttributionLink = () => (
+	<span
+		className="underline hover:text-blue-500 cursor-pointer"
+		onClick={() => window.open('https://www.thiings.co/things', '_blank')}
+	>
+		thiings.co
+	</span>
+);
+
 export default function Home() {
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -214,6 +228,22 @@ export default function Home() {
 					<p className="m-0 max-w-[30ch] text-sm opacity-50">
 						An animated iOS like Slider component
 						with dynamic blur as we slide.
+					</p>
+				</Link>
+				<Link
+					href={"/12"}
+					prefetch
+
+					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+				>
+					<h2 className="mb-3 font-semibold text-2xl">
+						12{" "}
+						<span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+							-&gt;
+						</span>
+					</h2>
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						Apple 3D icons animation inspired by Airbnb&apos;s 3D animations with smooth fade transitions. 3D models from <AttributionLink />
 					</p>
 				</Link>
 			</div>
