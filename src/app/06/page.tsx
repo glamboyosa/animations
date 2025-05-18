@@ -4,7 +4,7 @@ import {
 	AnimatePresence,
 	MotionConfig,
 	motion,
-} from "framer-motion";
+} from "motion/react";
 import { useState } from "react";
 const variants = {
 	exit: {

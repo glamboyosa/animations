@@ -3,7 +3,7 @@ import { cn } from "@/_lib/utils";
 import {
 	motion,
 	AnimatePresence,
-} from "framer-motion";
+} from "motion/react";
 import { useMemo, useState } from "react";
 
 const TwoStepPopover = () => {

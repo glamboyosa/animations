@@ -1,7 +1,7 @@
 import {
 	AnimatePresence,
 	motion,
-} from "framer-motion";
+} from "motion/react";
 import { useEffect, useState } from "react";
 
 export function Timer() {

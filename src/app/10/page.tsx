@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Music } from "./music";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function DynamicIsland() {
 	const [view, setView] = useState<

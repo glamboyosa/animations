@@ -10,7 +10,7 @@ import {
 	motion,
 	AnimatePresence,
 	MotionConfig,
-} from "framer-motion";
+} from "motion/react";
 import { Toaster, toast } from "sonner";
 import * as Separator from "@radix-ui/react-separator";
 import * as RadioGroup from "@radix-ui/react-radio-group";

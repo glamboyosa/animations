@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { FastAverageColor } from "fast-average-color";
 import Image from "next/image";
 import BBKing from "../../../public/Liveincookcountyjail.jpg";

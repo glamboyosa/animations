@@ -6,7 +6,7 @@ import useMeasure from "react-use-measure";
 import {
 	motion,
 	AnimatePresence,
-} from "framer-motion";
+} from "motion/react";
 import {
 	DefaultView,
 	Key,

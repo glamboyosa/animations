@@ -2,7 +2,7 @@
 import {
 	motion,
 	AnimatePresence,
-} from "framer-motion";
+} from "motion/react";
 import {
 	useState,
 	useEffect,

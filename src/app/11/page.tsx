@@ -5,7 +5,7 @@ import {
 	useMotionValueEvent,
 	useMotionValue,
 	useTransform,
-} from "framer-motion";
+} from "motion/react";
 import {
 	useEffect,
 	useRef,

@@ -2,7 +2,7 @@
 import {
 	motion,
 	AnimatePresence,
-} from "framer-motion";
+} from "motion/react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Andrea from "../../../public/andrea-davis-IWfe63thJxk-unsplash.jpg";

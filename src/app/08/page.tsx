@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Ring } from "./ring";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function DynamicIslandStarter() {
 	const [view, setView] = useState<

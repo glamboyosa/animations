@@ -6,7 +6,7 @@ import {
 	motion,
 	AnimatePresence,
 	MotionConfig,
-} from "framer-motion";
+} from "motion/react";
 import { Toaster, toast } from "sonner";
 
 const TABS = [

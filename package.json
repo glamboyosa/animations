@@ -17,6 +17,7 @@
     "clsx": "^2.1.1",
     "fast-average-color": "^9.4.0",
     "framer-motion": "^11.1.9",
+    "motion": "^12.12.1",
     "next": "15.0.0-canary.102",
     "react": "19.0.0-rc-06d0b89e-20240801",
     "react-dom": "19.0.0-rc-06d0b89e-20240801",

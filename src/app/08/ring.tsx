@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {
 	motion,
 	AnimatePresence,
-} from "framer-motion";
+} from "motion/react";
 
 export function Ring({
 	view,
