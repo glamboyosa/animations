@@ -24,22 +24,19 @@ export default function Page() {
 
     useEffect(() => {
         if (isFirstMount.current) {
-
             const initialTimeout = setTimeout(() => {
                 isFirstMount.current = false;
-
                 const interval = setInterval(() => {
                     setCurrentIndex((prev) => (prev + 1) % products.length);
-                }, 1000);
+                }, 1500);
                 return () => clearInterval(interval);
             }, initialDelay);
 
             return () => clearTimeout(initialTimeout);
         } else {
-
             const interval = setInterval(() => {
                 setCurrentIndex((prev) => (prev + 1) % products.length);
-            }, 1000);
+            }, 1500);
 
             return () => clearInterval(interval);
         }
@@ -54,21 +51,23 @@ export default function Page() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
+                        transition={{ duration: 0.3 }}
                         className="absolute inset-0"
                     >
-                        <Image
-                            src={products[currentIndex].src}
-                            alt={products[currentIndex].alt}
-                            fill
-                            priority
-                            onLoad={() => console.log(`Loaded: ${products[currentIndex].alt}`)}
-                            onError={(e) => console.error(`Error loading: ${products[currentIndex].alt}`, e)}
-                            loading="eager"
-                            fetchPriority="high"
-                            placeholder='blur'
-                            className="object-contain"
-                        />
+                        <div className="relative w-full h-full">
+                            <Image
+                                src={products[currentIndex].src}
+                                alt={products[currentIndex].alt}
+                                fill
+                                priority
+                                onLoad={() => console.log(`Loaded: ${products[currentIndex].alt}`)}
+                                onError={(e) => console.error(`Error loading: ${products[currentIndex].alt}`, e)}
+                                loading="eager"
+                                fetchPriority="high"
+                                placeholder='blur'
+                                className="object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.15)]"
+                            />
+                        </div>
                     </motion.div>
                 </AnimatePresence>
             </div>
