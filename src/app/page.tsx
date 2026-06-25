@@ -71,17 +71,17 @@ const demos: Demo[] = [
 		prefetch: true,
 	},
 	{
-		id: "10",
-		title: "Dynamic Island music",
+		id: "08",
+		title: "Dynamic Island ring",
 		description:
-			"iOS Dynamic Island–inspired player with animated waveforms and a color-matched palette.",
+			"Ring and silent mode on the Dynamic Island — bell shake, red pill, and strike-through.",
 		featured: true,
 	},
 	{
-		id: "11",
-		title: "iOS slider",
+		id: "07",
+		title: "Family drawer",
 		description:
-			"Animated slider with dynamic blur that tracks your thumb as you drag.",
+			"Family (Family.co) iOS-style drawer using Vaul.",
 		featured: true,
 	},
 	{
@@ -121,22 +121,22 @@ const demos: Demo[] = [
 			"Payments card calculator experiment.",
 	},
 	{
-		id: "07",
-		title: "Family drawer",
-		description:
-			"Family (Family.co) iOS-style drawer using Vaul.",
-	},
-	{
-		id: "08",
-		title: "Dynamic Island ring",
-		description:
-			"iOS Dynamic Island ring animation.",
-	},
-	{
 		id: "09",
 		title: "Dynamic Island timer",
 		description:
 			"iOS Dynamic Island timer animation.",
+	},
+	{
+		id: "10",
+		title: "Dynamic Island music",
+		description:
+			"iOS Dynamic Island–inspired player with animated waveforms and a color-matched palette.",
+	},
+	{
+		id: "11",
+		title: "iOS slider",
+		description:
+			"Animated slider with dynamic blur that tracks your thumb as you drag.",
 	},
 ];
 

@@ -65,12 +65,12 @@ const Airbnbsharebookmarks = () => {
 					transform:
 						"translateX(calc(100% - 50%))",
 				}}
-				className="relative max-w-xl overflow-hidden rounded-md bg-white p-10 shadow-black/30 shadow-lg"
+				className="relative max-w-xl overflow-hidden rounded-md bg-white p-10 text-neutral-900 shadow-black/30 shadow-lg"
 			>
 				<div className="mx-4 flex items-center gap-2">
 					<button
 						type="button"
-						className="flex items-center gap-0.5 rounded-2xl border-2 border-black px-3.5 py-2.5"
+						className="flex items-center gap-0.5 rounded-2xl border-2 border-neutral-900 px-3.5 py-2.5 text-neutral-900"
 					>
 						<span className="text-xs tracking-tighter">
 							Dates .
@@ -82,7 +82,7 @@ const Airbnbsharebookmarks = () => {
 
 					<button
 						type="button"
-						className="flex items-center gap-1.5 rounded-2xl border border-black/5 px-3.5 py-2.5 hover:bg-stone-100"
+						className="flex items-center gap-1.5 rounded-2xl border border-neutral-200 px-3.5 py-2.5 text-neutral-900 hover:bg-neutral-100"
 						onClick={() => setIsOpen(true)}
 					>
 						<span className="text-xs tracking-tighter">
@@ -115,14 +115,14 @@ const Airbnbsharebookmarks = () => {
 								className="fixed inset-0 z-10 bg-black/30"
 								onClick={() => setIsOpen(false)}
 							/>
-							<Drawer.Content className="fixed inset-x-0 bottom-[140px] z-50 h-[140px] max-w-xl cursor-pointer rounded-t-[10px] bg-gray-100 after:h-0 focus:outline-none">
+							<Drawer.Content className="fixed inset-x-0 bottom-[140px] z-50 h-[140px] max-w-xl cursor-pointer rounded-t-[10px] bg-gray-100 text-neutral-900 after:h-0 focus:outline-none">
 								<div className="fixed inset-x-3 top-2.5 cursor-pointer">
 									{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 									<svg
 										onClick={() =>
 											setIsOpen(false)
 										}
-										className=" text-gray-500"
+										className="text-gray-500"
 										width="18"
 										height="18"
 										viewBox="0 0 15 15"
@@ -174,15 +174,15 @@ const Airbnbsharebookmarks = () => {
 									</AnimatePresence>
 								</div>
 								<div className="mt-2.5 flex w-full flex-col items-center justify-start gap-2.5">
-									<h3 className="z-50 ml-4 w-60 font-semibold text-2xl tracking-tighter">
+									<h3 className="z-50 ml-4 w-60 font-semibold text-2xl text-neutral-900 tracking-tighter">
 										Share this wishlist with your
 										group
 									</h3>
-									<p className="z-50 ml-4 w-[300px] text-sm tracking-tight">
+									<p className="z-50 ml-4 w-[300px] text-neutral-600 text-sm tracking-tight">
 										Everyone can add homes, write
 										notes and vote for their
 										favourites.{" "}
-										<span className="underline">
+										<span className="text-neutral-900 underline">
 											Learn more
 										</span>
 									</p>
@@ -191,7 +191,7 @@ const Airbnbsharebookmarks = () => {
 											setIsOpen(false)
 										}
 										type="button"
-										className="z-50 w-11/12 rounded-lg bg-black px-4 py-2 text-sm text-white hover:bg-black/70"
+										className="z-50 w-11/12 rounded-lg bg-neutral-900 px-4 py-2 text-sm text-white hover:bg-neutral-800"
 									>
 										Got it
 									</button>
