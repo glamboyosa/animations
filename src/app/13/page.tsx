@@ -1,113 +1,171 @@
 "use client";
 
 import Image from "next/image";
+import { IBM_Plex_Sans } from "next/font/google";
 import {
+	useCallback,
 	useEffect,
-	useMemo,
+	useRef,
 	useState,
 } from "react";
 import {
+	AnimatePresence,
 	motion,
 	useReducedMotion,
 	type Transition,
 } from "motion/react";
 
-type ToastType = "message" | "retweet" | "like";
+const toastFont = IBM_Plex_Sans({
+	subsets: ["latin"],
+	weight: ["400", "500", "600"],
+	display: "swap",
+});
+
+type ToastType =
+	| "message"
+	| "retweet"
+	| "like"
+	| "follow";
 
 type Toast = {
 	id: string;
 	type: ToastType;
-	username: string;
 	headline: string;
-	preview?: string;
+	preview: string;
 	avatar: string;
 };
 
-const TOASTS: Toast[] = [
+type StackEntry = {
+	key: string;
+	toast: Toast;
+};
+
+const TOAST_SEQUENCE: Toast[] = [
 	{
-		id: "dm",
-		type: "message",
-		username: "glamboyosa",
-		headline: "@glamboyosa sent you a message",
-		preview: "ok but we need to ship this toast",
-		avatar: "https://unavatar.io/x/glamboyosa",
-	},
-	{
-		id: "rt",
+		id: "repost",
 		type: "retweet",
-		username: "genehackerman",
-		headline: "@genehackerman reposted",
+		headline: "@genehackerman reposted your post",
 		preview: "stacked toasts are actually insane",
 		avatar: "https://unavatar.io/x/genehackerman",
 	},
 	{
 		id: "like",
 		type: "like",
-		username: "theweeknd",
 		headline: "@theweeknd liked your post",
 		preview: "blinding lights on repeat",
 		avatar:
 			"https://image-cdn-ak.spotifycdn.com/image/ab67616100005174c1719ac9e6a75c1c25835018",
 	},
 	{
-		id: "random",
-		type: "like",
-		username: "nova_ui",
-		headline: "@nova_ui liked your post",
-		preview: "why does this feel so premium",
+		id: "follow",
+		type: "follow",
+		headline: "@nova_ui followed you",
+		preview: "you now follow each other",
 		avatar: "https://i.pravatar.cc/150?u=nova_ui",
+	},
+	{
+		id: "dm",
+		type: "message",
+		headline: "@glamboyosa sent you a message",
+		preview: "ok but we need to ship this toast",
+		avatar: "https://unavatar.io/x/glamboyosa",
 	},
 ];
 
-const CYCLE_SPRING: Transition = {
-	type: "spring",
-	duration: 0.35,
-	bounce: 0,
+const VISIBLE_COUNT = 3;
+const PUSH_INTERVAL_MS = 1700;
+
+const PUSH_TRANSITION: Transition = {
+	type: "tween",
+	duration: 0.52,
+	ease: [0.32, 0.72, 0, 1],
 };
 
-const ENTER_SPRING: Transition = {
-	type: "spring",
-	duration: 0.5,
-	bounce: 0.08,
+const ENTER_TRANSITION: Transition = {
+	type: "tween",
+	duration: 0.56,
+	ease: [0.23, 1, 0.32, 1],
 };
 
-const TEXT_ENTER: Transition = {
-	type: "spring",
-	duration: 0.35,
-	bounce: 0,
+const EXIT_TRANSITION: Transition = {
+	type: "tween",
+	duration: 0.42,
+	ease: [0.32, 0.72, 0, 1],
 };
 
-function stackStyle(
+function createEntry(
+	toast: Toast,
+	suffix: string,
+): StackEntry {
+	return { key: `${toast.id}-${suffix}`, toast };
+}
+
+function initialStack(): StackEntry[] {
+	return TOAST_SEQUENCE.slice(
+		0,
+		VISIBLE_COUNT,
+	).map((toast, index) =>
+		createEntry(toast, `init-${index}`),
+	);
+}
+
+function slotStyle(
 	position: number,
 	reduced: boolean,
 ) {
 	if (reduced) {
 		return {
-			opacity: position === 0 ? 1 : 0.35,
-			transform: `translateY(${position * -8}px) scale(${1 - position * 0.03})`,
-			zIndex: 10 - position,
+			opacity:
+				position === 0
+					? 1
+					: position === 1
+						? 0.55
+						: 0.3,
+			transform: `translate3d(0, ${position * 10}px, 0) scale(${1 - position * 0.028})`,
+			filter: "none",
+			zIndex: 30 - position,
 		};
 	}
 
+	const y = position * 22;
+	const scale = 1 - position * 0.048;
+
 	return {
-		opacity: 1 - position * 0.22,
-		transform: `translateY(${position * -20}px) scale(${1 - position * 0.045})`,
-		zIndex: 10 - position,
+		opacity:
+			position === 0
+				? 1
+				: position === 1
+					? 0.82
+					: 0.58,
+		transform: `translate3d(0, ${y}px, 0) scale(${scale})`,
+		filter:
+			position === 1
+				? "blur(2px)"
+				: position >= 2
+					? "blur(5px)"
+					: "none",
+		zIndex: 30 - position,
 	};
 }
 
-function RetweetIcon() {
+function RepostIcon() {
 	return (
 		<svg
-			width="18"
-			height="18"
+			width="13"
+			height="13"
 			viewBox="0 0 24 24"
-			fill="currentColor"
-			className="shrink-0 text-[#00ba7c]"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2.35"
+			strokeLinecap="round"
+			strokeLinejoin="round"
 			aria-hidden
 		>
 			<title>Repost</title>
-			<path d="M4.5 3.88l4.432 4.14-1.02 1.015L3.5 5.5v7h7v-1.5H5.5V3.88zm15 16.24l-4.432-4.14 1.02-1.015L20.5 18.5v-7h-7v1.5h4.5v5.62z" />
+			<path d="M17 2l4 4-4 4" />
+			<path d="M3 11v-1a4 4 0 0 1 4-4h14" />
+			<path d="M7 22l-4-4 4-4" />
+			<path d="M21 13v1a4 4 0 0 1-4 4H3" />
 		</svg>
 	);
 }
@@ -115,11 +173,10 @@ function RetweetIcon() {
 function HeartIcon() {
 	return (
 		<svg
-			width="18"
-			height="18"
+			width="14"
+			height="14"
 			viewBox="0 0 24 24"
 			fill="currentColor"
-			className="shrink-0 text-[#f91880]"
 			aria-hidden
 		>
 			<title>Like</title>
@@ -128,12 +185,76 @@ function HeartIcon() {
 	);
 }
 
+function FollowIcon() {
+	return (
+		<svg
+			width="14"
+			height="14"
+			viewBox="0 0 24 24"
+			fill="currentColor"
+			aria-hidden
+		>
+			<title>Follow</title>
+			<path d="M10 4H14V10H20V14H14V20H10V14H4V10H10V4Z" />
+		</svg>
+	);
+}
+
+function TypeBadge({
+	type,
+}: {
+	type: ToastType;
+}) {
+	const className =
+		"absolute -bottom-0.5 -right-0.5 flex items-center justify-center rounded-full border-2 border-black";
+
+	if (type === "message") {
+		return (
+			<span
+				className={`${className} size-[18px] bg-[#1d9bf0]`}
+				aria-hidden
+			/>
+		);
+	}
+
+	if (type === "retweet") {
+		return (
+			<span
+				className={`${className} size-[22px] bg-[#0f0f0f] text-[#00ba7c]`}
+				aria-hidden
+			>
+				<RepostIcon />
+			</span>
+		);
+	}
+
+	if (type === "like") {
+		return (
+			<span
+				className={`${className} size-[18px] bg-[#0f0f0f] text-[#f91880]`}
+				aria-hidden
+			>
+				<HeartIcon />
+			</span>
+		);
+	}
+
+	return (
+		<span
+			className={`${className} size-[18px] bg-[#0f0f0f] text-white`}
+			aria-hidden
+		>
+			<FollowIcon />
+		</span>
+	);
+}
+
 function ToastAvatar({
 	src,
-	showOnline,
+	type,
 }: {
 	src: string;
-	showOnline?: boolean;
+	type: ToastType;
 }) {
 	return (
 		<div className="relative shrink-0">
@@ -145,154 +266,88 @@ function ToastAvatar({
 				className="size-10 rounded-full object-cover outline outline-1 outline-white/10"
 				unoptimized
 			/>
-			{showOnline ? (
-				<span className="-right-0.5 absolute bottom-0 size-3 rounded-full border-2 border-[#1a1a1a] bg-[#1d9bf0]" />
-			) : null}
+			<TypeBadge type={type} />
 		</div>
 	);
 }
 
-function ToastText({
-	headline,
-	preview,
-	staggerIn,
-	baseDelay,
-}: {
-	headline: string;
-	preview?: string;
-	staggerIn: boolean;
-	baseDelay: number;
-}) {
-	if (!staggerIn) {
-		return (
-			<>
-				<p className="text-pretty text-[15px] text-white/90 leading-snug">
-					{headline}
-				</p>
-				{preview ? (
-					<p className="mt-1 truncate text-[15px] text-white/45 leading-snug">
-						{preview}
-					</p>
-				) : null}
-			</>
-		);
-	}
-
-	return (
-		<>
-			<motion.p
-				initial={{
-					opacity: 0,
-					transform: "translateY(6px)",
-				}}
-				animate={{
-					opacity: 1,
-					transform: "translateY(0)",
-				}}
-				transition={{
-					...TEXT_ENTER,
-					delay: baseDelay + 0.05,
-				}}
-				className="text-pretty text-[15px] text-white/90 leading-snug"
-			>
-				{headline}
-			</motion.p>
-			{preview ? (
-				<motion.p
-					initial={{
-						opacity: 0,
-						transform: "translateY(6px)",
-					}}
-					animate={{
-						opacity: 1,
-						transform: "translateY(0)",
-					}}
-					transition={{
-						...TEXT_ENTER,
-						delay: baseDelay + 0.12,
-					}}
-					className="mt-1 truncate text-[15px] text-white/45 leading-snug"
-				>
-					{preview}
-				</motion.p>
-			) : null}
-		</>
-	);
-}
-
 function ToastCard({
-	toast,
+	entry,
 	position,
 	reduced,
-	introComplete,
-	toastIndex,
+	isEntering,
 }: {
-	toast: Toast;
+	entry: StackEntry;
 	position: number;
 	reduced: boolean;
-	introComplete: boolean;
-	toastIndex: number;
+	isEntering: boolean;
 }) {
-	const stack = stackStyle(position, reduced);
-	const cardDelay = introComplete
-		? 0
-		: toastIndex * 0.11;
+	const slot = slotStyle(position, reduced);
 
 	return (
 		<motion.article
-			initial={{
-				opacity: 0,
-				transform: "translateY(32px) scale(0.95)",
-			}}
+			layout={false}
+			initial={
+				isEntering
+					? {
+							opacity: 0,
+							transform:
+								"translate3d(0, -44px, 0) scale(0.97)",
+							filter: "none",
+						}
+					: false
+			}
 			animate={{
-				opacity: stack.opacity,
-				transform: stack.transform,
+				opacity: slot.opacity,
+				transform: slot.transform,
+				filter: slot.filter,
 			}}
-			transition={{
-				...(introComplete
-					? CYCLE_SPRING
-					: ENTER_SPRING),
-				delay: cardDelay,
+			exit={{
+				opacity: 0,
+				transform:
+					"translate3d(0, 64px, 0) scale(0.9)",
+				filter: reduced ? "none" : "blur(0.8px)",
+				transition: EXIT_TRANSITION,
 			}}
+			transition={
+				isEntering
+					? ENTER_TRANSITION
+					: PUSH_TRANSITION
+			}
 			style={{
-				zIndex: stack.zIndex,
-				transformOrigin: "center bottom",
+				zIndex: slot.zIndex,
+				transformOrigin: "center top",
+				willChange: "transform, opacity",
 			}}
-			className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto w-full max-w-[400px]"
+			className="pointer-events-none absolute inset-x-0 top-0 mx-auto w-full max-w-[420px]"
 		>
 			<div
-				className="rounded-2xl px-4 py-3.5"
+				className="rounded-[22px] px-4 py-3.5"
 				style={{
-					background: "rgba(28, 28, 28, 0.82)",
-					backdropFilter: "blur(24px)",
+					background: "rgba(30, 30, 32, 0.78)",
+					backdropFilter:
+						"blur(32px) saturate(1.2)",
+					WebkitBackdropFilter:
+						"blur(32px) saturate(1.2)",
 					boxShadow: [
-						"0 0 0 1px rgba(255, 255, 255, 0.08)",
+						"0 0 0 1px rgba(255, 255, 255, 0.09)",
+						"inset 0 1px 0 rgba(255, 255, 255, 0.08)",
 						"0 16px 48px rgba(0, 0, 0, 0.55)",
-						"0 4px 12px rgba(0, 0, 0, 0.35)",
 					].join(", "),
 				}}
 			>
 				<div className="flex items-start gap-3">
-					{toast.type === "message" ? (
-						<ToastAvatar
-							src={toast.avatar}
-							showOnline
-						/>
-					) : toast.type === "retweet" ? (
-						<RetweetIcon />
-					) : (
-						<HeartIcon />
-					)}
-
+					<ToastAvatar
+						src={entry.toast.avatar}
+						type={entry.toast.type}
+					/>
 					<div className="min-w-0 flex-1 pt-0.5">
-						<ToastText
-							headline={toast.headline}
-							preview={toast.preview}
-							staggerIn={
-								!introComplete && position === 0
-							}
-							baseDelay={cardDelay}
-						/>
+						<p className="text-pretty font-semibold text-[#f7f9f9] text-[15px] leading-snug">
+							{entry.toast.headline}
+						</p>
+						<p className="mt-1 truncate text-[#8b8b90] text-[15px] leading-snug">
+							{entry.toast.preview}
+						</p>
 					</div>
 				</div>
 			</div>
@@ -302,82 +357,70 @@ function ToastCard({
 
 export default function ProposeAToast() {
 	const reduced = useReducedMotion() ?? false;
-	const [activeIndex, setActiveIndex] =
-		useState(0);
-	const [introComplete, setIntroComplete] =
-		useState(false);
+	const [stack, setStack] =
+		useState<StackEntry[]>(initialStack);
+	const [sequenceIndex, setSequenceIndex] =
+		useState(VISIBLE_COUNT);
+	const [enteringKey, setEnteringKey] = useState<
+		string | null
+	>(null);
+	const pushCounter = useRef(0);
 
-	const ordered = useMemo(() => {
-		return TOASTS.map((toast, index) => {
-			const position =
-				(index - activeIndex + TOASTS.length) %
-				TOASTS.length;
-			return { toast, position };
-		}).sort((a, b) => b.position - a.position);
-	}, [activeIndex]);
+	const pushToast = useCallback(() => {
+		const toast =
+			TOAST_SEQUENCE[
+				sequenceIndex % TOAST_SEQUENCE.length
+			];
+		const suffix = String(pushCounter.current++);
+		const key = `${toast.id}-${suffix}`;
+
+		setSequenceIndex((index) => index + 1);
+		setEnteringKey(key);
+		setStack((current) => [
+			{ key, toast },
+			...current.slice(0, VISIBLE_COUNT - 1),
+		]);
+	}, [sequenceIndex]);
 
 	useEffect(() => {
-		const introTimer = setTimeout(
-			() => setIntroComplete(true),
-			80 + TOASTS.length * 110 + 500,
+		if (!enteringKey) return;
+		const timer = setTimeout(
+			() => setEnteringKey(null),
+			620,
 		);
-		return () => clearTimeout(introTimer);
-	}, []);
+		return () => clearTimeout(timer);
+	}, [enteringKey]);
 
 	useEffect(() => {
-		if (!introComplete) return;
-
 		const interval = setInterval(
-			() => {
-				setActiveIndex(
-					(prev) => (prev + 1) % TOASTS.length,
-				);
-			},
-			reduced ? 4000 : 2400,
+			pushToast,
+			reduced ? 2800 : PUSH_INTERVAL_MS,
 		);
-
 		return () => clearInterval(interval);
-	}, [introComplete, reduced]);
+	}, [pushToast, reduced]);
 
 	return (
-		<div className="flex min-h-screen flex-col items-center justify-center bg-black antialiased">
-			<p className="mb-16 text-balance px-6 text-center text-sm text-white/30">
-				I&apos;d like to propose a toast
-			</p>
-
-			<div
-				className="relative h-[220px] w-full max-w-[440px] px-5"
-				style={{
-					perspective: reduced
-						? undefined
-						: "1200px",
-				}}
-			>
-				{ordered.map(({ toast, position }) => (
-					<ToastCard
-						key={toast.id}
-						toast={toast}
-						position={position}
-						reduced={reduced}
-						introComplete={introComplete}
-						toastIndex={TOASTS.findIndex(
-							(t) => t.id === toast.id,
-						)}
-					/>
-				))}
+		<button
+			type="button"
+			aria-label="Show next toast"
+			onClick={pushToast}
+			className={`${toastFont.className} flex min-h-screen w-full items-center justify-center bg-black tracking-[-0.01em] antialiased active:scale-[0.995] motion-reduce:active:scale-100`}
+		>
+			<div className="relative h-[230px] w-full max-w-[440px] px-5">
+				<AnimatePresence initial={false}>
+					{stack.map((entry, position) => (
+						<ToastCard
+							key={entry.key}
+							entry={entry}
+							position={position}
+							reduced={reduced}
+							isEntering={
+								entry.key === enteringKey
+							}
+						/>
+					))}
+				</AnimatePresence>
 			</div>
-
-			<button
-				type="button"
-				onClick={() =>
-					setActiveIndex(
-						(prev) => (prev + 1) % TOASTS.length,
-					)
-				}
-				className="mt-20 min-h-10 min-w-10 rounded-full px-5 py-2.5 text-sm text-white/40 transition-[transform,opacity,color] duration-200 ease-out hover:text-white/70 active:scale-[0.96]"
-			>
-				Next toast
-			</button>
-		</div>
+		</button>
 	);
 }
