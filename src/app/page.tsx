@@ -117,76 +117,20 @@ const demos: Demo[] = [
 	},
 ];
 
-const ENTER_EASE = [0.2, 0, 0, 1] as const;
-
-const cardClassName = (featured: boolean) =>
-	[
-		"group relative block rounded-2xl bg-white/90 p-5 shadow-[0_1px_1px_rgba(0,0,0,0.03),0_4px_16px_rgba(0,0,0,0.06)] outline outline-1 outline-black/[0.04] transition-[transform,box-shadow] duration-200 ease-[cubic-bezier(0.2,0,0,1)] active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none dark:bg-neutral-900/80 dark:shadow-[0_1px_1px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,0,0,0.35)] dark:outline-white/[0.06]",
-		featured ? "p-6 sm:p-7" : "",
-		"[@media(hover:hover)_and_(pointer:fine)]:hover:-translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_2px_2px_rgba(0,0,0,0.04),0_12px_32px_rgba(0,0,0,0.08)] dark:[@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_2px_2px_rgba(0,0,0,0.25),0_16px_40px_rgba(0,0,0,0.45)]",
-	].join(" ");
-
-function DemoCard({
-	demo,
-	index,
-	reduced,
-	featured = false,
-}: {
-	demo: Demo;
-	index: number;
-	reduced: boolean;
-	featured?: boolean;
-}) {
-	return (
-		<motion.li
-			initial={
-				reduced
-					? false
-					: {
-							opacity: 0,
-							transform: "translateY(10px)",
-						}
-			}
-			animate={{
-				opacity: 1,
-				transform: "translateY(0)",
-			}}
-			transition={{
-				duration: reduced ? 0 : 0.32,
-				delay: reduced ? 0 : index * 0.045,
-				ease: ENTER_EASE,
-			}}
-		>
-			<Link
-				href={`/${demo.id}`}
-				prefetch={demo.prefetch}
-				className={cardClassName(featured)}
-			>
-				<div className="flex items-start justify-between gap-3">
-					<div className="min-w-0">
-						<p className="mb-1.5 font-medium text-neutral-400 text-xs uppercase tabular-nums tracking-widest">
-							{demo.id}
-						</p>
-						<h2
-							className={`text-balance font-semibold text-neutral-900 tracking-tight dark:text-neutral-50 ${featured ? "text-xl sm:text-2xl" : "text-lg"}`}
-						>
-							{demo.title}
-						</h2>
-						<p className="mt-2 text-pretty text-neutral-500 text-sm leading-relaxed dark:text-neutral-400">
-							{demo.description}
-						</p>
-					</div>
-					<span
-						aria-hidden
-						className="shrink-0 pt-1 text-neutral-300 transition-transform duration-200 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transform-none dark:text-neutral-600 [@media(hover:hover)_and_(pointer:fine)]:group-hover:translate-x-0.5 [@media(hover:hover)_and_(pointer:fine)]:group-hover:text-neutral-500 dark:[@media(hover:hover)_and_(pointer:fine)]:group-hover:text-neutral-300"
-					>
-						→
-					</span>
-				</div>
-			</Link>
-		</motion.li>
-	);
-}
+// Client component for the attribution link
+const AttributionLink = () => (
+	<span
+		className="underline hover:text-blue-500 cursor-pointer"
+		onClick={() =>
+			window.open(
+				"https://www.thiings.co/things",
+				"_blank",
+			)
+		}
+	>
+		thiings.co
+	</span>
+);
 
 export default function Home() {
 	const reduced = useReducedMotion() ?? false;
@@ -249,35 +193,192 @@ export default function Home() {
 					<h2 className="mb-5 font-medium text-neutral-500 text-sm uppercase tracking-widest">
 						Highlights
 					</h2>
-					<ul className="grid gap-4 sm:grid-cols-2">
-						{featured.map((demo, index) => (
-							<DemoCard
-								key={demo.id}
-								demo={demo}
-								index={index}
-								reduced={reduced}
-								featured
-							/>
-						))}
-					</ul>
-				</section>
-
-				<section>
-					<h2 className="mb-5 font-medium text-neutral-500 text-sm uppercase tracking-widest">
-						All demos
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						Dynamic Settings from UI Labs by
+						mrnest
+					</p>
+				</Link>
+				<Link
+					href={"/02"}
+					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+				>
+					<h2 className="mb-3 font-semibold text-2xl">
+						02{" "}
+						<span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+							-&gt;
+						</span>
 					</h2>
-					<ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-						{rest.map((demo, index) => (
-							<DemoCard
-								key={demo.id}
-								demo={demo}
-								index={index + featured.length}
-								reduced={reduced}
-							/>
-						))}
-					</ul>
-				</section>
-			</main>
-		</div>
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						Contextual Toolbar from UI Labs by
+						mrnest
+					</p>
+				</Link>
+				<Link
+					href={"/03"}
+					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+				>
+					<h2 className="mb-3 font-semibold text-2xl">
+						03{" "}
+						<span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+							-&gt;
+						</span>
+					</h2>
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						Airbnb &ldquo;available homes&rdquo;
+						preview microinteraction
+					</p>
+				</Link>
+				<Link
+					href={"/04"}
+					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+				>
+					<h2 className="mb-3 font-semibold text-2xl">
+						04{" "}
+						<span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+							-&gt;
+						</span>
+					</h2>
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						Airbnb &ldquo;share wishlist&rdquo;
+						microinteraction
+					</p>
+				</Link>
+				<Link
+					href={"/05"}
+					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+				>
+					<h2 className="mb-3 font-semibold text-2xl">
+						05{" "}
+						<span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+							-&gt;
+						</span>
+					</h2>
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						Directionally aware two-step popover
+					</p>
+				</Link>
+				<Link
+					href={"/06"}
+					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+				>
+					<h2 className="mb-3 font-semibold text-2xl">
+						06{" "}
+						<span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+							-&gt;
+						</span>
+					</h2>
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						Payments Card Calculator(?)
+					</p>
+				</Link>
+				<Link
+					href={"/07"}
+					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+				>
+					<h2 className="mb-3 font-semibold text-2xl">
+						07{" "}
+						<span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+							-&gt;
+						</span>
+					</h2>
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						Family (Family.co) iOS style drawer
+						using Vaul.
+					</p>
+				</Link>
+				<Link
+					href={"/08"}
+					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+				>
+					<h2 className="mb-3 font-semibold text-2xl">
+						08{" "}
+						<span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+							-&gt;
+						</span>
+					</h2>
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						iOS Dynamic Island Ring animation.
+					</p>
+				</Link>
+				<Link
+					href={"/09"}
+					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+				>
+					<h2 className="mb-3 font-semibold text-2xl">
+						09{" "}
+						<span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+							-&gt;
+						</span>
+					</h2>
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						iOS Dynamic Island Timer animation.
+					</p>
+				</Link>
+				<Link
+					href={"/10"}
+					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+				>
+					<h2 className="mb-3 font-semibold text-2xl">
+						10{" "}
+						<span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+							-&gt;
+						</span>
+					</h2>
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						An iOS Dynamic Island-inspired music
+						component with animated waveforms and
+						color-matched palette.
+					</p>
+				</Link>
+				<Link
+					href={"/11"}
+					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+				>
+					<h2 className="mb-3 font-semibold text-2xl">
+						11{" "}
+						<span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+							-&gt;
+						</span>
+					</h2>
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						An animated iOS like Slider component
+						with dynamic blur as we slide.
+					</p>
+				</Link>
+				<Link
+					href={"/12"}
+					prefetch={true}
+					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+				>
+					<h2 className="mb-3 font-semibold text-2xl">
+						12{" "}
+						<span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+							-&gt;
+						</span>
+					</h2>
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						Apple 3D icons animation inspired by
+						Airbnb&apos;s 3D animations with
+						smooth fade transitions. 3D models
+						from <AttributionLink />
+					</p>
+				</Link>
+				<Link
+					href={"/13"}
+					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+				>
+					<h2 className="mb-3 font-semibold text-2xl">
+						13{" "}
+						<span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+							-&gt;
+						</span>
+					</h2>
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						X stacked toast notifications by Benji
+						Taylor — glassy 3D card stack
+					</p>
+				</Link>
+			</div>
+		</main>
 	);
 }
