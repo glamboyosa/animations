@@ -43,7 +43,7 @@ const demos: Demo[] = [
 			</span>
 		),
 		description:
-			"Glassy push-stack notifications by Benji Taylor — depth, blur, and timing matched to the original.",
+			"Glassy push-stack notifications by Benji Taylor, with depth, blur, and timing matched to the original.",
 		featured: true,
 	},
 	{
@@ -74,7 +74,7 @@ const demos: Demo[] = [
 		id: "08",
 		title: "Dynamic Island ring",
 		description:
-			"Ring and silent mode on the Dynamic Island — bell shake, red pill, and strike-through.",
+			"Ring and silent mode on the Dynamic Island, including the bell shake, red pill, and strike-through.",
 		featured: true,
 	},
 	{
@@ -237,8 +237,8 @@ export default function Home() {
 						</h1>
 						<p className="mt-4 max-w-xl text-pretty text-lg text-neutral-600 leading-relaxed dark:text-neutral-400">
 							Microinteractions reverse-engineered
-							from products I admire — motion,
-							timing, and feel included.
+							from products I admire, including
+							their motion, timing, and feel.
 						</p>
 					</div>
 
