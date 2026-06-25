@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import clsx from "clsx";
 import {
@@ -20,7 +20,12 @@ const jac = Jacquard_24({
 const AttributionLink = () => (
 	<span
 		className="underline hover:text-blue-500 cursor-pointer"
-		onClick={() => window.open('https://www.thiings.co/things', '_blank')}
+		onClick={() =>
+			window.open(
+				"https://www.thiings.co/things",
+				"_blank",
+			)
+		}
 	>
 		thiings.co
 	</span>
@@ -233,7 +238,6 @@ export default function Home() {
 				<Link
 					href={"/12"}
 					prefetch={true}
-
 					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
 				>
 					<h2 className="mb-3 font-semibold text-2xl">
@@ -243,7 +247,25 @@ export default function Home() {
 						</span>
 					</h2>
 					<p className="m-0 max-w-[30ch] text-sm opacity-50">
-						Apple 3D icons animation inspired by Airbnb&apos;s 3D animations with smooth fade transitions. 3D models from <AttributionLink />
+						Apple 3D icons animation inspired by
+						Airbnb&apos;s 3D animations with
+						smooth fade transitions. 3D models
+						from <AttributionLink />
+					</p>
+				</Link>
+				<Link
+					href={"/13"}
+					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+				>
+					<h2 className="mb-3 font-semibold text-2xl">
+						13{" "}
+						<span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+							-&gt;
+						</span>
+					</h2>
+					<p className="m-0 max-w-[30ch] text-sm opacity-50">
+						X stacked toast notifications by Benji
+						Taylor — glassy 3D card stack
 					</p>
 				</Link>
 			</div>
