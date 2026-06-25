@@ -59,16 +59,22 @@ const TOASTS: Toast[] = [
 	},
 ];
 
-const SPRING: Transition = {
+const CYCLE_SPRING: Transition = {
 	type: "spring",
-	duration: 0.55,
-	bounce: 0.12,
+	duration: 0.35,
+	bounce: 0,
 };
 
 const ENTER_SPRING: Transition = {
 	type: "spring",
-	duration: 0.65,
+	duration: 0.5,
 	bounce: 0.08,
+};
+
+const TEXT_ENTER: Transition = {
+	type: "spring",
+	duration: 0.35,
+	bounce: 0,
 };
 
 function stackStyle(
@@ -79,7 +85,6 @@ function stackStyle(
 		return {
 			opacity: position === 0 ? 1 : 0.35,
 			transform: `translateY(${position * -8}px) scale(${1 - position * 0.03})`,
-			filter: "blur(0px)",
 			zIndex: 10 - position,
 		};
 	}
@@ -87,10 +92,6 @@ function stackStyle(
 	return {
 		opacity: 1 - position * 0.22,
 		transform: `translateY(${position * -20}px) scale(${1 - position * 0.045})`,
-		filter:
-			position > 0
-				? `blur(${position}px)`
-				: "blur(0px)",
 		zIndex: 10 - position,
 	};
 }
@@ -151,6 +152,74 @@ function ToastAvatar({
 	);
 }
 
+function ToastText({
+	headline,
+	preview,
+	staggerIn,
+	baseDelay,
+}: {
+	headline: string;
+	preview?: string;
+	staggerIn: boolean;
+	baseDelay: number;
+}) {
+	if (!staggerIn) {
+		return (
+			<>
+				<p className="text-pretty text-[15px] text-white/90 leading-snug">
+					{headline}
+				</p>
+				{preview ? (
+					<p className="mt-1 truncate text-[15px] text-white/45 leading-snug">
+						{preview}
+					</p>
+				) : null}
+			</>
+		);
+	}
+
+	return (
+		<>
+			<motion.p
+				initial={{
+					opacity: 0,
+					transform: "translateY(6px)",
+				}}
+				animate={{
+					opacity: 1,
+					transform: "translateY(0)",
+				}}
+				transition={{
+					...TEXT_ENTER,
+					delay: baseDelay + 0.05,
+				}}
+				className="text-pretty text-[15px] text-white/90 leading-snug"
+			>
+				{headline}
+			</motion.p>
+			{preview ? (
+				<motion.p
+					initial={{
+						opacity: 0,
+						transform: "translateY(6px)",
+					}}
+					animate={{
+						opacity: 1,
+						transform: "translateY(0)",
+					}}
+					transition={{
+						...TEXT_ENTER,
+						delay: baseDelay + 0.12,
+					}}
+					className="mt-1 truncate text-[15px] text-white/45 leading-snug"
+				>
+					{preview}
+				</motion.p>
+			) : null}
+		</>
+	);
+}
+
 function ToastCard({
 	toast,
 	position,
@@ -165,27 +234,25 @@ function ToastCard({
 	toastIndex: number;
 }) {
 	const stack = stackStyle(position, reduced);
+	const cardDelay = introComplete
+		? 0
+		: toastIndex * 0.11;
 
 	return (
 		<motion.article
-			layout
 			initial={{
 				opacity: 0,
 				transform: "translateY(32px) scale(0.95)",
-				filter: "blur(6px)",
 			}}
 			animate={{
 				opacity: stack.opacity,
 				transform: stack.transform,
-				filter: stack.filter,
 			}}
 			transition={{
 				...(introComplete
-					? SPRING
+					? CYCLE_SPRING
 					: ENTER_SPRING),
-				delay: introComplete
-					? 0
-					: toastIndex * 0.11,
+				delay: cardDelay,
 			}}
 			style={{
 				zIndex: stack.zIndex,
@@ -218,28 +285,14 @@ function ToastCard({
 					)}
 
 					<div className="min-w-0 flex-1 pt-0.5">
-						<motion.p
-							initial={false}
-							animate={{
-								opacity: 1,
-								filter: "blur(0px)",
-							}}
-							className="text-pretty text-[15px] text-white/90 leading-snug"
-						>
-							{toast.headline}
-						</motion.p>
-						{toast.preview ? (
-							<motion.p
-								initial={false}
-								animate={{
-									opacity: 1,
-									filter: "blur(0px)",
-								}}
-								className="mt-1 truncate text-[15px] text-white/45 leading-snug"
-							>
-								{toast.preview}
-							</motion.p>
-						) : null}
+						<ToastText
+							headline={toast.headline}
+							preview={toast.preview}
+							staggerIn={
+								!introComplete && position === 0
+							}
+							baseDelay={cardDelay}
+						/>
 					</div>
 				</div>
 			</div>
@@ -266,7 +319,7 @@ export default function ProposeAToast() {
 	useEffect(() => {
 		const introTimer = setTimeout(
 			() => setIntroComplete(true),
-			80 + TOASTS.length * 110 + 600,
+			80 + TOASTS.length * 110 + 500,
 		);
 		return () => clearTimeout(introTimer);
 	}, []);
