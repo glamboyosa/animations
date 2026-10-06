@@ -1,6 +1,7 @@
 "use client";
 import {
 	useEffect,
+	useLayoutEffect,
 	useMemo,
 	useRef,
 	useState,
@@ -10,6 +11,7 @@ import {
 	motion,
 	AnimatePresence,
 	MotionConfig,
+	useReducedMotion,
 } from "motion/react";
 import { Toaster, toast } from "sonner";
 import * as Separator from "@radix-ui/react-separator";
@@ -25,6 +27,35 @@ const TABS = [
 	"Share Workspace",
 ] as const;
 type ActiveTabType = (typeof TABS)[number];
+
+/**
+ * Tracks an element's border-box size. Observing inside the effect (not in a
+ * ref callback) keeps it working through StrictMode's remount, so the size is
+ * known before the first interaction.
+ */
+const useElementSize = () => {
+	const [element, setElement] =
+		useState<HTMLElement | null>(null);
+	const [size, setSize] = useState({
+		width: 0,
+		height: 0,
+	});
+	useLayoutEffect(() => {
+		if (!element) return;
+		const observer = new ResizeObserver(
+			([entry]) => {
+				const [box] = entry.borderBoxSize;
+				setSize({
+					width: box.inlineSize,
+					height: box.blockSize,
+				});
+			},
+		);
+		observer.observe(element);
+		return () => observer.disconnect();
+	}, [element]);
+	return [setElement, size] as const;
+};
 const ContextualToolbar = () => {
 	const [open, setOpen] = useState(false);
 	const [checked, setChecked] = useState(false);
@@ -35,11 +66,14 @@ const ContextualToolbar = () => {
 	const scrollC = useRef<HTMLDivElement | null>(
 		null,
 	);
+	const reduced = useReducedMotion() ?? false;
+	const [cardRef, bounds] = useElementSize();
 	const content = useMemo(() => {
 		switch (shownTab) {
 			case "Create Webhook":
 				return (
 					<motion.div
+						key="webhook"
 						className="h-[320px]"
 						initial={{
 							opacity: 0,
@@ -48,11 +82,11 @@ const ContextualToolbar = () => {
 						animate={{
 							opacity: 1,
 							filter: "blur(0px)",
-							height: "320px",
 						}}
 						exit={{
 							opacity: 0,
 							filter: "blur(5px)",
+							transition: { duration: 0.15 },
 						}}
 					>
 						<div className="my-3 space-y-2">
@@ -135,8 +169,8 @@ const ContextualToolbar = () => {
 													<path
 														d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
 														fill="currentColor"
-														fill-rule="evenodd"
-														clip-rule="evenodd"
+														fillRule="evenodd"
+														clipRule="evenodd"
 													/>
 												</svg>
 											</Checkbox.Indicator>
@@ -166,8 +200,8 @@ const ContextualToolbar = () => {
 													<path
 														d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
 														fill="currentColor"
-														fill-rule="evenodd"
-														clip-rule="evenodd"
+														fillRule="evenodd"
+														clipRule="evenodd"
 													/>
 												</svg>
 											</Checkbox.Indicator>
@@ -197,8 +231,8 @@ const ContextualToolbar = () => {
 													<path
 														d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
 														fill="currentColor"
-														fill-rule="evenodd"
-														clip-rule="evenodd"
+														fillRule="evenodd"
+														clipRule="evenodd"
 													/>
 												</svg>
 											</Checkbox.Indicator>
@@ -230,8 +264,8 @@ const ContextualToolbar = () => {
 													<path
 														d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
 														fill="currentColor"
-														fill-rule="evenodd"
-														clip-rule="evenodd"
+														fillRule="evenodd"
+														clipRule="evenodd"
 													/>
 												</svg>
 											</Checkbox.Indicator>
@@ -261,8 +295,8 @@ const ContextualToolbar = () => {
 													<path
 														d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
 														fill="currentColor"
-														fill-rule="evenodd"
-														clip-rule="evenodd"
+														fillRule="evenodd"
+														clipRule="evenodd"
 													/>
 												</svg>
 											</Checkbox.Indicator>
@@ -282,6 +316,7 @@ const ContextualToolbar = () => {
 			case "Connect Repositories":
 				return (
 					<motion.div
+						key="repositories"
 						className="h-[125px]"
 						initial={{
 							opacity: 0,
@@ -290,11 +325,11 @@ const ContextualToolbar = () => {
 						animate={{
 							opacity: 1,
 							filter: "blur(0px)",
-							height: "125px",
 						}}
 						exit={{
 							opacity: 0,
 							filter: "blur(5px)",
+							transition: { duration: 0.15 },
 						}}
 					>
 						<h2 className="mt-1.5 mb-2.5 ml-1 text-[15px]">
@@ -322,8 +357,8 @@ const ContextualToolbar = () => {
 												<path
 													d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
 													fill="currentColor"
-													fill-rule="evenodd"
-													clip-rule="evenodd"
+													fillRule="evenodd"
+													clipRule="evenodd"
 												/>
 											</svg>
 										</Checkbox.Indicator>
@@ -352,8 +387,8 @@ const ContextualToolbar = () => {
 												<path
 													d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
 													fill="currentColor"
-													fill-rule="evenodd"
-													clip-rule="evenodd"
+													fillRule="evenodd"
+													clipRule="evenodd"
 												/>
 											</svg>
 										</Checkbox.Indicator>
@@ -382,8 +417,8 @@ const ContextualToolbar = () => {
 												<path
 													d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
 													fill="currentColor"
-													fill-rule="evenodd"
-													clip-rule="evenodd"
+													fillRule="evenodd"
+													clipRule="evenodd"
 												/>
 											</svg>
 										</Checkbox.Indicator>
@@ -402,6 +437,7 @@ const ContextualToolbar = () => {
 			case "Create API Key":
 				return (
 					<motion.div
+						key="api-key"
 						className="h-[133px]"
 						initial={{
 							opacity: 0,
@@ -410,11 +446,11 @@ const ContextualToolbar = () => {
 						animate={{
 							opacity: 1,
 							filter: "blur(0px)",
-							height: "133px",
 						}}
 						exit={{
 							opacity: 0,
 							filter: "blur(5px)",
+							transition: { duration: 0.15 },
 						}}
 					>
 						<h2 className="mt-1.5 mb-2.5 ml-1 text-[15px]">
@@ -440,6 +476,7 @@ const ContextualToolbar = () => {
 			default:
 				return (
 					<motion.div
+						key="share"
 						className="h-[90px]"
 						initial={{
 							opacity: 0,
@@ -448,11 +485,11 @@ const ContextualToolbar = () => {
 						animate={{
 							opacity: 1,
 							filter: "blur(0px)",
-							height: "90px",
 						}}
 						exit={{
 							opacity: 0,
 							filter: "blur(5px)",
+							transition: { duration: 0.15 },
 						}}
 					>
 						<div className="flex items-center">
@@ -539,19 +576,26 @@ const ContextualToolbar = () => {
 			shownTab !== "Create Webhook" &&
 			scrollC.current
 		) {
-			scrollC.current.scrollLeft = 1000;
+			scrollC.current.scrollTo({
+				left: scrollC.current.scrollWidth,
+				behavior: reduced ? "auto" : "smooth",
+			});
 		} else if (
 			(shownTab === null ||
 				shownTab === "Create Webhook") &&
 			scrollC.current
 		) {
-			scrollC.current.scrollLeft = 0;
+			scrollC.current.scrollTo({
+				left: 0,
+				behavior: reduced ? "auto" : "smooth",
+			});
 		}
-	}, [shownTab]);
+	}, [shownTab, reduced]);
 	return (
 		<MotionConfig
+			reducedMotion="user"
 			transition={{
-				duration: 0.25,
+				duration: 0.3,
 				bounce: 0,
 				type: "spring",
 			}}
@@ -562,33 +606,77 @@ const ContextualToolbar = () => {
 				className="flex h-screen items-center justify-center"
 			>
 				<Toaster />
-				<div>
-					<div className="flex w-full flex-col items-center rounded-xl border border-black/30 bg-white p-1.5">
-						{shownTab === "Create Webhook" ? (
-							<h1 className="mt-1 mb-2 ml-2 place-self-start text-[15px]">
-								Create Webhook
-							</h1>
-						) : null}
-
-						<AnimatePresence initial={false}>
-							{shownTab !== null ? (
-								<motion.div
+				{/* The card animates to its measured content size, so opening,
+				    closing and switching tabs is one smooth resize instead of
+				    a jump. Content is bottom-anchored so the toolbar stays put
+				    while the card grows or shrinks above it. */}
+				<motion.div
+					initial={false}
+					animate={{
+						// +2 for the card's 1px border, so overflow-hidden
+						// doesn't clip the measured content. "auto" until the
+						// first measurement so later changes animate from a
+						// real size.
+						width: bounds.width
+							? bounds.width + 2
+							: "auto",
+						height: bounds.height
+							? bounds.height + 2
+							: "auto",
+					}}
+					className="relative flex flex-col items-center justify-end overflow-hidden rounded-xl border border-black/30 bg-white"
+				>
+					<div
+						ref={cardRef}
+						className="flex w-max flex-col items-center p-1.5"
+					>
+						<AnimatePresence
+							initial={false}
+							mode="popLayout"
+							anchorY="bottom"
+						>
+							{shownTab === "Create Webhook" ? (
+								<motion.h1
+									key="webhook-title"
 									initial={{ opacity: 0 }}
 									animate={{ opacity: 1 }}
 									exit={{
-										overflowY: "hidden",
-										height: 0,
 										opacity: 0,
+										transition: {
+											duration: 0.15,
+										},
+									}}
+									className="mt-1 mb-2 ml-2 place-self-start text-[15px]"
+								>
+									Create Webhook
+								</motion.h1>
+							) : null}
+						</AnimatePresence>
+
+						<AnimatePresence
+							initial={false}
+							mode="popLayout"
+							anchorY="bottom"
+						>
+							{/* The panel's [data-motion-pop-id] rule: popLayout marks
+							    the exiting content block with that attribute. It
+							    overlaps the new block while it fades, so it must
+							    not take clicks. */}
+							{shownTab !== null ? (
+								<motion.div
+									key="panel"
+									initial={{ opacity: 0 }}
+									animate={{ opacity: 1 }}
+									exit={{
+										opacity: 0,
+										transition: {
+											duration: 0.15,
+										},
 									}}
 									onClick={(e) =>
 										e.stopPropagation()
 									}
-									transition={{
-										duration: 0.1,
-										type: "spring",
-										bounce: 0,
-									}}
-									className="flex w-[450px] flex-col rounded-lg border border-black/10 bg-stone-50 p-3 "
+									className="relative flex w-[min(450px,calc(100vw-48px))] flex-col overflow-hidden rounded-lg [&>[data-motion-pop-id]]:pointer-events-none border border-black/10 bg-stone-50 p-3"
 								>
 									<AnimatePresence mode="popLayout">
 										{content}
@@ -628,7 +716,7 @@ const ContextualToolbar = () => {
 							<motion.div
 								ref={scrollC}
 								className={clsx(
-									"scrollContainer flex w-[408px] snap-x items-center overflow-scroll",
+									"scrollContainer flex w-[min(408px,calc(100vw-110px))] snap-x items-center overflow-scroll",
 								)}
 							>
 								{TABS.map((tab) => (
@@ -697,14 +785,14 @@ const ContextualToolbar = () => {
 									<path
 										d="M1.5 3C1.22386 3 1 3.22386 1 3.5C1 3.77614 1.22386 4 1.5 4H13.5C13.7761 4 14 3.77614 14 3.5C14 3.22386 13.7761 3 13.5 3H1.5ZM1 7.5C1 7.22386 1.22386 7 1.5 7H13.5C13.7761 7 14 7.22386 14 7.5C14 7.77614 13.7761 8 13.5 8H1.5C1.22386 8 1 7.77614 1 7.5ZM1 11.5C1 11.2239 1.22386 11 1.5 11H13.5C13.7761 11 14 11.2239 14 11.5C14 11.7761 13.7761 12 13.5 12H1.5C1.22386 12 1 11.7761 1 11.5Z"
 										fill="currentColor"
-										fill-rule="evenodd"
-										clip-rule="evenodd"
+										fillRule="evenodd"
+										clipRule="evenodd"
 									/>
 								</svg>
 							</div>
 						</div>
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		</MotionConfig>
 	);
