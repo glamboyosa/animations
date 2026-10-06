@@ -129,10 +129,7 @@ const Airbnbsharebookmarks = () => {
 	return (
 		<MotionConfig reducedMotion="user">
 			<div className="relative h-screen overflow-scroll p-4 sm:p-20">
-				<div
-					style={{ height: "calc(100vh - 80px)" }}
-					className="relative mx-auto max-w-xl overflow-hidden rounded-md bg-white p-5 text-neutral-900 shadow-black/30 shadow-lg sm:p-10"
-				>
+				<div className="relative mx-auto h-[calc(100vh-112px)] max-w-xl overflow-hidden rounded-md bg-white p-5 text-neutral-900 shadow-black/30 shadow-lg sm:h-[calc(100vh-160px)] sm:p-10">
 					<div className="mx-4 flex items-center gap-2">
 						<button
 							type="button"
