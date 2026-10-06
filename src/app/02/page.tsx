@@ -1,25 +1,20 @@
 "use client";
-import {
-	useEffect,
-	useLayoutEffect,
-	useMemo,
-	useRef,
-	useState,
-} from "react";
+import * as Checkbox from "@radix-ui/react-checkbox";
+import * as RadioGroup from "@radix-ui/react-radio-group";
+import * as Separator from "@radix-ui/react-separator";
+import * as Switch from "@radix-ui/react-switch";
 import { clsx } from "clsx";
 import {
-	motion,
 	AnimatePresence,
 	MotionConfig,
+	motion,
 	useReducedMotion,
 } from "motion/react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Toaster, toast } from "sonner";
-import * as Separator from "@radix-ui/react-separator";
-import * as RadioGroup from "@radix-ui/react-radio-group";
-import * as Checkbox from "@radix-ui/react-checkbox";
-import * as Switch from "@radix-ui/react-switch";
 
 import "./styles.css";
+
 const TABS = [
 	"Create Webhook",
 	"Connect Repositories",
@@ -34,38 +29,30 @@ type ActiveTabType = (typeof TABS)[number];
  * known before the first interaction.
  */
 const useElementSize = () => {
-	const [element, setElement] =
-		useState<HTMLElement | null>(null);
+	const [element, setElement] = useState<HTMLElement | null>(null);
 	const [size, setSize] = useState({
 		width: 0,
 		height: 0,
 	});
 	useLayoutEffect(() => {
 		if (!element) return;
-		const observer = new ResizeObserver(
-			([entry]) => {
-				const [box] = entry.borderBoxSize;
-				setSize({
-					width: box.inlineSize,
-					height: box.blockSize,
-				});
-			},
-		);
+		const observer = new ResizeObserver(([entry]) => {
+			const [box] = entry.borderBoxSize;
+			setSize({
+				width: box.inlineSize,
+				height: box.blockSize,
+			});
+		});
 		observer.observe(element);
 		return () => observer.disconnect();
 	}, [element]);
 	return [setElement, size] as const;
 };
 const ContextualToolbar = () => {
-	const [open, setOpen] = useState(false);
 	const [checked, setChecked] = useState(false);
-	const [activeTab, setActiveTab] =
-		useState<ActiveTabType | null>(null);
-	const [shownTab, setShownTab] =
-		useState<ActiveTabType | null>(null);
-	const scrollC = useRef<HTMLDivElement | null>(
-		null,
-	);
+	const [activeTab, setActiveTab] = useState<ActiveTabType | null>(null);
+	const [shownTab, setShownTab] = useState<ActiveTabType | null>(null);
+	const scrollC = useRef<HTMLDivElement | null>(null);
 	const reduced = useReducedMotion() ?? false;
 	const [cardRef, bounds] = useElementSize();
 	const content = useMemo(() => {
@@ -90,9 +77,7 @@ const ContextualToolbar = () => {
 						}}
 					>
 						<div className="my-3 space-y-2">
-							<h2 className="mb-1 text-[15px]">
-								Endpoint
-							</h2>
+							<h2 className="mb-1 text-[15px]">Endpoint</h2>
 							<input
 								type="text"
 								placeholder="https://myapp.com/webhooks"
@@ -100,9 +85,7 @@ const ContextualToolbar = () => {
 							/>
 						</div>
 						<div className="my-3 space-y-2">
-							<h2 className="mb-1 text-[15px]">
-								Projects
-							</h2>
+							<h2 className="mb-1 text-[15px]">Projects</h2>
 							<form>
 								<RadioGroup.Root
 									className="flex gap-2.5"
@@ -146,9 +129,7 @@ const ContextualToolbar = () => {
 							</form>
 						</div>
 						<div className="my-3 space-y-2">
-							<h2 className="mb-1 font-lg">
-								Events
-							</h2>
+							<h2 className="mb-1 font-lg">Events</h2>
 							<form className=" flex justify-start gap-2 rounded-md bg-zinc-100 p-4">
 								<div className="flex flex-col gap-1.5">
 									<div className="flex items-center">
@@ -457,8 +438,8 @@ const ContextualToolbar = () => {
 							Create new API key
 						</h2>
 						<p className="mb-2 text-pretty text-sm">
-							Your secret API Key will be shared
-							with all users belonging to your
+							Your secret API Key will be shared with all users belonging to
+							your
 							<span className="rounded-md bg-stone-100 p-1 text-orange-500 ">
 								acme
 							</span>
@@ -493,27 +474,18 @@ const ContextualToolbar = () => {
 						}}
 					>
 						<div className="flex items-center">
-							<h2 className="mt-1.5 mb-2.5 ml-1 text-[15px]">
-								Sharing is off
-							</h2>
+							<h2 className="mt-1.5 mb-2.5 ml-1 text-[15px]">Sharing is off</h2>
 							<Switch.Root
 								checked={checked}
-								onClick={(e) =>
-									e.stopPropagation()
-								}
-								onCheckedChange={(checked) =>
-									setChecked(checked)
-								}
+								onClick={(e) => e.stopPropagation()}
+								onCheckedChange={(checked) => setChecked(checked)}
 								className="relative ml-auto h-[18px] w-[35px] cursor-pointer rounded-full bg-gray-100 outline-none data-[state=checked]:bg-orange-400"
 								id="airplane-mode"
 							>
 								<Switch.Thumb className="block h-[14px] w-[14px] translate-x-0.5 rounded-full bg-white transition-transform duration-100 will-change-transform data-[state=checked]:translate-x-[19px]" />
 							</Switch.Root>
 						</div>
-						<AnimatePresence
-							mode="popLayout"
-							initial={false}
-						>
+						<AnimatePresence mode="popLayout" initial={false}>
 							{!checked ? (
 								<motion.p
 									initial={{
@@ -530,8 +502,7 @@ const ContextualToolbar = () => {
 									}}
 									className="mb-2 text-pretty text-sm"
 								>
-									To share your workspace with
-									other people you need to publish
+									To share your workspace with other people you need to publish
 									it first.
 								</motion.p>
 							) : (
@@ -571,18 +542,13 @@ const ContextualToolbar = () => {
 		}
 	}, [shownTab, checked]);
 	useEffect(() => {
-		if (
-			shownTab !== null &&
-			shownTab !== "Create Webhook" &&
-			scrollC.current
-		) {
+		if (shownTab !== null && shownTab !== "Create Webhook" && scrollC.current) {
 			scrollC.current.scrollTo({
 				left: scrollC.current.scrollWidth,
 				behavior: reduced ? "auto" : "smooth",
 			});
 		} else if (
-			(shownTab === null ||
-				shownTab === "Create Webhook") &&
+			(shownTab === null || shownTab === "Create Webhook") &&
 			scrollC.current
 		) {
 			scrollC.current.scrollTo({
@@ -600,7 +566,8 @@ const ContextualToolbar = () => {
 				type: "spring",
 			}}
 		>
-			{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+			{/* biome-ignore lint/a11y/useKeyWithClickEvents: backdrop click closes the panel; Cancel is the keyboard path */}
+			{/* biome-ignore lint/a11y/noStaticElementInteractions: same backdrop */}
 			<div
 				onClick={() => setShownTab(null)}
 				className="flex h-screen items-center justify-center"
@@ -617,24 +584,13 @@ const ContextualToolbar = () => {
 						// doesn't clip the measured content. "auto" until the
 						// first measurement so later changes animate from a
 						// real size.
-						width: bounds.width
-							? bounds.width + 2
-							: "auto",
-						height: bounds.height
-							? bounds.height + 2
-							: "auto",
+						width: bounds.width ? bounds.width + 2 : "auto",
+						height: bounds.height ? bounds.height + 2 : "auto",
 					}}
 					className="relative flex flex-col items-center justify-end overflow-hidden rounded-xl border border-black/30 bg-white"
 				>
-					<div
-						ref={cardRef}
-						className="flex w-max flex-col items-center p-1.5"
-					>
-						<AnimatePresence
-							initial={false}
-							mode="popLayout"
-							anchorY="bottom"
-						>
+					<div ref={cardRef} className="flex w-max flex-col items-center p-1.5">
+						<AnimatePresence initial={false} mode="popLayout" anchorY="bottom">
 							{shownTab === "Create Webhook" ? (
 								<motion.h1
 									key="webhook-title"
@@ -653,11 +609,7 @@ const ContextualToolbar = () => {
 							) : null}
 						</AnimatePresence>
 
-						<AnimatePresence
-							initial={false}
-							mode="popLayout"
-							anchorY="bottom"
-						>
+						<AnimatePresence initial={false} mode="popLayout" anchorY="bottom">
 							{/* The panel's [data-motion-pop-id] rule: popLayout marks
 							    the exiting content block with that attribute. It
 							    overlaps the new block while it fades, so it must
@@ -673,20 +625,14 @@ const ContextualToolbar = () => {
 											duration: 0.15,
 										},
 									}}
-									onClick={(e) =>
-										e.stopPropagation()
-									}
+									onClick={(e) => e.stopPropagation()}
 									className="relative flex w-[min(450px,calc(100vw-48px))] flex-col overflow-hidden rounded-lg [&>[data-motion-pop-id]]:pointer-events-none border border-black/10 bg-stone-50 p-3"
 								>
-									<AnimatePresence mode="popLayout">
-										{content}
-									</AnimatePresence>
+									<AnimatePresence mode="popLayout">{content}</AnimatePresence>
 									<div className="ml-auto flex gap-1 text-sm">
 										<button
 											type="button"
-											onClick={() =>
-												setShownTab(null)
-											}
+											onClick={() => setShownTab(null)}
 											className="rounded-md bg-transparent px-1.5 py-0.5 text-sm hover:bg-stone-200"
 										>
 											Cancel
@@ -694,16 +640,12 @@ const ContextualToolbar = () => {
 										<button
 											type="button"
 											onClick={() => {
-												toast.message(
-													"Settings Saved",
-													{},
-												);
+												toast.message("Settings Saved", {});
 												setShownTab(null);
 											}}
 											className="rounded-md bg-orange-500 px-2.5 py-1 text-sm text-white disabled:bg-orange-300"
 										>
-											{shownTab ===
-											"Create API Key"
+											{shownTab === "Create API Key"
 												? "Create Secret Key"
 												: shownTab}
 										</button>
@@ -723,24 +665,14 @@ const ContextualToolbar = () => {
 									<motion.li
 										className={clsx(
 											"relative cursor-pointer snap-center list-none space-x-4 whitespace-nowrap text-nowrap px-[6.9px] py-1.5 text-sm text-stone-600 outline-none transition-colors",
-											activeTab === tab
-												? "text-black "
-												: null,
-											shownTab === tab
-												? "text-black "
-												: null,
+											activeTab === tab ? "text-black " : null,
+											shownTab === tab ? "text-black " : null,
 										)}
 										tabIndex={0}
 										key={tab}
-										onFocus={() =>
-											setActiveTab(tab)
-										}
-										onMouseOver={() =>
-											setActiveTab(tab)
-										}
-										onMouseLeave={() =>
-											setActiveTab(tab)
-										}
+										onFocus={() => setActiveTab(tab)}
+										onMouseOver={() => setActiveTab(tab)}
+										onMouseLeave={() => setActiveTab(tab)}
 										onClick={(e) => {
 											e.stopPropagation();
 											setShownTab(tab);
@@ -758,9 +690,7 @@ const ContextualToolbar = () => {
 												className="absolute inset-0 rounded-lg bg-stone-100"
 											/>
 										) : null}
-										<span className="relative text-inherit">
-											{tab}
-										</span>
+										<span className="relative text-inherit">{tab}</span>
 									</motion.li>
 								))}
 							</motion.div>
@@ -770,25 +700,28 @@ const ContextualToolbar = () => {
 									decorative
 									orientation="vertical"
 								/>
-								{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
-								<svg
-									onClick={() =>
-										setShownTab(null)
-									}
-									width="15"
-									height="15"
-									viewBox="0 0 15 15"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
+								<button
+									type="button"
+									aria-label="Close panel"
+									onClick={() => setShownTab(null)}
+									className="flex"
 								>
-									<title>svg</title>
-									<path
-										d="M1.5 3C1.22386 3 1 3.22386 1 3.5C1 3.77614 1.22386 4 1.5 4H13.5C13.7761 4 14 3.77614 14 3.5C14 3.22386 13.7761 3 13.5 3H1.5ZM1 7.5C1 7.22386 1.22386 7 1.5 7H13.5C13.7761 7 14 7.22386 14 7.5C14 7.77614 13.7761 8 13.5 8H1.5C1.22386 8 1 7.77614 1 7.5ZM1 11.5C1 11.2239 1.22386 11 1.5 11H13.5C13.7761 11 14 11.2239 14 11.5C14 11.7761 13.7761 12 13.5 12H1.5C1.22386 12 1 11.7761 1 11.5Z"
-										fill="currentColor"
-										fillRule="evenodd"
-										clipRule="evenodd"
-									/>
-								</svg>
+									<svg
+										width="15"
+										height="15"
+										viewBox="0 0 15 15"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<title>svg</title>
+										<path
+											d="M1.5 3C1.22386 3 1 3.22386 1 3.5C1 3.77614 1.22386 4 1.5 4H13.5C13.7761 4 14 3.77614 14 3.5C14 3.22386 13.7761 3 13.5 3H1.5ZM1 7.5C1 7.22386 1.22386 7 1.5 7H13.5C13.7761 7 14 7.22386 14 7.5C14 7.77614 13.7761 8 13.5 8H1.5C1.22386 8 1 7.77614 1 7.5ZM1 11.5C1 11.2239 1.22386 11 1.5 11H13.5C13.7761 11 14 11.2239 14 11.5C14 11.7761 13.7761 12 13.5 12H1.5C1.22386 12 1 11.7761 1 11.5Z"
+											fill="currentColor"
+											fillRule="evenodd"
+											clipRule="evenodd"
+										/>
+									</svg>
+								</button>
 							</div>
 						</div>
 					</div>

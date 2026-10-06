@@ -1,19 +1,14 @@
 "use client";
 
-import Image from "next/image";
-import { IBM_Plex_Sans } from "next/font/google";
-import {
-	useCallback,
-	useEffect,
-	useRef,
-	useState,
-} from "react";
 import {
 	AnimatePresence,
 	motion,
-	useReducedMotion,
 	type Transition,
+	useReducedMotion,
 } from "motion/react";
+import { IBM_Plex_Sans } from "next/font/google";
+import Image from "next/image";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { preload } from "react-dom";
 
 const toastFont = IBM_Plex_Sans({
@@ -22,11 +17,7 @@ const toastFont = IBM_Plex_Sans({
 	display: "swap",
 });
 
-type ToastType =
-	| "message"
-	| "retweet"
-	| "like"
-	| "follow";
+type ToastType = "message" | "retweet" | "like" | "follow";
 
 type Toast = {
 	id: string;
@@ -94,34 +85,20 @@ const EXIT_TRANSITION: Transition = {
 	ease: [0.32, 0.72, 0, 1],
 };
 
-function createEntry(
-	toast: Toast,
-	suffix: string,
-): StackEntry {
+function createEntry(toast: Toast, suffix: string): StackEntry {
 	return { key: `${toast.id}-${suffix}`, toast };
 }
 
 function initialStack(): StackEntry[] {
-	return TOAST_SEQUENCE.slice(
-		0,
-		VISIBLE_COUNT,
-	).map((toast, index) =>
+	return TOAST_SEQUENCE.slice(0, VISIBLE_COUNT).map((toast, index) =>
 		createEntry(toast, `init-${index}`),
 	);
 }
 
-function slotStyle(
-	position: number,
-	reduced: boolean,
-) {
+function slotStyle(position: number, reduced: boolean) {
 	if (reduced) {
 		return {
-			dim:
-				position === 0
-					? 0
-					: position === 1
-						? 0.45
-						: 0.7,
+			dim: position === 0 ? 0 : position === 1 ? 0.45 : 0.7,
 			transform: `translate3d(0, ${position * 10}px, 0) scale(${1 - position * 0.028})`,
 			filter: "none",
 			zIndex: 30 - position,
@@ -132,19 +109,9 @@ function slotStyle(
 	const scale = 1 - position * 0.048;
 
 	return {
-		dim:
-			position === 0
-				? 0
-				: position === 1
-					? 0.18
-					: 0.42,
+		dim: position === 0 ? 0 : position === 1 ? 0.18 : 0.42,
 		transform: `translate3d(0, ${y}px, 0) scale(${scale})`,
-		filter:
-			position === 1
-				? "blur(2px)"
-				: position >= 2
-					? "blur(5px)"
-					: "none",
+		filter: position === 1 ? "blur(2px)" : position >= 2 ? "blur(5px)" : "none",
 		zIndex: 30 - position,
 	};
 }
@@ -201,20 +168,13 @@ function FollowIcon() {
 	);
 }
 
-function TypeBadge({
-	type,
-}: {
-	type: ToastType;
-}) {
+function TypeBadge({ type }: { type: ToastType }) {
 	const className =
 		"absolute -bottom-0.5 -right-0.5 flex items-center justify-center rounded-full border-2 border-black";
 
 	if (type === "message") {
 		return (
-			<span
-				className={`${className} size-[18px] bg-[#1d9bf0]`}
-				aria-hidden
-			/>
+			<span className={`${className} size-[18px] bg-[#1d9bf0]`} aria-hidden />
 		);
 	}
 
@@ -250,13 +210,7 @@ function TypeBadge({
 	);
 }
 
-function ToastAvatar({
-	src,
-	type,
-}: {
-	src: string;
-	type: ToastType;
-}) {
+function ToastAvatar({ src, type }: { src: string; type: ToastType }) {
 	return (
 		<div className="relative shrink-0">
 			<Image
@@ -292,8 +246,7 @@ function ToastCard({
 				isEntering
 					? {
 							opacity: 0,
-							transform:
-								"translate3d(0, -44px, 0) scale(0.97)",
+							transform: "translate3d(0, -44px, 0) scale(0.97)",
 							filter: "none",
 						}
 					: false
@@ -305,16 +258,11 @@ function ToastCard({
 			}}
 			exit={{
 				opacity: 0,
-				transform:
-					"translate3d(0, 64px, 0) scale(0.9)",
+				transform: "translate3d(0, 64px, 0) scale(0.9)",
 				filter: reduced ? "none" : "blur(0.8px)",
 				transition: EXIT_TRANSITION,
 			}}
-			transition={
-				isEntering
-					? ENTER_TRANSITION
-					: PUSH_TRANSITION
-			}
+			transition={isEntering ? ENTER_TRANSITION : PUSH_TRANSITION}
 			style={{
 				zIndex: slot.zIndex,
 				transformOrigin: "center top",
@@ -337,10 +285,7 @@ function ToastCard({
 				}}
 			>
 				<div className="flex items-start gap-3">
-					<ToastAvatar
-						src={entry.toast.avatar}
-						type={entry.toast.type}
-					/>
+					<ToastAvatar src={entry.toast.avatar} type={entry.toast.type} />
 					<div className="min-w-0 flex-1 pt-0.5">
 						<p className="text-pretty font-semibold text-[#f7f9f9] text-[15px] leading-snug">
 							{entry.toast.headline}
@@ -372,20 +317,13 @@ export default function ProposeAToast() {
 		preload(toast.avatar, { as: "image" });
 	}
 	const reduced = useReducedMotion() ?? false;
-	const [stack, setStack] =
-		useState<StackEntry[]>(initialStack);
-	const [sequenceIndex, setSequenceIndex] =
-		useState(VISIBLE_COUNT);
-	const [enteringKey, setEnteringKey] = useState<
-		string | null
-	>(null);
+	const [stack, setStack] = useState<StackEntry[]>(initialStack);
+	const [sequenceIndex, setSequenceIndex] = useState(VISIBLE_COUNT);
+	const [enteringKey, setEnteringKey] = useState<string | null>(null);
 	const pushCounter = useRef(0);
 
 	const pushToast = useCallback(() => {
-		const toast =
-			TOAST_SEQUENCE[
-				sequenceIndex % TOAST_SEQUENCE.length
-			];
+		const toast = TOAST_SEQUENCE[sequenceIndex % TOAST_SEQUENCE.length];
 		const suffix = String(pushCounter.current++);
 		const key = `${toast.id}-${suffix}`;
 
@@ -399,18 +337,12 @@ export default function ProposeAToast() {
 
 	useEffect(() => {
 		if (!enteringKey) return;
-		const timer = setTimeout(
-			() => setEnteringKey(null),
-			620,
-		);
+		const timer = setTimeout(() => setEnteringKey(null), 620);
 		return () => clearTimeout(timer);
 	}, [enteringKey]);
 
 	useEffect(() => {
-		const interval = setInterval(
-			pushToast,
-			reduced ? 2800 : PUSH_INTERVAL_MS,
-		);
+		const interval = setInterval(pushToast, reduced ? 2800 : PUSH_INTERVAL_MS);
 		return () => clearInterval(interval);
 	}, [pushToast, reduced]);
 
@@ -430,9 +362,7 @@ export default function ProposeAToast() {
 							entry={entry}
 							position={position}
 							reduced={reduced}
-							isEntering={
-								entry.key === enteringKey
-							}
+							isEntering={entry.key === enteringKey}
 						/>
 					))}
 				</AnimatePresence>

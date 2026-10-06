@@ -1,7 +1,4 @@
-import {
-	AnimatePresence,
-	motion,
-} from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
 export function Timer() {
@@ -15,10 +12,7 @@ export function Timer() {
 				whileTap={{ scale: 0.9 }}
 				className="flex size-10 items-center justify-center rounded-full bg-[#5A3C07] transition-colors hover:bg-[#694608]"
 			>
-				<AnimatePresence
-					initial={false}
-					mode="wait"
-				>
+				<AnimatePresence initial={false} mode="wait">
 					{isPaused ? (
 						<motion.svg
 							key="play"
@@ -97,9 +91,7 @@ export function Timer() {
 	);
 }
 
-function Counter({
-	paused,
-}: { paused?: boolean }) {
+function Counter({ paused }: { paused?: boolean }) {
 	const [count, setCount] = useState(60);
 
 	useEffect(() => {
@@ -119,22 +111,16 @@ function Counter({
 		};
 	}, [paused]);
 
-	const countArray = count
-		.toString()
-		.padStart(2, "0")
-		.split("");
+	const countArray = count.toString().padStart(2, "0").split("");
 
 	return (
 		<div className="relative w-[64px] overflow-hidden whitespace-nowrap font-light text-3xl">
 			0:
-			<AnimatePresence
-				initial={false}
-				mode="popLayout"
-			>
+			<AnimatePresence initial={false} mode="popLayout">
 				{countArray.map((n, i) => (
 					<motion.div
 						className="inline-block tabular-nums"
-						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+						// biome-ignore lint/suspicious/noArrayIndexKey: digit + position keys make each changed digit re-enter
 						key={n + i}
 						animate={{
 							y: "0",

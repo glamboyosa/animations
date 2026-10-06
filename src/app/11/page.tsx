@@ -2,38 +2,22 @@
 
 import {
 	motion,
-	useMotionValueEvent,
 	useMotionValue,
+	useMotionValueEvent,
 	useTransform,
 } from "motion/react";
-import {
-	useEffect,
-	useRef,
-	useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Slider = () => {
 	const x = useMotionValue(0);
-	const constrainsRef =
-		useRef<HTMLDivElement | null>(null);
-	const blurRef = useRef<HTMLSpanElement | null>(
-		null,
-	);
-	const [constraintRight, setConstraintRight] =
-		useState(0);
-	const [finalBlurValue, setFinalBlurValue] =
-		useState("blur(0px)");
+	const constrainsRef = useRef<HTMLDivElement | null>(null);
+	const blurRef = useRef<HTMLSpanElement | null>(null);
+	const [constraintRight, setConstraintRight] = useState(0);
 
-	const blurValue = useTransform(
-		x,
-		[41, 160],
-		["blur(6px)", "blur(1px)"],
-	);
+	const blurValue = useTransform(x, [41, 160], ["blur(6px)", "blur(1px)"]);
 
 	const preventTextSelection = (
-		e:
-			| React.MouseEvent<HTMLDivElement>
-			| React.TouchEvent<HTMLDivElement>,
+		e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
 	) => {
 		e.preventDefault();
 		return false;
@@ -41,24 +25,22 @@ const Slider = () => {
 	useMotionValueEvent(x, "change", (latest) => {
 		if (blurRef.current) {
 			if (latest < 41 || latest > 160) {
-				blurRef.current.style.filter =
-					"blur(0px)";
+				blurRef.current.style.filter = "blur(0px)";
 			} else {
-				blurRef.current.style.filter =
-					blurValue.get();
+				blurRef.current.style.filter = blurValue.get();
 			}
 		}
 	});
 
 	useEffect(() => {
 		if (constrainsRef.current) {
-			const containerWidth =
-				constrainsRef.current.offsetWidth;
+			const containerWidth = constrainsRef.current.offsetWidth;
 			setConstraintRight(containerWidth - 56); // 56px is the width of the draggable element (40px) plus right padding (16px)
 		}
 	}, []);
 	return (
 		<div className="flex h-screen items-center justify-center">
+			{/* biome-ignore lint/a11y/noStaticElementInteractions: only blocks text selection while the thumb is dragged */}
 			<div
 				ref={constrainsRef}
 				className="relative flex h-14 w-64 items-center rounded-2xl bg-gray-200 px-4 shadow-xl"

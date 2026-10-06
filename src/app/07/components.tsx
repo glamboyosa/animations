@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import type React from "react";
 import {
 	BannedIcon,
@@ -10,17 +11,13 @@ import {
 	ShieldIcon,
 	WarningIcon,
 } from "./icons";
-import clsx from "clsx";
 
 interface ButtonProps {
 	children: React.ReactNode;
 	onClick: () => void;
 }
 
-export function Button({
-	children,
-	onClick,
-}: ButtonProps) {
+export function Button({ children, onClick }: ButtonProps) {
 	return (
 		<button
 			data-vaul-no-drag=""
@@ -33,8 +30,7 @@ export function Button({
 	);
 }
 
-interface SecondaryButtonProps
-	extends ButtonProps {
+interface SecondaryButtonProps extends ButtonProps {
 	className?: string;
 }
 
@@ -64,11 +60,7 @@ interface HeaderProps {
 	description: string;
 }
 
-export function Header({
-	icon,
-	title,
-	description,
-}: HeaderProps) {
+export function Header({ icon, title, description }: HeaderProps) {
 	return (
 		<header className="mt-[21px]">
 			{icon}
@@ -173,9 +165,7 @@ export function Key({ setView }: ViewProps) {
 	);
 }
 
-export function RemoveWallet({
-	setView,
-}: ViewProps) {
+export function RemoveWallet({ setView }: ViewProps) {
 	return (
 		<div>
 			<div className="px-2">
@@ -203,9 +193,7 @@ export function RemoveWallet({
 	);
 }
 
-export function DefaultView({
-	setView,
-}: ViewProps) {
+export function DefaultView({ setView }: ViewProps) {
 	return (
 		<>
 			<header className="mb-4 flex h-[72px] items-center border-[#F7F7F7] border-b pl-2">

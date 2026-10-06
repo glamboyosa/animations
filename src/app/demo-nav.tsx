@@ -29,9 +29,7 @@ const linkClassName =
  */
 export const DemoNav = () => {
 	const pathname = usePathname();
-	const index = DEMO_IDS.indexOf(
-		pathname.slice(1),
-	);
+	const index = DEMO_IDS.indexOf(pathname.slice(1));
 	if (index === -1) return null;
 
 	const previous = DEMO_IDS[index - 1];

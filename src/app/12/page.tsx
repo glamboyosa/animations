@@ -1,16 +1,13 @@
 "use client";
 
-import {
-	motion,
-	useReducedMotion,
-} from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import airpods from "../../../public/airpods.webp";
+import iphone from "../../../public/iphone.webp";
 import mac from "../../../public/mac.webp";
 import watch from "../../../public/watch.webp";
-import iphone from "../../../public/iphone.webp";
 
 const products = [
 	{ src: airpods, alt: "AirPods" },
@@ -24,15 +21,12 @@ const CYCLE_MS = 1500;
 
 export default function Page() {
 	const reduced = useReducedMotion() ?? false;
-	const [currentIndex, setCurrentIndex] =
-		useState(0);
+	const [currentIndex, setCurrentIndex] = useState(0);
 
 	useEffect(() => {
 		let interval: ReturnType<typeof setInterval>;
 		const advance = () =>
-			setCurrentIndex(
-				(prev) => (prev + 1) % products.length,
-			);
+			setCurrentIndex((prev) => (prev + 1) % products.length);
 		const timeout = setTimeout(() => {
 			interval = setInterval(advance, CYCLE_MS);
 		}, INITIAL_DELAY_MS);
@@ -53,8 +47,7 @@ export default function Page() {
 						key={product.alt}
 						initial={false}
 						animate={{
-							opacity:
-								index === currentIndex ? 1 : 0,
+							opacity: index === currentIndex ? 1 : 0,
 						}}
 						transition={{
 							duration: reduced ? 0 : 0.3,

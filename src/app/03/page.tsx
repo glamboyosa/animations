@@ -1,24 +1,16 @@
 "use client";
-import {
-	motion,
-	AnimatePresence,
-} from "motion/react";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import Andrea from "../../../public/andrea-davis-IWfe63thJxk-unsplash.jpg";
 import Karsten from "../../../public/karsten-winegeart-sStahKEhT9w-unsplash.jpg";
 import Merrit from "../../../public/meritt-thomas-_YxDGcDm4Hs-unsplash.jpg";
 import Roberto from "../../../public/roberto-nickson-6FZf3yzuodE-unsplash.jpg";
 import Stephen from "../../../public/stephen-wheeler-hBh9JbyeCtg-unsplash.jpg";
+
 const MotionImage = motion(Image);
 
-const images = [
-	Andrea,
-	Karsten,
-	Merrit,
-	Roberto,
-	Stephen,
-];
+const images = [Andrea, Karsten, Merrit, Roberto, Stephen];
 const rotationDegrees = [10, -20, -5, 5, 2];
 const variants = {
 	initial: () => ({
@@ -40,14 +32,9 @@ const variants = {
 	}),
 };
 const AirBnbHomesAnimation = () => {
-	const [play, setPlaying] = useState<
-		"not-playing" | "playing"
-	>("playing");
+	const [play, setPlaying] = useState<"not-playing" | "playing">("playing");
 	useEffect(() => {
-		const timer = setTimeout(
-			() => setPlaying("not-playing"),
-			2000,
-		);
+		const timer = setTimeout(() => setPlaying("not-playing"), 2000);
 		return () => clearTimeout(timer);
 	}, []);
 	return (
@@ -58,7 +45,7 @@ const AirBnbHomesAnimation = () => {
 						? images.map((img, idx) => (
 								<MotionImage
 									className="h-12 w-12 overflow-hidden rounded-md border-2 border-white"
-									// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+									// biome-ignore lint/suspicious/noArrayIndexKey: static list that never reorders
 									key={idx}
 									style={{
 										zIndex: idx * 10,
@@ -70,9 +57,7 @@ const AirBnbHomesAnimation = () => {
 									animate="animate"
 									variants={variants}
 									custom={idx}
-									transition={variants.transition(
-										idx,
-									)}
+									transition={variants.transition(idx)}
 									loading="eager"
 									fetchPriority="high"
 									alt=""
@@ -83,7 +68,7 @@ const AirBnbHomesAnimation = () => {
 						: images.map((img, idx) => (
 								<Image
 									className="h-12 w-12 overflow-hidden rounded-md border-2 border-white"
-									// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+									// biome-ignore lint/suspicious/noArrayIndexKey: static list that never reorders
 									key={idx}
 									style={{
 										zIndex: idx * 10,

@@ -1,33 +1,25 @@
 "use client";
-import { useEffect, useState } from "react";
-import { motion } from "motion/react";
 import { FastAverageColor } from "fast-average-color";
+import { motion } from "motion/react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import BBKing from "../../../public/Liveincookcountyjail.jpg";
-const scaledValue = (value: number) =>
-	Math.max((value / 100) * 20, 5);
 
-const generateRandomValues = (
-	numBars: number,
-) => {
+const scaledValue = (value: number) => Math.max((value / 100) * 20, 5);
+
+const generateRandomValues = (numBars: number) => {
 	return Array.from({ length: numBars }, () =>
 		scaledValue(Math.random() * 100),
 	);
 };
 const fac = new FastAverageColor();
-export function Music({
-	view,
-}: {
-	view: "music" | "idle";
-}) {
+export function Music({ view: _view }: { view: "music" | "idle" }) {
 	const [color, setColor] = useState("#E2E8F0");
-	const [frequencies, setFrequencies] = useState<
-		number[]
-	>(generateRandomValues(6));
+	const [frequencies, setFrequencies] = useState<number[]>(
+		generateRandomValues(6),
+	);
 
-	const getColor = async (
-		img: HTMLImageElement,
-	) => {
+	const getColor = async (img: HTMLImageElement) => {
 		try {
 			const c = await fac.getColorAsync(img, {
 				mode: "precision",
@@ -69,6 +61,7 @@ export function Music({
 					<motion.div
 						layout
 						className="mx-[1px] w-[1px] rounded-md"
+						// biome-ignore lint/suspicious/noArrayIndexKey: bars are fixed positions; the value in the key replays the animation
 						key={`${index}-${value}`}
 						style={{
 							backgroundColor: color,

@@ -1,10 +1,7 @@
 "use client";
 
+import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
-import {
-	motion,
-	useReducedMotion,
-} from "motion/react";
 import type { ReactNode } from "react";
 
 type Demo = {
@@ -15,11 +12,7 @@ type Demo = {
 	prefetch?: boolean;
 };
 
-function XMark({
-	className,
-}: {
-	className?: string;
-}) {
+function XMark({ className }: { className?: string }) {
 	return (
 		<svg
 			viewBox="0 0 24 24"
@@ -51,8 +44,7 @@ const demos: Demo[] = [
 		title: "Apple 3D icons",
 		description: (
 			<>
-				Airbnb-inspired 3D icon carousel with
-				smooth fades. Models from{" "}
+				Airbnb-inspired 3D icon carousel with smooth fades. Models from{" "}
 				<a
 					href="https://www.thiings.co/things"
 					target="_blank"
@@ -77,51 +69,43 @@ const demos: Demo[] = [
 	{
 		id: "07",
 		title: "Family drawer",
-		description:
-			"Family (Family.co) iOS-style drawer using Vaul.",
+		description: "Family (Family.co) iOS-style drawer using Vaul.",
 		featured: true,
 	},
 	{
 		id: "01",
 		title: "Dynamic Settings",
-		description:
-			"Dynamic Settings panel from UI Labs by mrnest.",
+		description: "Dynamic Settings panel from UI Labs by mrnest.",
 	},
 	{
 		id: "02",
 		title: "Contextual Toolbar",
-		description:
-			"Contextual Toolbar from UI Labs by mrnest.",
+		description: "Contextual Toolbar from UI Labs by mrnest.",
 	},
 	{
 		id: "03",
 		title: "Available homes",
-		description:
-			'Airbnb "available homes" preview microinteraction.',
+		description: 'Airbnb "available homes" preview microinteraction.',
 	},
 	{
 		id: "04",
 		title: "Share wishlist",
-		description:
-			'Airbnb "share wishlist" microinteraction.',
+		description: 'Airbnb "share wishlist" microinteraction.',
 	},
 	{
 		id: "05",
 		title: "Directional popover",
-		description:
-			"Directionally aware two-step popover.",
+		description: "Directionally aware two-step popover.",
 	},
 	{
 		id: "06",
 		title: "Payments calculator",
-		description:
-			"Payments card calculator experiment.",
+		description: "Payments card calculator experiment.",
 	},
 	{
 		id: "09",
 		title: "Dynamic Island timer",
-		description:
-			"iOS Dynamic Island timer animation.",
+		description: "iOS Dynamic Island timer animation.",
 	},
 	{
 		id: "10",
@@ -215,12 +199,8 @@ function DemoCard({
 
 export default function Home() {
 	const reduced = useReducedMotion() ?? false;
-	const featured = demos.filter(
-		(demo) => demo.featured,
-	);
-	const rest = demos.filter(
-		(demo) => !demo.featured,
-	);
+	const featured = demos.filter((demo) => demo.featured);
+	const rest = demos.filter((demo) => !demo.featured);
 
 	return (
 		<div
@@ -241,9 +221,8 @@ export default function Home() {
 							UI animations & recreations
 						</h1>
 						<p className="mt-4 max-w-xl text-pretty text-lg text-neutral-600 leading-relaxed dark:text-neutral-400">
-							Microinteractions reverse-engineered
-							from products I admire, including
-							their motion, timing, and feel.
+							Microinteractions reverse-engineered from products I admire,
+							including their motion, timing, and feel.
 						</p>
 					</div>
 

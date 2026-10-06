@@ -1,13 +1,11 @@
 "use client";
 
+import { motion } from "motion/react";
 import { useMemo, useState } from "react";
 import { Music } from "./music";
-import { motion } from "motion/react";
 
 export default function DynamicIsland() {
-	const [view, setView] = useState<
-		"music" | "idle"
-	>("idle");
+	const [view, setView] = useState<"music" | "idle">("idle");
 
 	const content = useMemo(() => {
 		switch (view) {

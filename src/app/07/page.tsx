@@ -1,37 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { Drawer } from "vaul";
-import useMeasure from "react-use-measure";
-import {
-	motion,
-	AnimatePresence,
-} from "motion/react";
-import {
-	DefaultView,
-	Key,
-	Phrase,
-	RemoveWallet,
-} from "./components";
-import { CloseIcon } from "./icons";
+import { AnimatePresence, motion } from "motion/react";
 import { Inter } from "next/font/google";
+import { useMemo, useState } from "react";
+import useMeasure from "react-use-measure";
+import { Drawer } from "vaul";
 import { cn } from "@/_lib/utils";
+import { DefaultView, Key, Phrase, RemoveWallet } from "./components";
+import { CloseIcon } from "./icons";
+
 const inter = Inter({
-	weight: [
-		"200",
-		"300",
-		"400",
-		"500",
-		"600",
-		"700",
-	],
-	subsets: [
-		"cyrillic",
-		"cyrillic-ext",
-		"greek",
-		"latin",
-		"latin-ext",
-	],
+	weight: ["200", "300", "400", "500", "600", "700"],
+	subsets: ["cyrillic", "cyrillic-ext", "greek", "latin", "latin-ext"],
 });
 export default function FamilyDrawer() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -63,10 +43,7 @@ export default function FamilyDrawer() {
 			>
 				Try it out
 			</button>
-			<Drawer.Root
-				open={isOpen}
-				onOpenChange={setIsOpen}
-			>
+			<Drawer.Root open={isOpen} onOpenChange={setIsOpen}>
 				<Drawer.Portal>
 					<Drawer.Overlay
 						className="fixed inset-0 z-10 bg-black/30"
@@ -97,15 +74,8 @@ export default function FamilyDrawer() {
 									<CloseIcon />
 								</button>
 							</Drawer.Close>
-							<div
-								ref={elementRef}
-								className="px-6 pt-2.5 pb-6 antialiased"
-							>
-								<AnimatePresence
-									initial={false}
-									mode="popLayout"
-									custom={view}
-								>
+							<div ref={elementRef} className="px-6 pt-2.5 pb-6 antialiased">
+								<AnimatePresence initial={false} mode="popLayout" custom={view}>
 									<motion.div
 										initial={{
 											opacity: 0,

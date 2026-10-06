@@ -1,23 +1,19 @@
 "use client";
 import {
-	motion,
 	AnimatePresence,
 	MotionConfig,
-	useIsPresent,
+	motion,
 	type Transition,
+	useIsPresent,
 } from "motion/react";
-import {
-	useState,
-	useEffect,
-	useRef,
-	type MouseEvent,
-} from "react";
 import Image from "next/image";
+import { type MouseEvent, useEffect, useRef, useState } from "react";
 import Andrea from "../../../public/andrea-davis-IWfe63thJxk-unsplash.jpg";
+import Digital from "../../../public/digital-marketing-agency-ntwrk-g39p1kDjvSY-unsplash.jpg";
 import Karsten from "../../../public/karsten-winegeart-sStahKEhT9w-unsplash.jpg";
 import Merrit from "../../../public/meritt-thomas-_YxDGcDm4Hs-unsplash.jpg";
 import Mike from "../../../public/mike-von-GrfbQPPYguU-unsplash.jpg";
-import Digital from "../../../public/digital-marketing-agency-ntwrk-g39p1kDjvSY-unsplash.jpg";
+
 const MotionImage = motion(Image);
 const images = [Andrea, Karsten, Merrit];
 const translates = [
@@ -52,11 +48,7 @@ const SHEET_SPRING: Transition = {
 };
 /** Dims the card behind the sheet. It stops taking clicks as soon as it
  * starts exiting, so Share can reopen the sheet mid-close. */
-const Scrim = ({
-	onClose,
-}: {
-	onClose: () => void;
-}) => {
+const Scrim = ({ onClose }: { onClose: () => void }) => {
 	const isPresent = useIsPresent();
 	return (
 		<motion.div
@@ -65,9 +57,7 @@ const Scrim = ({
 			exit={{ opacity: 0 }}
 			transition={SHEET_SPRING}
 			style={{
-				pointerEvents: isPresent
-					? "auto"
-					: "none",
+				pointerEvents: isPresent ? "auto" : "none",
 			}}
 			className="absolute inset-0 z-10 bg-black/30"
 			onClick={onClose}
@@ -75,22 +65,15 @@ const Scrim = ({
 	);
 };
 const Airbnbsharebookmarks = () => {
-	const [loaded, setLoaded] = useState<
-		"not-loaded" | "loaded"
-	>("not-loaded");
+	const [loaded, setLoaded] = useState<"not-loaded" | "loaded">("not-loaded");
 	const [isOpen, setIsOpen] = useState(false);
-	const gotItRef =
-		useRef<HTMLButtonElement>(null);
-	const shareRef =
-		useRef<HTMLButtonElement>(null);
+	const gotItRef = useRef<HTMLButtonElement>(null);
+	const shareRef = useRef<HTMLButtonElement>(null);
 	// A drag that ends on a button would otherwise also fire its click.
 	// Keyboard clicks (detail 0) never come from a drag, so they always close.
 	const draggedRef = useRef(false);
 	const closeFromClick = (event: MouseEvent) => {
-		if (
-			event.detail !== 0 &&
-			draggedRef.current
-		) {
+		if (event.detail !== 0 && draggedRef.current) {
 			draggedRef.current = false;
 			return;
 		}
@@ -107,8 +90,7 @@ const Airbnbsharebookmarks = () => {
 		});
 		const shareButton = shareRef.current;
 		const onKeyDown = (event: KeyboardEvent) => {
-			if (event.key === "Escape")
-				setIsOpen(false);
+			if (event.key === "Escape") setIsOpen(false);
 			// "Got it" is the sheet's only focusable control, so Tab
 			// stays on it while the sheet is open.
 			if (event.key === "Tab") {
@@ -118,10 +100,7 @@ const Airbnbsharebookmarks = () => {
 		};
 		window.addEventListener("keydown", onKeyDown);
 		return () => {
-			window.removeEventListener(
-				"keydown",
-				onKeyDown,
-			);
+			window.removeEventListener("keydown", onKeyDown);
 			shareButton?.focus({ preventScroll: true });
 		};
 	}, [isOpen]);
@@ -135,12 +114,8 @@ const Airbnbsharebookmarks = () => {
 							type="button"
 							className="flex items-center gap-0.5 rounded-2xl border-2 border-neutral-900 px-3.5 py-2.5 text-neutral-900"
 						>
-							<span className="text-xs tracking-tighter">
-								Dates .
-							</span>
-							<span className="text-xs tracking-tighter">
-								4 guests
-							</span>
+							<span className="text-xs tracking-tighter">Dates .</span>
+							<span className="text-xs tracking-tighter">4 guests</span>
 						</button>
 
 						<button
@@ -149,9 +124,7 @@ const Airbnbsharebookmarks = () => {
 							className="flex items-center gap-1.5 rounded-2xl border border-neutral-200 px-3.5 py-2.5 text-neutral-900 hover:bg-neutral-100"
 							onClick={() => setIsOpen(true)}
 						>
-							<span className="text-xs tracking-tighter">
-								Share
-							</span>
+							<span className="text-xs tracking-tighter">Share</span>
 							<span className="text-xs tracking-tighter">
 								<svg
 									width="15"
@@ -176,11 +149,7 @@ const Airbnbsharebookmarks = () => {
 						<AnimatePresence>
 							{isOpen ? (
 								<>
-									<Scrim
-										onClose={() =>
-											setIsOpen(false)
-										}
-									/>
+									<Scrim onClose={() => setIsOpen(false)} />
 									<motion.div
 										role="dialog"
 										aria-modal="true"
@@ -205,84 +174,77 @@ const Airbnbsharebookmarks = () => {
 											draggedRef.current = true;
 										}}
 										onDragEnd={(_, info) => {
-											if (
-												info.offset.y > 80 ||
-												info.velocity.y > 400
-											) {
+											if (info.offset.y > 80 || info.velocity.y > 400) {
 												setIsOpen(false);
 											}
 										}}
 										className="absolute inset-x-0 bottom-0 z-50 cursor-grab touch-none rounded-t-[10px] bg-gray-100 pt-10 pb-6 text-neutral-900 active:cursor-grabbing"
 									>
 										<div className="absolute top-2.5 left-3 cursor-pointer">
-											{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
-											<svg
+											<button
+												type="button"
+												aria-label="Close"
+												// Escape and "Got it" are the keyboard paths, so the Tab trap
+												// can stay on a single control.
+												tabIndex={-1}
 												onClick={closeFromClick}
-												className="text-gray-500"
-												width="18"
-												height="18"
-												viewBox="0 0 15 15"
-												fill="none"
-												xmlns="http://www.w3.org/2000/svg"
+												className="flex"
 											>
-												<title>SVG</title>
-												<path
-													d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z"
-													fill="currentColor"
-													fillRule="evenodd"
-													clipRule="evenodd"
-												/>
-											</svg>
+												<svg
+													className="text-gray-500"
+													width="18"
+													height="18"
+													viewBox="0 0 15 15"
+													fill="none"
+													xmlns="http://www.w3.org/2000/svg"
+												>
+													<title>SVG</title>
+													<path
+														d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z"
+														fill="currentColor"
+														fillRule="evenodd"
+														clipRule="evenodd"
+													/>
+												</svg>
+											</button>
 										</div>
 										<div className="relative z-50 flex h-24 w-full items-center justify-center">
 											<AnimatePresence>
-												{images.map(
-													(img, idx) => (
-														<MotionImage
-															className="absolute h-16 w-16 overflow-hidden rounded-md border-[3px] border-white"
-															draggable={false}
-															// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-															key={idx}
-															style={{
-																zIndex: idx * 10,
-																translateX:
-																	translates[idx]
-																		.x,
-																translateY:
-																	translates[idx]
-																		.y,
-															}}
-															width={32}
-															height={32}
-															initial="initial"
-															animate="animate"
-															variants={variants}
-															custom={idx}
-															transition={variants.transition(
-																idx,
-															)}
-															loading="eager"
-															fetchPriority="high"
-															alt=""
-															placeholder="blur"
-															blurDataURL={
-																img.blurDataURL
-															}
-															src={img.src}
-														/>
-													),
-												)}
+												{images.map((img, idx) => (
+													<MotionImage
+														className="absolute h-16 w-16 overflow-hidden rounded-md border-[3px] border-white"
+														draggable={false}
+														// biome-ignore lint/suspicious/noArrayIndexKey: static list that never reorders
+														key={idx}
+														style={{
+															zIndex: idx * 10,
+															translateX: translates[idx].x,
+															translateY: translates[idx].y,
+														}}
+														width={32}
+														height={32}
+														initial="initial"
+														animate="animate"
+														variants={variants}
+														custom={idx}
+														transition={variants.transition(idx)}
+														loading="eager"
+														fetchPriority="high"
+														alt=""
+														placeholder="blur"
+														blurDataURL={img.blurDataURL}
+														src={img.src}
+													/>
+												))}
 											</AnimatePresence>
 										</div>
 										<div className="mt-2.5 flex w-full flex-col items-center justify-start gap-2.5">
 											<h3 className="z-50 ml-4 w-60 font-semibold text-2xl text-neutral-900 tracking-tighter">
-												Share this wishlist with
-												your group
+												Share this wishlist with your group
 											</h3>
 											<p className="z-50 ml-4 w-[300px] text-neutral-600 text-sm tracking-tight">
-												Everyone can add homes,
-												write notes and vote for
-												their favourites.{" "}
+												Everyone can add homes, write notes and vote for their
+												favourites.{" "}
 												<span className="text-neutral-900 underline">
 													Learn more
 												</span>
@@ -362,9 +324,7 @@ const Airbnbsharebookmarks = () => {
 										fill="currentColor"
 									/>
 								</svg>
-								<p className="font-light text-lg">
-									5.0
-								</p>
+								<p className="font-light text-lg">5.0</p>
 							</div>
 						</div>
 						<div className="my-2 w-full rounded-lg bg-stone-100 p-4 shadow-black/5 shadow-xl">

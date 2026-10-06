@@ -1,15 +1,8 @@
 "use client";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
-import {
-	motion,
-	AnimatePresence,
-} from "motion/react";
 
-export function Ring({
-	view,
-}: {
-	view: "ring" | "idle";
-}) {
+export function Ring({ view }: { view: "ring" | "idle" }) {
 	const [isSilent, setIsSilent] = useState(false);
 	useEffect(() => {
 		let id: NodeJS.Timeout;
@@ -55,10 +48,7 @@ export function Ring({
 				animate={{
 					rotate: isSilent
 						? [0, -15, 5, -2, 0]
-						: [
-								0, 20, -15, 12.5, -10, 10, -7.5,
-								7.5, -5, 5, 0,
-							],
+						: [0, 20, -15, 12.5, -10, 10, -7.5, 7.5, -5, 5, 0],
 					x: isSilent ? 9 : 0,
 				}}
 			>
@@ -98,13 +88,9 @@ export function Ring({
 			</motion.div>
 			<div className="ml-auto flex items-center">
 				{isSilent ? (
-					<span className="font-medium text-[#FD4F30] text-xs">
-						Silent
-					</span>
+					<span className="font-medium text-[#FD4F30] text-xs">Silent</span>
 				) : (
-					<span className="font-medium text-white text-xs">
-						Ring
-					</span>
+					<span className="font-medium text-white text-xs">Ring</span>
 				)}
 			</div>
 		</motion.div>

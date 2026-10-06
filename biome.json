@@ -1,53 +1,25 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.5.1/schema.json",
-	"formatter": {
-		"enabled": true,
-		"formatWithErrors": true,
-		"includes": ["**"],
-		"attributePosition": "auto",
-		"indentStyle": "tab",
-		"indentWidth": 2,
-		"lineWidth": 50,
-		"lineEnding": "lf"
-	},
-	"javascript": {
-		"formatter": {
-			"arrowParentheses": "always",
-			"bracketSameLine": false,
-			"bracketSpacing": true,
-			"jsxQuoteStyle": "double",
-			"quoteProperties": "asNeeded",
-			"semicolons": "always",
-			"trailingCommas": "all",
-			"quoteStyle": "double"
-		}
-	},
-	"json": {
-		"formatter": {
-			"trailingCommas": "none"
-		}
-	},
 	"vcs": {
-		"clientKind": "git",
-		"defaultBranch": "main",
 		"enabled": true,
-		"root": ".",
+		"clientKind": "git",
 		"useIgnoreFile": true
 	},
-	"assist": {
-		"actions": {
-			"source": { "organizeImports": "off" }
-		}
+	"formatter": {
+		"indentStyle": "tab"
 	},
 	"linter": {
-		"enabled": true,
 		"rules": {
 			"preset": "recommended",
-			"correctness": {
-				"noUnusedImports": "error"
-			},
-			"nursery": {
-				"useSortedClasses": "error"
+			"suspicious": {
+				"noUnknownAtRules": {
+					"level": "error",
+					"options": {
+						"ignore": [
+							"tailwind"
+						]
+					}
+				}
 			}
 		}
 	}
