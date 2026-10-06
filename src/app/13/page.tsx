@@ -14,6 +14,7 @@ import {
 	useReducedMotion,
 	type Transition,
 } from "motion/react";
+import { preload } from "react-dom";
 
 const toastFont = IBM_Plex_Sans({
 	subsets: ["latin"],
@@ -115,12 +116,12 @@ function slotStyle(
 ) {
 	if (reduced) {
 		return {
-			opacity:
+			dim:
 				position === 0
-					? 1
+					? 0
 					: position === 1
-						? 0.55
-						: 0.3,
+						? 0.45
+						: 0.7,
 			transform: `translate3d(0, ${position * 10}px, 0) scale(${1 - position * 0.028})`,
 			filter: "none",
 			zIndex: 30 - position,
@@ -131,12 +132,12 @@ function slotStyle(
 	const scale = 1 - position * 0.048;
 
 	return {
-		opacity:
+		dim:
 			position === 0
-				? 1
+				? 0
 				: position === 1
-					? 0.82
-					: 0.58,
+					? 0.18
+					: 0.42,
 		transform: `translate3d(0, ${y}px, 0) scale(${scale})`,
 		filter:
 			position === 1
@@ -298,7 +299,7 @@ function ToastCard({
 					: false
 			}
 			animate={{
-				opacity: slot.opacity,
+				opacity: 1,
 				transform: slot.transform,
 				filter: slot.filter,
 			}}
@@ -321,14 +322,13 @@ function ToastCard({
 			}}
 			className="pointer-events-none absolute inset-x-0 top-0 mx-auto w-full max-w-[420px]"
 		>
+			{/* Opaque surface instead of backdrop-filter: the card animates
+			    filter and opacity, which turns it into a backdrop root and
+			    makes a glass background flicker between frames. */}
 			<div
 				className="rounded-[22px] px-4 py-3.5"
 				style={{
-					background: "rgba(30, 30, 32, 0.78)",
-					backdropFilter:
-						"blur(32px) saturate(1.2)",
-					WebkitBackdropFilter:
-						"blur(32px) saturate(1.2)",
+					background: "#171719",
 					boxShadow: [
 						"0 0 0 1px rgba(255, 255, 255, 0.09)",
 						"inset 0 1px 0 rgba(255, 255, 255, 0.08)",
@@ -351,11 +351,26 @@ function ToastCard({
 					</div>
 				</div>
 			</div>
+			{/* Dims cards further back without making them see-through, so
+			    text never bleeds through the card in front. The 1px outset
+			    also dims the card's outline ring. */}
+			<motion.div
+				initial={false}
+				animate={{ opacity: slot.dim }}
+				transition={PUSH_TRANSITION}
+				className="absolute -inset-px rounded-[23px] bg-black"
+				aria-hidden
+			/>
 		</motion.article>
 	);
 }
 
 export default function ProposeAToast() {
+	// Every toast mounts a fresh <img>; preloading keeps avatars from
+	// painting blank while they load.
+	for (const toast of TOAST_SEQUENCE) {
+		preload(toast.avatar, { as: "image" });
+	}
 	const reduced = useReducedMotion() ?? false;
 	const [stack, setStack] =
 		useState<StackEntry[]>(initialStack);
@@ -404,7 +419,7 @@ export default function ProposeAToast() {
 			type="button"
 			aria-label="Show next toast"
 			onClick={pushToast}
-			className={`${toastFont.className} flex min-h-screen w-full items-center justify-center bg-black tracking-[-0.01em] antialiased active:scale-[0.995] motion-reduce:active:scale-100`}
+			className={`${toastFont.className} flex min-h-screen w-full items-center justify-center bg-black tracking-[-0.01em] antialiased transition-transform duration-150 ease-out active:scale-[0.995] motion-reduce:active:scale-100`}
 		>
 			<div className="relative h-[230px] w-full max-w-[440px] px-5">
 				<AnimatePresence initial={false}>

@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
+		formats: ["image/avif", "image/webp"],
 		remotePatterns: [
 			{ protocol: "https", hostname: "unavatar.io" },
 			{ protocol: "https", hostname: "image-cdn-ak.spotifycdn.com" },

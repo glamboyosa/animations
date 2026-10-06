@@ -32,7 +32,7 @@ const variants = {
 	}),
 	transition: (index: number) => ({
 		delay: index * 0.15,
-		type: "spring",
+		type: "spring" as const,
 		bounce: 0.6,
 		bounceDamping: 10,
 		bounceStiffness: 40,

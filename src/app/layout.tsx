@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 	description:
 		"UI microinteractions and animation recreations — motion, timing, and craft.",
 };
-export const experimental_ppr = true;
 export default function RootLayout({
 	children,
 }: Readonly<{
