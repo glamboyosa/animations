@@ -57,10 +57,7 @@ const demos: Demo[] = [
 					href="https://www.thiings.co/things"
 					target="_blank"
 					rel="noopener noreferrer"
-					className="underline decoration-neutral-400/60 underline-offset-2 transition-colors [@media(hover:hover)_and_(pointer:fine)]:hover:text-neutral-900 dark:[@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
-					onClick={(event) =>
-						event.stopPropagation()
-					}
+					className="relative z-10 underline decoration-neutral-400/60 underline-offset-2 transition-colors [@media(hover:hover)_and_(pointer:fine)]:hover:text-neutral-900 dark:[@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
 				>
 					thiings.co
 				</a>
@@ -180,11 +177,10 @@ function DemoCard({
 				ease: ENTER_EASE,
 			}}
 		>
-			<Link
-				href={`/${demo.id}`}
-				prefetch={demo.prefetch}
-				className={cardClassName(featured)}
-			>
+			{/* A div, not a link: descriptions can hold their own links, and
+			    nested <a> breaks hydration. The title link stretches over
+			    the card instead. */}
+			<div className={cardClassName(featured)}>
 				<div className="flex items-start justify-between gap-3">
 					<div className="min-w-0">
 						<p className="mb-1.5 font-medium text-neutral-400 text-xs uppercase tabular-nums tracking-widest">
@@ -193,7 +189,13 @@ function DemoCard({
 						<h2
 							className={`text-balance font-semibold text-neutral-900 tracking-tight dark:text-neutral-50 ${featured ? "text-xl sm:text-2xl" : "text-lg"}`}
 						>
-							{demo.title}
+							<Link
+								href={`/${demo.id}`}
+								prefetch={demo.prefetch}
+								className="outline-none after:absolute after:inset-0 after:rounded-2xl focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:outline-neutral-600 focus-visible:after:outline-offset-2 dark:focus-visible:after:outline-neutral-400"
+							>
+								{demo.title}
+							</Link>
 						</h2>
 						<p className="mt-2 text-pretty text-neutral-500 text-sm leading-relaxed dark:text-neutral-400">
 							{demo.description}
@@ -206,7 +208,7 @@ function DemoCard({
 						→
 					</span>
 				</div>
-			</Link>
+			</div>
 		</motion.li>
 	);
 }
@@ -300,6 +302,18 @@ export default function Home() {
 						))}
 					</ul>
 				</section>
+
+				<footer className="mt-16 text-neutral-500 text-sm dark:text-neutral-400">
+					A project by{" "}
+					<a
+						href="https://glamboyosa.xyz"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="font-medium text-neutral-700 underline decoration-neutral-400/60 underline-offset-4 transition-colors dark:text-neutral-300 [@media(hover:hover)_and_(pointer:fine)]:hover:text-neutral-900 dark:[@media(hover:hover)_and_(pointer:fine)]:hover:text-white"
+					>
+						Osa Ogbemudia
+					</a>
+				</footer>
 			</main>
 		</div>
 	);
