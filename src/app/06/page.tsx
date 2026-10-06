@@ -29,7 +29,7 @@ const Six = () => {
 	};
 	return (
 		<div className="flex h-screen items-center justify-center">
-			<div className="flex h-1/2 w-1/3 flex-col items-center justify-center gap-24 rounded-md border border-stone-300 bg-stone-100">
+			<div className="flex h-1/2 w-[calc(100%-32px)] max-w-md flex-col items-center justify-center gap-24 rounded-md border border-stone-300 bg-stone-100 sm:w-1/3 sm:max-w-none">
 				<MotionConfig
 					transition={{
 						type: "spring",
@@ -55,8 +55,8 @@ const Six = () => {
 									<path
 										d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
 										fill="currentColor"
-										fill-rule="evenodd"
-										clip-rule="evenodd"
+										fillRule="evenodd"
+										clipRule="evenodd"
 									/>
 								</svg>
 								<p>You are $6000M richer</p>
@@ -81,9 +81,9 @@ const Six = () => {
 											viewBox="0 0 24 24"
 											fill="none"
 											stroke="currentColor"
-											stroke-width="2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
+											strokeWidth="2"
+											strokeLinecap="round"
+											strokeLinejoin="round"
 											className="animate-spin"
 										>
 											<title>svg</title>
@@ -122,7 +122,7 @@ const Six = () => {
 					onClick={calculateHandler}
 					disabled={status !== "default"}
 					className={cn(
-						"mt-20 w-1/3 rounded-md bg-black p-3 text-sm text-white hover:bg-black/80 hover:text-white/70 disabled:bg-black/80 disabled:text-white/80",
+						"mt-20 w-1/2 rounded-md bg-black p-3 text-sm text-white hover:bg-black/80 hover:text-white/70 disabled:bg-black/80 disabled:text-white/80 sm:w-1/3",
 					)}
 				>
 					Calculate

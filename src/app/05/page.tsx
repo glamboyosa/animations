@@ -33,9 +33,9 @@ const TwoStepPopover = () => {
 									viewBox="0 0 24 24"
 									fill="none"
 									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
 									className="lucide lucide-circle-check fill-gray-400 stroke-gray-400"
 								>
 									<title>svg</title>
@@ -74,9 +74,9 @@ const TwoStepPopover = () => {
 									viewBox="0 0 24 24"
 									fill="none"
 									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
 									className="lucide lucide-message-square-text fill-gray-400 stroke-gray-400"
 								>
 									<title>svg</title>
@@ -120,9 +120,9 @@ const TwoStepPopover = () => {
 									viewBox="0 0 24 24"
 									fill="none"
 									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
 									className="lucide lucide-heading-1"
 								>
 									<title>svg</title>
@@ -231,9 +231,9 @@ const TwoStepPopover = () => {
 					viewBox="0 0 24 24"
 					fill="none"
 					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
+					strokeWidth="2"
+					strokeLinecap="round"
+					strokeLinejoin="round"
 					className={cn(
 						"lucide lucide-inbox scale-[0.8] text-gray-500 transition-all delay-[0.4] hover:scale-90 hover:text-black",
 						open && "scale-90 text-black",

@@ -223,7 +223,10 @@ export default function Home() {
 	);
 
 	return (
-		<div className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50">
+		<div
+			data-canvas="home"
+			className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50"
+		>
 			<div className="pointer-events-none absolute inset-0 overflow-hidden">
 				<div className="absolute -top-32 left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(120,120,120,0.08),transparent_70%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.04),transparent_70%)]" />
 			</div>

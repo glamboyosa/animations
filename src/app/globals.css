@@ -21,9 +21,14 @@ body {
   background: #fafafa;
 }
 
+/* Demos are designed for a light page. Pages with their own dark surface
+   mark it with data-canvas so overscroll shows the same colour. */
+body:has([data-canvas="black"]) {
+  background: #000;
+}
+
 @media (prefers-color-scheme: dark) {
-  body {
-    color: #fafafa;
+  body:has([data-canvas="home"]) {
     background: #0a0a0a;
   }
 }

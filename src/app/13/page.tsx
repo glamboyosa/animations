@@ -320,7 +320,7 @@ function ToastCard({
 				transformOrigin: "center top",
 				willChange: "transform, opacity",
 			}}
-			className="pointer-events-none absolute inset-x-0 top-0 mx-auto w-full max-w-[420px]"
+			className="pointer-events-none absolute inset-x-5 top-0 mx-auto max-w-[420px] sm:inset-x-0 sm:w-full"
 		>
 			{/* Opaque surface instead of backdrop-filter: the card animates
 			    filter and opacity, which turns it into a backdrop root and
@@ -419,6 +419,7 @@ export default function ProposeAToast() {
 			type="button"
 			aria-label="Show next toast"
 			onClick={pushToast}
+			data-canvas="black"
 			className={`${toastFont.className} flex min-h-screen w-full items-center justify-center bg-black tracking-[-0.01em] antialiased transition-transform duration-150 ease-out active:scale-[0.995] motion-reduce:active:scale-100`}
 		>
 			<div className="relative h-[230px] w-full max-w-[440px] px-5">
